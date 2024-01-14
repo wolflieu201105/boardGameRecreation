@@ -1,0 +1,70 @@
+Cards:
+Name
+Image source
+Stamina cost
+Skill (should be their own)
+
+=> UI:
+Placement
+Width
+Height
+scale
+MoveToCenter function
+when hovered => move up and show what the card can do
+
+//////////////////////////////////////////////////
+
+Bosses:
+Name
+Image source
+Skill (3 different skills)
+Health bar
+
+[	Another JPanel for BossHealthBar
+	=> UI: 
+	Placement
+	Width
+	Height
+]	
+
+=> UI:
+Placement
+scale
+when hovered => show their attacks on players
+
+//////////////////////////////////////////////////
+
+Players:
+Name
+PlayerHealthbar
+
+[	Another JPanel for PlayerHealthBar
+	=> UI: 
+	Placement
+	Width
+	Height
+	Scale
+]
+
+Stamina
+Shields
+Buffs
+
+=> UI:
+Placement
+scale
+When hovered => show their status, max mana for next round, tanking the damage for someone else...
+
+//////////////////////////////////////////////////
+
+End turn:
+=> UI:
+Placement
+Scale
+
+//////////////////////////////////////////////////
+
+Mana:
+=> UI
+Placement
+Scale
