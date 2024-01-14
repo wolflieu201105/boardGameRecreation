@@ -4,20 +4,22 @@ import java.awt.event.ComponentListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.JLabel;
 
 public class MyFrame extends JFrame implements ComponentListener{
 	private int width_ratio = 3;
 	private int height_ratio = 2;
-	private int scale = 500; 
+	private int scale = 300; 
 	public int width = this.width_ratio * scale;
 	public int height = this.height_ratio * scale;
+	private String iconSource = "src\\Icon.png";
+	JLabel mainLabel;
 	
 	MyFrame(){
 		// create the mainPanel where the game occurs
-		MainPanel mainPanel = new MainPanel(width, height);
+		mainLabel = new MainLabel(width, height);
 		// add label to detect resize events
-		getContentPane().add(mainPanel);
+		getContentPane().add(mainLabel);
 		getContentPane().addComponentListener(this);
 		
 		this.setTitle("new frame");// set titles of the frame
@@ -27,10 +29,15 @@ public class MyFrame extends JFrame implements ComponentListener{
 		this.setLayout(null);
 		this.setVisible(true); // make frame visible
 		
-		ImageIcon image = new ImageIcon("src\\Icon.png");
+		// set icon for the frame
+		ImageIcon image = new ImageIcon(iconSource);
 		this.setIconImage(image.getImage());
-		this.getContentPane().setBackground(new Color(0, 0, 0));
-		System.out.println(this.getWidth() + " and " + this.getHeight());
+		
+		// set the the background for the frame
+		this.getContentPane().setBackground(new Color(0, 0, 125));
+		
+		// adding the main label of the frame
+		this.add(mainLabel);
 	}
 	
 	// these functions result from the ComponentListener but there are no uses yet
@@ -39,5 +46,13 @@ public class MyFrame extends JFrame implements ComponentListener{
 	public void componentHidden(ComponentEvent e) {}
 	
 	// this function to relocate the main panel
-	public void componentResized(ComponentEvent e) {}
+	public void componentResized(ComponentEvent e) {
+		
+		// finding the placement for the main frame
+		int x_start = (this.getWidth() - width)/2; 
+		int y_start = (this.getHeight() - height)/2;
+		
+		// setting the placement after the frame have been resized
+		mainLabel.setBounds(x_start, y_start, width, height);
+	}
 }
