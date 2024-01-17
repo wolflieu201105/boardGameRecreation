@@ -31,7 +31,10 @@ public class MainLabel extends JLabel {
 		scale = currentScale;
 		
 		// set the game title for the label
-		gameTitle = new GameTitle(scale, width_ratio, height_ratio);
+		gameTitle = new GameTitle();
+		
+		// adding the components to the label
+		this.add(gameTitle);
 		
 		// set the bounds for the label
 		ResizedFrame(scale);
@@ -43,9 +46,6 @@ public class MainLabel extends JLabel {
 		// set color back ground and visibility of the color
 		this.setBackground(new Color(123, 50, 250));
 		this.setOpaque(true);
-		
-		// adding the components to the label
-		this.add(gameTitle);
 	}
 	
 	// resizing the frame as the window is resized
