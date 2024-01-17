@@ -4,8 +4,6 @@ import java.awt.Color;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 import MainPackages.MainMenu.GameTitle;
