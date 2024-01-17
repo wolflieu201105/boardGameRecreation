@@ -12,9 +12,6 @@ public class GameTitle extends JTextPane {
 	// the size of the text
 	final private int text_size_ratio = 20;
 
-	// the current scale
-	private int scale;
-
 	// the current width or height after resizing
 	private int width;
 	private int height;
@@ -56,16 +53,12 @@ public class GameTitle extends JTextPane {
 	// the function will set the scale to the new scale and set font, bounds
 	// the function is also called when first construct in mainLabel
 	public void resizedFrame(int newScale) {
-
-		// change the scale to the new scale
-		scale = newScale;
-
 		// setting the initial height and width of the text pane
-		width = width_ratio * scale;
-		height = height_ratio * scale;
+		width = width_ratio * newScale;
+		height = height_ratio * newScale;
 
 		// setting the initial text size of the text pane
-		text_size = text_size_ratio * scale;
+		text_size = text_size_ratio * newScale;
 
 		// setting font and size of the text
 		this.setFont(new Font("Arial", Font.PLAIN, text_size));
