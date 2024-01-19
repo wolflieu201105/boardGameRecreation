@@ -70,7 +70,7 @@ public class ScaleChanger extends JLabel implements ChangeListener {
 	// a button to make event of making a new scale
 	private JButton applyButton = new JButton();
 
-	ScaleChanger() {
+	public ScaleChanger() {
 		this.add(slider);
 		this.add(scaleText);
 		this.add(applyButton);
@@ -80,6 +80,11 @@ public class ScaleChanger extends JLabel implements ChangeListener {
 	public void stateChanged(ChangeEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public void resizedFrame(int newScale) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
