@@ -78,8 +78,11 @@ public class ScaleChanger extends JLabel implements ChangeListener {
 
 	@Override
 	public void stateChanged(ChangeEvent e) {
-		// TODO Auto-generated method stub
+	}
 
+	public void resizedFrame(int newScale) {
+		width = width_ratio * newScale;
+		height = height_ratio * newScale;
 	}
 
 }
