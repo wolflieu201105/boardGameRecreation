@@ -1,14 +1,11 @@
 package MainPackages;
-
 import java.awt.Color;
-
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 import MainPackages.MainMenu.GameTitle;
+import MainPackages.MainMenu.ScaleChanger;
 
 public class MainLabel extends JLabel {
 	// the dimensions of the main label
@@ -24,7 +21,10 @@ public class MainLabel extends JLabel {
 	
 	// create the gameTitle instance
 	private GameTitle gameTitle;
-	
+
+	// create the scaleChanger instance
+	private ScaleChanger scaleChanger;
+
 	// create the constructor
 	public MainLabel(int currentScale) {
 		// setting the scale for the scale
@@ -32,10 +32,14 @@ public class MainLabel extends JLabel {
 		
 		// set the game title for the label
 		gameTitle = new GameTitle();
-		
+
+		// set the scaleChanger part for the label
+		scaleChanger = new ScaleChanger();
+
 		// adding the components to the label
 		this.add(gameTitle);
-		
+		this.add(scaleChanger);
+
 		// set the bounds for the label
 		ResizedFrame(scale);
 		
@@ -53,7 +57,6 @@ public class MainLabel extends JLabel {
 		// determine the location of the label
 		int x_start = (frameWidth - width) / 2;
 		int y_start = (frameHeight - height) / 2;
-
 		// relocate the label
 		this.setBounds(x_start, y_start, width, height);
 	}
@@ -73,8 +76,9 @@ public class MainLabel extends JLabel {
 		
 		// setting the new bounds for the label
 		this.setBounds(x_start, y_start, width, height);
-		
+
 		// setting the new scale for all the components
 		gameTitle.resizedFrame(newScale);
+		scaleChanger.resizedFrame(newScale);
 	}
 }

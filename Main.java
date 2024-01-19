@@ -1,8 +1,8 @@
-import javax.swing.JFrame;
+
+import MainPackages.MyFrame;
 
 public class Main {
-	
 	public static void main(String[] args) {
-		JFrame mainFrame = new MyFrame();
+		MyFrame mainFrame = new MyFrame();
 	}
 }
