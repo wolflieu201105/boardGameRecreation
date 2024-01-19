@@ -1,6 +1,7 @@
 package MainPackages.MainMenu;
 
-import java.awt.Component;
+import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -12,19 +13,15 @@ import javax.swing.event.ChangeListener;
 public class ScaleChanger extends JLabel implements ChangeListener {
 	// the dimensions of the text label
 	final private int width_ratio = 300;
-	final private int height_ratio = 30;
+	final private int height_ratio = 60;
 
-	// the current width or height after resizing
-	private int width;
-	private int height;
-
+	// the placement of the text label before scaling
+	final private int width_span_ratio = 0;
+	final private int height_span_ratio = 110;
+	
 	// the dimensions of the slider
 	final private int slider_width_ratio = 200;
 	final private int slider_height_ratio = 15;
-
-	// the current width and height after resizing
-	private int slider_width;
-	private int slider_height;
 
 	// the max min value of the slider
 	final private int slider_min_value = 1;
@@ -43,18 +40,8 @@ public class ScaleChanger extends JLabel implements ChangeListener {
 	// the size of the text
 	final private int scaleText_size_ratio = 12;
 
-	// the current width or height after resizing
-	private int scaleText_width;
-	private int scaleText_height;
-
-	// the current text size
-	private int text_size;
-
 	// the string to represent scaling
 	final private String scale_text = "The scale that you are trying to set to is: ";
-
-	// the scale integer
-	private int scale;
 
 	// a text that represent the value of the scale before applying
 	private JTextPane scaleText = new JTextPane();
@@ -71,6 +58,11 @@ public class ScaleChanger extends JLabel implements ChangeListener {
 	private JButton applyButton = new JButton();
 
 	public ScaleChanger() {
+		// set the text with style for the scaleText, not editable and no background color
+		scaleText.setText(scale_text);
+		scaleText.setEditable(false);
+		scaleText.setOpaque(false);
+		
 		this.add(slider);
 		this.add(scaleText);
 		this.add(applyButton);
@@ -79,10 +71,17 @@ public class ScaleChanger extends JLabel implements ChangeListener {
 	@Override
 	public void stateChanged(ChangeEvent e) {
 	}
-
+	
 	public void resizedFrame(int newScale) {
-		width = width_ratio * newScale;
-		height = height_ratio * newScale;
+		int width = width_ratio * newScale;
+		int height = height_ratio * newScale;
+		
+		this.setBounds(width_span_ratio * newScale, height_span_ratio * newScale, width, height);
+		this.setBackground(Color.BLACK);
+		this.setOpaque(false);
+		
+		int scaleText_size = scaleText_size_ratio * newScale;
+		scaleText.setFont(new Font("Arial", Font.PLAIN, scaleText_size + newScale));
 	}
 
 }
