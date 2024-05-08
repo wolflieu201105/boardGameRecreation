@@ -1,11 +1,14 @@
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.border.Border;
 
 @SuppressWarnings("serial")
-public class MainLabel extends JLabel {
+public class MainLabel extends JLabel implements ActionListener{
 	// the dimensions of the main label
 	final private int width_ratio = 300;
 	final private int height_ratio = 200;
@@ -33,6 +36,7 @@ public class MainLabel extends JLabel {
 
 		// set the play Button for the label
 		playButton = new PlayButton();
+		playButton.addActionListener(this);
 
 		// adding the components to the label
 		this.add(gameTitle);
@@ -78,5 +82,11 @@ public class MainLabel extends JLabel {
 		// setting the new scale for all the components
 		gameTitle.resizedFrame(newScale);
 		playButton.resizedFrame(newScale);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == playButton) {
+			System.out.println("start game");
+		}
 	}
 }

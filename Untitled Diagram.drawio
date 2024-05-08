@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-05-08T11:17:36.349Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="5JFE11wWYQLMXR_Zcmod" version="24.3.1" type="device">
+<mxfile host="app.diagrams.net" modified="2024-05-08T11:45:11.369Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="R9w5A6NNGExHanqWeOEu" version="24.3.1" type="device">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="365" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1221" dy="759" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -8,6 +8,9 @@
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="260" y="120" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="tczm5RnQLbympOsDItCV-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="tczm5RnQLbympOsDItCV-0" target="tczm5RnQLbympOsDItCV-11">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="tczm5RnQLbympOsDItCV-0" value="My Frame" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="200" y="40" width="120" height="30" as="geometry" />
@@ -39,6 +42,9 @@
         </mxCell>
         <mxCell id="tczm5RnQLbympOsDItCV-9" value="Should be able to access My Frame and change to game lable&amp;nbsp;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="300" y="220" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="tczm5RnQLbympOsDItCV-11" value="Game Lable" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="570" y="90" width="120" height="25" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
