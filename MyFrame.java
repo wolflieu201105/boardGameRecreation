@@ -1,5 +1,3 @@
-package MainPackages;
-
 import java.awt.Color;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -10,6 +8,7 @@ import java.util.Scanner;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+@SuppressWarnings("serial")
 public class MyFrame extends JFrame implements ComponentListener {
 	// the initial frame size
 	final private int width_ratio = 300;
@@ -23,10 +22,10 @@ public class MyFrame extends JFrame implements ComponentListener {
 	private int height;
 
 	// the source of the icon for the frame
-	final private String iconSource = "src\\Icon.png";
+	final private String iconSource = "Icon.png";
 
 	// the source of frame settings
-	final private String frameSetting = "src\\Savings\\FrameSetting.txt";
+	final private String frameSetting = "Savings.txt";
 
 	// create the Label for the Frame
 	MainLabel mainLabel;

@@ -1,0 +1,59 @@
+[33mcommit a952e968c9706e2a48de4a7c5b5a16d59888edbd[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mafterReset[m[33m, [m[1;31morigin/afterReset[m[33m)[m
+Author: unknown <201105phamgiahuy@gmail.com>
+Date:   Fri Jan 19 15:41:17 2024 -0500
+
+    removed width height redundency
+
+[33mcommit f367796f079d14dcd7ba8eead4501807ec3e2f1c[m
+Author: unknown <201105phamgiahuy@gmail.com>
+Date:   Thu Jan 18 22:40:32 2024 -0500
+
+    reset
+
+[33mcommit 38d94a75256c1fc7da24d58d6c43b87250024409[m
+Author: unknown <201105phamgiahuy@gmail.com>
+Date:   Thu Jan 18 22:25:55 2024 -0500
+
+    resetting everything
+
+[33mcommit cd7f503d136f6a9c024d7d826d230dd5afcc8151[m
+Author: unknown <201105phamgiahuy@gmail.com>
+Date:   Wed Jan 17 15:23:02 2024 -0500
+
+    delete scale variable
+
+[33mcommit 2219558a9f4f962df5364008e1021a4e3390be25[m
+Author: unknown <201105phamgiahuy@gmail.com>
+Date:   Tue Jan 16 21:41:57 2024 -0500
+
+    little changes
+
+[33mcommit 4c4de5cf734b70874a6a1341b83933ca50fbbe59[m
+Author: wolflieu201105 <77225091+wolflieu201105@users.noreply.github.com>
+Date:   Tue Jan 16 17:30:06 2024 -0500
+
+    Delete MainLabel.java
+
+[33mcommit 4ea31f56a87552651b27000572d7b9fe046b01ea[m
+Author: wolflieu201105 <77225091+wolflieu201105@users.noreply.github.com>
+Date:   Tue Jan 16 17:29:57 2024 -0500
+
+    Delete MyFrame.java
+
+[33mcommit f4d9d21863fd490bfe3a7aa10074358aec259778[m
+Author: unknown <201105phamgiahuy@gmail.com>
+Date:   Tue Jan 16 17:26:26 2024 -0500
+
+    Game title with resizing funcitions
+
+[33mcommit f9763448282207250d4213a229716ad626046b30[m
+Author: unknown <201105phamgiahuy@gmail.com>
+Date:   Sat Jan 13 21:26:03 2024 -0500
+
+    resizable frame
+
+[33mcommit 4844443707eaaf037e43035ff1622082ba1bb2a6[m
+Author: unknown <201105phamgiahuy@gmail.com>
+Date:   Sat Jan 13 20:24:48 2024 -0500
+
+    first commit

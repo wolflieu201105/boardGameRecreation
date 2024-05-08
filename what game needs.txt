@@ -47,8 +47,7 @@ PlayerHealthbar
 ]
 
 Stamina
-Shields
-Buffs
+Buffs (including shields, protecting other player and phase skills)
 
 => UI:
 Placement
