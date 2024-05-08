@@ -20,6 +20,9 @@ public class MainLabel extends JLabel {
 	// create the gameTitle instance
 	private GameTitle gameTitle;
 
+	// create the playButton
+	private PlayButton playButton;
+
 	// create the constructor
 	public MainLabel(int currentScale) {
 		// setting the scale for the scale
@@ -28,8 +31,12 @@ public class MainLabel extends JLabel {
 		// set the game title for the label
 		gameTitle = new GameTitle();
 
+		// set the play Button for the label
+		playButton = new PlayButton();
+
 		// adding the components to the label
 		this.add(gameTitle);
+		this.add(playButton);
 
 		// set the bounds for the label
 		ResizedFrame(scale);
@@ -70,5 +77,6 @@ public class MainLabel extends JLabel {
 
 		// setting the new scale for all the components
 		gameTitle.resizedFrame(newScale);
+		playButton.resizedFrame(newScale);
 	}
 }
