@@ -19,6 +19,12 @@ public class GameLabel extends JLabel{
 	CardLabel cardLabel;
 	BossLabel bossLabel;
 
+	// players
+	PlayerCards player1;
+	PlayerCards player2;
+	PlayerCards player3;
+	PlayerCards player4;
+
     public GameLabel(int newScale) {
         scale = newScale;
         width = width_ratio * scale;

@@ -28,7 +28,7 @@ public class PlayerLabel extends JLabel{
 		this.setBounds(x_start, y_start, width, height);
         
 		// set the visibility of the color
-		this.setBackground(new Color(70, 255 , 255));
+		this.setBackground(new Color(70, 255, 255));
 		this.setOpaque(true);
     }
 }
