@@ -14,10 +14,20 @@ public class GameLabel extends JLabel{
 	private int width;
 	private int height;
 
+	// different Labels for better management
+	PlayerLabel playerLabel;
+	CardLabel cardLabel;
+
     public GameLabel(int newScale) {
         scale = newScale;
         width = width_ratio * scale;
         height = height_ratio * scale;
+
+		// adding it's own label
+		playerLabel = new PlayerLabel(scale);
+		cardLabel = new CardLabel(scale);
+		this.add(playerLabel);
+		this.add(cardLabel);
 
 		// setting the new bounds for the label
 		this.setBounds(0, 0, width, height);
@@ -28,4 +38,8 @@ public class GameLabel extends JLabel{
     }
 
     // FPS implementation
+    private int FRAMES_PER_SECOND = 25;
+    private int SKIP_TICKS = 1000 / FRAMES_PER_SECOND;
+
+    
 }
