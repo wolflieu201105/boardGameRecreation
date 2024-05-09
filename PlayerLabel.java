@@ -1,4 +1,5 @@
 import javax.swing.JLabel;
+import java.awt.Color;
 
 public class PlayerLabel extends JLabel{
 	// the dimensions of the main label
@@ -27,6 +28,7 @@ public class PlayerLabel extends JLabel{
 		this.setBounds(x_start, y_start, width, height);
         
 		// set the visibility of the color
+		this.setBackground(new Color(70, 255 , 255));
 		this.setOpaque(true);
     }
 }

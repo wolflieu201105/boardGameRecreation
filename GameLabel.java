@@ -17,6 +17,7 @@ public class GameLabel extends JLabel{
 	// different Labels for better management
 	PlayerLabel playerLabel;
 	CardLabel cardLabel;
+	BossLabel bossLabel;
 
     public GameLabel(int newScale) {
         scale = newScale;
@@ -26,8 +27,10 @@ public class GameLabel extends JLabel{
 		// adding it's own label
 		playerLabel = new PlayerLabel(scale);
 		cardLabel = new CardLabel(scale);
+		bossLabel = new BossLabel(scale);
 		this.add(playerLabel);
 		this.add(cardLabel);
+		this.add(bossLabel);
 
 		// setting the new bounds for the label
 		this.setBounds(0, 0, width, height);
