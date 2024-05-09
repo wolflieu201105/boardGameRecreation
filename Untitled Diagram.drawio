@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-05-08T11:45:11.369Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="R9w5A6NNGExHanqWeOEu" version="24.3.1" type="device">
+<mxfile host="app.diagrams.net" modified="2024-05-08T15:25:13.049Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="5IcedzsYwVzPTZKuYynJ" version="24.3.1" type="device">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1221" dy="759" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -8,9 +8,6 @@
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="260" y="120" as="targetPoint" />
           </mxGeometry>
-        </mxCell>
-        <mxCell id="tczm5RnQLbympOsDItCV-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="tczm5RnQLbympOsDItCV-0" target="tczm5RnQLbympOsDItCV-11">
-          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="tczm5RnQLbympOsDItCV-0" value="My Frame" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="200" y="40" width="120" height="30" as="geometry" />
@@ -23,6 +20,13 @@
         <mxCell id="tczm5RnQLbympOsDItCV-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="tczm5RnQLbympOsDItCV-3" target="tczm5RnQLbympOsDItCV-7">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="tczm5RnQLbympOsDItCV-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="tczm5RnQLbympOsDItCV-3" target="tczm5RnQLbympOsDItCV-11">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="570" y="105" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
         <mxCell id="tczm5RnQLbympOsDItCV-3" value="Main Lable" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="200" y="90" width="120" height="30" as="geometry" />
         </mxCell>
@@ -32,19 +36,78 @@
         <mxCell id="tczm5RnQLbympOsDItCV-6" value="Game Title" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="90" y="160" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tczm5RnQLbympOsDItCV-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="tczm5RnQLbympOsDItCV-7">
+        <mxCell id="tczm5RnQLbympOsDItCV-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="tczm5RnQLbympOsDItCV-7" target="tczm5RnQLbympOsDItCV-9">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="360" y="220" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="tczm5RnQLbympOsDItCV-7" value="Play button" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="300" y="160" width="120" height="30" as="geometry" />
+          <mxGeometry x="270" y="160" width="120" height="30" as="geometry" />
         </mxCell>
         <mxCell id="tczm5RnQLbympOsDItCV-9" value="Should be able to access My Frame and change to game lable&amp;nbsp;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="300" y="220" width="120" height="110" as="geometry" />
+          <mxGeometry x="270" y="220" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="tczm5RnQLbympOsDItCV-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="tczm5RnQLbympOsDItCV-11" target="tczm5RnQLbympOsDItCV-15">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="770" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tczm5RnQLbympOsDItCV-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="tczm5RnQLbympOsDItCV-11" target="tczm5RnQLbympOsDItCV-17">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="630" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tczm5RnQLbympOsDItCV-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="tczm5RnQLbympOsDItCV-11" target="tczm5RnQLbympOsDItCV-19">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="490" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tczm5RnQLbympOsDItCV-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="tczm5RnQLbympOsDItCV-11" target="tczm5RnQLbympOsDItCV-23">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="880" y="102.5" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="tczm5RnQLbympOsDItCV-11" value="Game Lable" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="570" y="90" width="120" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="tczm5RnQLbympOsDItCV-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="tczm5RnQLbympOsDItCV-15" target="tczm5RnQLbympOsDItCV-31">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="770" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tczm5RnQLbympOsDItCV-15" value="Boss Label" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="710" y="190" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tczm5RnQLbympOsDItCV-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="tczm5RnQLbympOsDItCV-17" target="tczm5RnQLbympOsDItCV-28">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="630" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tczm5RnQLbympOsDItCV-17" value="Card Label" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="570" y="190" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tczm5RnQLbympOsDItCV-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="tczm5RnQLbympOsDItCV-19" target="tczm5RnQLbympOsDItCV-25">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="490" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="tczm5RnQLbympOsDItCV-19" value="Player Label" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="430" y="190" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tczm5RnQLbympOsDItCV-23" value="Time&lt;div&gt;Player&#39;s turn&lt;/div&gt;&lt;div&gt;Skip button&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="870" y="72.5" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tczm5RnQLbympOsDItCV-25" value="Player&#39;s health&lt;div&gt;Player&#39;s Function Cards&lt;/div&gt;&lt;div&gt;Player&#39;s name&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="430" y="270" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tczm5RnQLbympOsDItCV-28" value="Cards&lt;div&gt;Cards played&lt;/div&gt;&lt;div&gt;Cards functionality&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="570" y="270" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tczm5RnQLbympOsDItCV-31" value="Boss Name&lt;div&gt;Boss Health&lt;/div&gt;&lt;div&gt;Boss Skills&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="710" y="270" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tczm5RnQLbympOsDItCV-33" value="Since time is already implemented, a time button can be used for FPS reasons" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="830" y="160" width="440" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

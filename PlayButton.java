@@ -14,7 +14,7 @@ public class PlayButton extends JButton {
 
     public PlayButton() {
         this.setText(text);
-        this.setOpaque(false);
+        this.setOpaque(true);
     }
 
     public void resizedFrame(int newScale) {
