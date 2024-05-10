@@ -25,7 +25,7 @@ public class MyFrame extends JFrame implements ComponentListener {
 	final private String iconSource = "Icon.png";
 
 	// the source of frame settings
-	final private String frameSetting = "Savings.txt";
+	final private String setting = "Savings.txt";
 
 	// create the Label for the Frame
 	MainLabel mainLabel;
@@ -34,7 +34,7 @@ public class MyFrame extends JFrame implements ComponentListener {
 	public MyFrame() {
 		try {
 			// get the txt file and read it 
-			File savedSetting = new File(frameSetting);
+			File savedSetting = new File(setting);
 			Scanner myReader = new Scanner(savedSetting);
 			
 			// the data now have the first line of the txt file for scale

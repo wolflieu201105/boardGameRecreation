@@ -2,6 +2,8 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -20,11 +22,17 @@ public class MainLabel extends JLabel implements ActionListener {
 	private int width;
 	private int height;
 
+	// save file name
+	final private String names = "PlayerName.txt";
+
 	// create the gameTitle instance
 	private GameTitle gameTitle;
 
 	// create the playButton
 	private PlayButton playButton;
+
+	// create name holder
+	private PlayerNameLabel playerNameLabel;
 
 	// create the constructor
 	public MainLabel(int currentScale) {
@@ -38,9 +46,13 @@ public class MainLabel extends JLabel implements ActionListener {
 		playButton = new PlayButton();
 		playButton.addActionListener(this);
 
+		// set the name for players
+		playerNameLabel = new PlayerNameLabel();
+
 		// adding the components to the label
 		this.add(gameTitle);
 		this.add(playButton);
+		this.add(playerNameLabel);
 
 		// set the bounds for the label
 		ResizedFrame(scale);
@@ -82,6 +94,7 @@ public class MainLabel extends JLabel implements ActionListener {
 		// setting the new scale for all the components
 		gameTitle.resizedFrame(newScale);
 		playButton.resizedFrame(newScale);
+		playerNameLabel.ResizedFrame(newScale);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -93,9 +106,24 @@ public class MainLabel extends JLabel implements ActionListener {
 	GameLabel gameLabel;
 
 	public void startGame() {
+		try {
+			FileWriter myWriter = new FileWriter(names);
+			for (int i = 0; i < playerNameLabel.textFields.length; i++) {
+				myWriter.write("Player " + (i+1) + "\t");
+				if (playerNameLabel.textFields[i].getText().equals("")) {
+					myWriter.write("Player " + (i+1) + "\n");
+				}
+				else {
+					myWriter.write(playerNameLabel.textFields[i].getText() + "\n");
+				}
+			}
+			myWriter.close();
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
 		gameLabel = new GameLabel(scale);
-		this.remove(gameTitle);
-		this.remove(playButton);
+		this.removeAll();
 		this.add(gameLabel);
 		repaint();
 	}
