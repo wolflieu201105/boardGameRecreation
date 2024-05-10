@@ -16,6 +16,15 @@ public class PlayerLabel extends JLabel{
 	private int height;
     private int x_start;
     private int y_start;
+
+	// players
+	final private int player_width = 50;
+	final private int player_height = 50;
+	private PlayerCards player1;
+	private PlayerCards player2;
+	private PlayerCards player3;
+	private PlayerCards player4;
+	private PlayerCards[] players = {player1, player2, player3, player4};
     
     public PlayerLabel(int newScale) {
         scale = newScale;
@@ -23,6 +32,12 @@ public class PlayerLabel extends JLabel{
         height = height_ratio * scale;
         x_start = x_start_ratio * scale;
         y_start = y_start_ratio * scale;
+
+		// adding the players
+		for (int i = 0; i < players.length; i++) {
+			players[i] = new PlayerCards(0, i * player_height, player_width, player_height, newScale);
+			this.add(players[i]);
+		}
 
 		// setting the new bounds for the label
 		this.setBounds(x_start, y_start, width, height);
