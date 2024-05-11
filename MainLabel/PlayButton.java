@@ -1,3 +1,4 @@
+package MainLabel;
 import javax.swing.JButton;
 
 import java.awt.Font;

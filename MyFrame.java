@@ -22,7 +22,7 @@ public class MyFrame extends JFrame implements ComponentListener {
 	private int height;
 
 	// the source of the icon for the frame
-	final private String iconSource = "Icon.png";
+	final private String iconSource = "Assets/Icon.png";
 
 	// the source of frame settings
 	final private String setting = "Savings.txt";

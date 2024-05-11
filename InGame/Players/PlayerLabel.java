@@ -1,4 +1,6 @@
+package InGame.Players;
 import javax.swing.JLabel;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;

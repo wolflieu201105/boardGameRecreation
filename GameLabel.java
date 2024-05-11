@@ -2,6 +2,8 @@ import java.awt.Color;
 
 import javax.swing.JLabel;
 
+import InGame.Players.PlayerLabel;
+
 public class GameLabel extends JLabel{
 	// the dimensions of the main label
 	final private int width_ratio = 300;
