@@ -10,7 +10,7 @@ public class PlayButton extends JButton {
 
     // text for the button
     final private String text = "Start";
-	final private int text_size_ratio = 20;
+	final private int text_size_ratio = 5;
 
     public PlayButton() {
         this.setText(text);
@@ -26,7 +26,7 @@ public class PlayButton extends JButton {
 		int text_size = text_size_ratio * newScale;
 
 		// setting font and size of the text
-		this.setFont(new Font("Arial", Font.PLAIN, text_size));
+		this.setFont(new Font("Arial", Font.PLAIN, text_size*newScale));
 
         int x_start = (this.getParent().getWidth() - width)/2;
 		int y_start = this.getParent().getHeight() / 5*2;

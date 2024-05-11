@@ -5,6 +5,7 @@ import java.util.Scanner;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import java.awt.Color;
 import java.awt.Font;
 
 public class PlayerNameLabel extends JLabel{
@@ -21,7 +22,7 @@ public class PlayerNameLabel extends JLabel{
     private int marginTop = 35;
     private int width = 55;
     private int height = 20;
-    private int text_size = 35;
+    private int text_size = 10;
     JTextField textField1 = new JTextField();
     JTextField textField2 = new JTextField();
     JTextField textField3 = new JTextField();
@@ -37,6 +38,7 @@ public class PlayerNameLabel extends JLabel{
 			for (int i = 0; i < textFields.length; i++) {
                 String data = myReader.nextLine();
                 textFields[i].setText(data.split("\t")[1]);
+                textFields[i].setBackground(new Color(255, 248, 178));
             }
 			
 			// closing the reader
@@ -47,14 +49,14 @@ public class PlayerNameLabel extends JLabel{
 			System.out.println("An error occurred.");
 			e.printStackTrace();
 		}
-		this.setOpaque(true);
+		this.setOpaque(false);
     }
     
 	public void ResizedFrame(int newScale) {
         for (int i = 0; i < textFields.length; i++) {
             textFields[i].setBounds(((marginLeft * 2 + width) * i + marginLeft) * newScale, marginTop * newScale, width * newScale, height * newScale);
 		    // setting font and size of the text
-		    textFields[i].setFont(new Font("Arial", Font.PLAIN, text_size));
+		    textFields[i].setFont(new Font("Arial", Font.PLAIN, text_size * newScale));
             this.add(textFields[i]);
         }
         this.setBounds(x_start * newScale, y_start * newScale, width_ratio * newScale, height_ratio * newScale);
