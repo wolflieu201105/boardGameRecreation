@@ -1,0 +1,9 @@
+Cards:	8
+TanCong	1	TanCong.png	10	Deal 2 damage to one enemy
+MuaTen	2	MuaTen.png	5	Deal 1 damage to all enemies
+DuongThuong	2	DuongThuong.png	5	Heal 2 hp to another player
+TienThoaiLuongNan	2	TienThoaiLuongNan.png	5	Consumes 2 hp and deal 4 damage to one enemy
+PhongThu	1	PhongThu.png	10	Block 1 damage that comes from the next attack from enemy
+BaoHoDongMinh	1	BaoHoDongMinh.png	5	Takes all the damage for the player you picked in the next turn
+DieuBinhKhienTuong	1	DieuBinhKhienTuong.png	5	Draws 2 cards
+DanXepDoiHinh	1	DanXepDoiHinh.png	5	Change your position with the player you pick
