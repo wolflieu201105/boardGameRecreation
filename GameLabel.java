@@ -4,7 +4,7 @@ import javax.swing.JLabel;
 
 import InGame.Players.PlayerLabel;
 
-public class GameLabel extends JLabel{
+public class GameLabel extends JLabel implements Runnable{
 	// the dimensions of the main label
 	final private int width_ratio = 300;
 	final private int height_ratio = 200;
@@ -40,11 +40,38 @@ public class GameLabel extends JLabel{
 		// set color back ground and visibility of the color
 		this.setBackground(new Color(255, 248, 178));
 		this.setOpaque(true);
+		startGameThread();
     }
 
     // FPS implementation
-    private int FRAMES_PER_SECOND = 25;
-    private int SKIP_TICKS = 1000 / FRAMES_PER_SECOND;
 
-    
+	final private int FPS = 1;
+
+	Thread gameThread;
+    public void startGameThread() {
+		gameThread = new Thread(this);
+		gameThread.start();
+	}
+
+	@Override
+	public void run() {
+		double drawInterval = 1000000000/FPS;
+		double delta = 0;
+		long lastTime = System.nanoTime();
+		long currentTime;
+		while (gameThread != null) {
+			currentTime = System.nanoTime();
+			delta += (currentTime - lastTime) / drawInterval;
+			lastTime = currentTime;
+			if (delta >= 1) {
+				update();
+				repaint();
+				delta--;
+			}
+		}
+	}
+
+	public void update() {
+		playerLabel.update();
+	}
 }

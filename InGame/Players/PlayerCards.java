@@ -22,11 +22,11 @@ public class PlayerCards extends JLabel {
 	JTextPane healthBar;
 
 	// health
-	int health = 25;
-	private int maxHealth = 25;
+	public int health = 25;
+	public int maxHealth = 25;
 
 	// the maximum stamina of the player
-	int maxStamina;
+	public int maxStamina = 3;
 
 	// the number of buffs (can be different) that the player have currently
 	int[] buffs;
@@ -47,7 +47,7 @@ public class PlayerCards extends JLabel {
 		nameTextPane.setFont(new Font("Arial", Font.PLAIN, text_size*newScale));
 		nameTextPane.setText(name);
 		nameTextPane.setEditable(false);
-		nameTextPane.setBackground(new Color(0, 255, 0, 150));
+		nameTextPane.setBackground(new Color(0, 250, 0, 150));
 		nameTextPane.setOpaque(true);
 		this.add(nameTextPane);
 
@@ -64,7 +64,16 @@ public class PlayerCards extends JLabel {
 		this.setOpaque(false);
 	}
 	
+	public void update() {
+		if (health < 0) {
+			health = 0;
+		}
+		if (health != Integer.parseInt(healthBar.getText().split("/")[0])) {
+			healthBar.setText(health + "/" + maxHealth);
+			nameTextPane.setBackground(new Color(250 - health*10, health*10, 0, 150));
+		}
+	}
+
 	// when hovering over the player, it should show the player name, status and 
 	// buffs
-	
 }

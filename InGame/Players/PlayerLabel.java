@@ -1,4 +1,5 @@
 package InGame.Players;
+
 import javax.swing.JLabel;
 
 import java.io.File;
@@ -27,11 +28,7 @@ public class PlayerLabel extends JLabel {
 	// players
 	final private int player_width = 50;
 	final private int player_height = 50;
-	private PlayerCards player1;
-	private PlayerCards player2;
-	private PlayerCards player3;
-	private PlayerCards player4;
-	private PlayerCards[] players = { player1, player2, player3, player4 };
+	private PlayerCards[] players = new PlayerCards[4];
 
 	public PlayerLabel(int newScale) {
 		scale = newScale;
@@ -67,5 +64,13 @@ public class PlayerLabel extends JLabel {
 
 		// set the visibility of the color
 		this.setOpaque(false);
+	}
+
+	public void update() {
+		players[0].health--;
+		players[1].health -= 2;
+		for (PlayerCards playerCards : players) {
+			playerCards.update();
+		}
 	}
 }
