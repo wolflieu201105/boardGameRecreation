@@ -2,6 +2,7 @@ import java.awt.Color;
 
 import javax.swing.JLabel;
 
+import InGame.Cards.CardLabel;
 import InGame.Players.PlayerLabel;
 
 public class GameLabel extends JLabel implements Runnable{

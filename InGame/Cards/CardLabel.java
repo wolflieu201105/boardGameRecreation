@@ -1,6 +1,12 @@
+package InGame.Cards;
 import javax.swing.JLabel;
 
+import InGame.Players.PlayerCards;
+
 import java.awt.Color;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class CardLabel extends JLabel{
 	// the dimensions of the main label
@@ -18,12 +24,30 @@ public class CardLabel extends JLabel{
     private int x_start;
     private int y_start;
 
+	// playing cards file
+	private String assets = "./Assets.PlayingCards.txt";
+
     public CardLabel(int newScale) {
         scale = newScale;
         width = width_ratio * scale;
         height = height_ratio * scale;
         x_start = x_start_ratio * scale;
         y_start = y_start_ratio * scale;
+
+		// adding the players
+		try {
+			// get the txt file and read it
+			File savedSetting = new File(assets);
+			Scanner myReader = new Scanner(savedSetting);
+
+			// closing the reader
+			myReader.close();
+		}
+		// returning error if there is no setting saved file
+		catch (FileNotFoundException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
 
 		// setting the new bounds for the label
 		this.setBounds(x_start, y_start, width, height);
