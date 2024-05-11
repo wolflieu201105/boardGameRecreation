@@ -67,8 +67,6 @@ public class PlayerLabel extends JLabel {
 	}
 
 	public void update() {
-		players[0].health--;
-		players[1].health -= 2;
 		for (PlayerCards playerCards : players) {
 			playerCards.update();
 		}
