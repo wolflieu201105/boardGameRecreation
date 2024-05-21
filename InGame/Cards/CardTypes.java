@@ -1,14 +1,16 @@
 package InGame.Cards;
 
 
-import javax.swing.JLabel;
+import java.awt.Image;
 
-public class Cards extends JLabel {
+import javax.swing.Icon;
+
+public class CardTypes{
 	// the name of the card
 	String name;
 
 	// the source of the image to navigate
-	String imageSource;
+	Image image;
 
 	// the stamina cost of the card
 	int staminaCost;
@@ -16,10 +18,10 @@ public class Cards extends JLabel {
 	// description
 	String description;
 
-	public Cards(String Name, int StaminaCost, String ImageSource, String Description) {
+	public CardTypes(String Name, int StaminaCost, Image cardImage, String Description) {
 		name = Name;
 		staminaCost = StaminaCost;
-		imageSource = ImageSource;
+		image = cardImage;
 		description = Description;
 	}
 }

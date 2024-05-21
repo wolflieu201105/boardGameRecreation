@@ -46,7 +46,7 @@ public class GameLabel extends JLabel implements Runnable{
 
     // FPS implementation
 
-	final private int FPS = 1;
+	final private int FPS = 60;
 
 	Thread gameThread;
     public void startGameThread() {
@@ -74,5 +74,6 @@ public class GameLabel extends JLabel implements Runnable{
 
 	public void update() {
 		playerLabel.update();
+		cardLabel.update();
 	}
 }

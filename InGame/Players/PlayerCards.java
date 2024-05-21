@@ -28,6 +28,9 @@ public class PlayerCards extends JLabel {
 	// the maximum stamina of the player
 	public int maxStamina = 3;
 
+	// the maximum cards the player can have
+	public int cardsNextTurn = 3;
+
 	// the number of buffs (can be different) that the player have currently
 	int[] buffs;
 
