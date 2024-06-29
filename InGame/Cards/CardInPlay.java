@@ -41,12 +41,12 @@ public class CardInPlay extends JLabel implements MouseListener {
         this.addMouseListener(this);
     }
 
-    public void viewAble(int X, int Y) {
-        x = X;
-        y = Y;
-        initialX = X;
-        initialY = Y;
-        this.setBounds(x, y, x + width, y + width);
+    public void viewAble(int X, int Y, int scale) {
+        x = X*scale;
+        y = Y*scale;
+        initialX = X*scale;
+        initialY = Y*scale;
+        this.setBounds(x, y, x + width, y + height);
         ImageIcon scaledIcon = new ImageIcon(cardTypes.image);
         this.setIcon(scaledIcon);
     }
@@ -56,15 +56,15 @@ public class CardInPlay extends JLabel implements MouseListener {
         x += dx;
         dy = (y_stop - y) / speed_scale;
         y += dy;
-        this.setBounds(x, y, x + width, y + height);
+        this.setLocation(x, y);
     }
 
-    public void update() {
+    public void update(int FPS) {
         if (choosen) {
-            this.moveTo(x, initialY + height);
+            this.moveTo(initialX, initialY + height);
         } else {
             if (mouseInside) {
-                this.moveTo(initialX, initialY + height / 2);
+                this.moveTo(initialX, initialY - (height / 2));
             } else {
                 this.moveTo(initialX, initialY);
             }

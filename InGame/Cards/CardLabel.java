@@ -26,8 +26,8 @@ public class CardLabel extends JLabel {
 	private int y_start;
 
 	// card label to display cards
-	private int card_width_ratio = 40;
-	private int card_height_ratio = 60;
+	private int card_width_ratio = 30;
+	private int card_height_ratio = 50;
 	private CardInPlay[] cardsInPlay = new CardInPlay[8];
 
 	// playing cards file
@@ -63,7 +63,7 @@ public class CardLabel extends JLabel {
 					thisLine = data.split("\t");
 					ImageIcon newIcon = new ImageIcon(assets + thisLine[2]);
 					Image cardImage = newIcon.getImage();
-					cardImage = cardImage.getScaledInstance(card_width_ratio * scale, card_height_ratio * scale, Image.SCALE_SMOOTH);
+					cardImage = cardImage.getScaledInstance(card_width_ratio * scale * 5/3, card_height_ratio * scale * 3/2, Image.SCALE_SMOOTH);
 					cardTypes[i] = new CardTypes(thisLine[0], Integer.parseInt(thisLine[1]), cardImage, thisLine[4]);
 					remaining[i] = Integer.parseInt(thisLine[3]);
 				} catch (Exception e) {
@@ -99,11 +99,11 @@ public class CardLabel extends JLabel {
 
 	public void start() {
 		cardsInPlay[0].cardTypes = cardTypes[3];
-		cardsInPlay[0].viewAble(20,20);
+		cardsInPlay[0].viewAble(20,20,scale);
 		this.add(cardsInPlay[0]);
 	}
 
-	public void update() {
-		cardsInPlay[0].update();
+	public void update(int FPS) {
+		cardsInPlay[0].update(FPS);
 	}
 }
