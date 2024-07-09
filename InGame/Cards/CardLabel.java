@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class CardLabel extends JLabel {
 	// the dimensions of the main label
-	final private int width_ratio = 250;
+	final private int width_ratio = 280;
 	final private int height_ratio = 120;
 	final private int x_start_ratio = 50;
 	final private int y_start_ratio = 80;
@@ -46,7 +46,7 @@ public class CardLabel extends JLabel {
 		x_start = x_start_ratio * scale;
 		y_start = y_start_ratio * scale;
 
-		// adding the players
+		// adding the playing cards
 		try {
 			// get the txt file and read it
 			File savedSetting = new File(assetFile);

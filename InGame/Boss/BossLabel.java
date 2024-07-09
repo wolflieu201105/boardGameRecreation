@@ -5,7 +5,7 @@ import java.awt.Color;
 
 public class BossLabel extends JLabel{
 	// the dimensions of the main label
-	final private int width_ratio = 200;
+	final private int width_ratio = 220;
 	final private int height_ratio = 80;
 	final private int x_start_ratio = 50;
 	final private int y_start_ratio = 0;
@@ -18,6 +18,10 @@ public class BossLabel extends JLabel{
 	private int height;
     private int x_start;
     private int y_start;
+
+	// bossFile
+	private String assetFile = "Assets/BossCards.txt";
+	private String assets = "Assets/BossCards/Phase_";
 
     public BossLabel(int newScale) {
         scale = newScale;

@@ -11,8 +11,8 @@ import javax.swing.JFrame;
 @SuppressWarnings("serial")
 public class MyFrame extends JFrame implements ComponentListener {
 	// the initial frame size
-	final private int width_ratio = 300;
-	final private int height_ratio = 200;
+	final private int width_ratio = 350;
+	final private int height_ratio = 250;
 
 	// the current scale
 	private int scale;

@@ -8,7 +8,7 @@ import InGame.Players.PlayerLabel;
 
 public class GameLabel extends JLabel implements Runnable{
 	// the dimensions of the main label
-	final private int width_ratio = 300;
+	final private int width_ratio = 320;
 	final private int height_ratio = 200;
     
 	// the current scale
