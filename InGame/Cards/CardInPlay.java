@@ -20,7 +20,7 @@ public class CardInPlay extends JLabel implements MouseListener {
     // vector of card
     private double dx;
     private double dy;
-    private int speed_scale = 10;
+    private int speed_scale = 300;
 
     // whether the card is being shown
     boolean choosen = false;
@@ -44,42 +44,39 @@ public class CardInPlay extends JLabel implements MouseListener {
     public void viewAble(int X, int Y, int scale) {
         x = X*scale;
         y = Y*scale;
-        initialX = X*scale;
-        initialY = Y*scale;
-        this.setBounds(x, y, x + width, y + height);
+        initialX = x;
+        initialY = y;
+        this.setBounds(x, y, width, height);
         ImageIcon scaledIcon = new ImageIcon(cardTypes.image);
         this.setIcon(scaledIcon);
     }
 
-    public void moveTo(int x_stop, int y_stop) {
-        dx = (x_stop - x) / speed_scale;
+    public void moveTo(int x_stop, int y_stop, int FPS) {
+        dx = (x_stop - x) * FPS / speed_scale;
         x += dx;
-        dy = (y_stop - y) / speed_scale;
+        dy = (y_stop - y) * FPS / speed_scale;
         y += dy;
         this.setLocation(x, y);
     }
 
     public void update(int FPS) {
         if (choosen) {
-            this.moveTo(initialX, initialY + height);
+            this.moveTo(initialX, initialY - (3*height / 4), FPS);
         } else {
             if (mouseInside) {
-                this.moveTo(initialX, initialY - (height / 2));
+                this.moveTo(initialX, initialY - (height / 4), FPS);
             } else {
-                this.moveTo(initialX, initialY);
+                this.moveTo(initialX, initialY, FPS);
             }
         }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseClicked'");
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        System.out.println("mouseIn!");
         mouseInside = true;
     }
 
@@ -90,12 +87,10 @@ public class CardInPlay extends JLabel implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println("mousePressed");
+        choosen = true;
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseReleased'");
     }
 }

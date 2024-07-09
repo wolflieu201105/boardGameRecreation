@@ -26,8 +26,8 @@ public class CardLabel extends JLabel {
 	private int y_start;
 
 	// card label to display cards
-	private int card_width_ratio = 30;
-	private int card_height_ratio = 50;
+	private int card_width_ratio = 40;
+	private int card_height_ratio = 60;
 	private CardInPlay[] cardsInPlay = new CardInPlay[8];
 
 	// playing cards file
@@ -63,7 +63,7 @@ public class CardLabel extends JLabel {
 					thisLine = data.split("\t");
 					ImageIcon newIcon = new ImageIcon(assets + thisLine[2]);
 					Image cardImage = newIcon.getImage();
-					cardImage = cardImage.getScaledInstance(card_width_ratio * scale * 5/3, card_height_ratio * scale * 3/2, Image.SCALE_SMOOTH);
+					cardImage = cardImage.getScaledInstance((int)card_width_ratio * scale, (int)card_height_ratio * scale, Image.SCALE_SMOOTH);
 					cardTypes[i] = new CardTypes(thisLine[0], Integer.parseInt(thisLine[1]), cardImage, thisLine[4]);
 					remaining[i] = Integer.parseInt(thisLine[3]);
 				} catch (Exception e) {
@@ -97,13 +97,26 @@ public class CardLabel extends JLabel {
 		start();
 	}
 
+	private int cardMarginHeight = 45;
+	private int initialMargin = 15;
+	private int numberOfCards = 8;
 	public void start() {
-		cardsInPlay[0].cardTypes = cardTypes[3];
-		cardsInPlay[0].viewAble(20,20,scale);
-		this.add(cardsInPlay[0]);
+		int marginWidth = (this.width_ratio - this.card_width_ratio*numberOfCards - initialMargin*2)/(numberOfCards - 1);
+		for (int i = 0; i < numberOfCards; i++) {
+			cardsInPlay[i].cardTypes = cardTypes[i];
+			cardsInPlay[i].viewAble(initialMargin + (marginWidth + card_width_ratio) * i,cardMarginHeight,scale);
+			this.add(cardsInPlay[i]);
+		} 
 	}
 
 	public void update(int FPS) {
-		cardsInPlay[0].update(FPS);
+		Thread[] cardsThread = new Thread[numberOfCards];
+		for (int i = 0; i < numberOfCards; i++) {
+			int num = i;
+			cardsThread[num] = new Thread(() ->{
+				cardsInPlay[num].update(FPS);
+			});
+			cardsThread[num].start();
+		}
 	}
 }
