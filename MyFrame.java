@@ -66,7 +66,7 @@ public class MyFrame extends JFrame implements ComponentListener {
 		this.setTitle("new frame");// set titles of the frame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// exit out of application
 		this.setResizable(true);
-		this.setSize(width, height); // sets the x-dimension, and y-dimension of the frame
+		this.setSize(width * 11/10, height * 11/10); // sets the x-dimension, and y-dimension of the frame
 		this.setLayout(null);
 		this.setVisible(true); // make frame visible
 

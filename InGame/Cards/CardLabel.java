@@ -97,7 +97,7 @@ public class CardLabel extends JLabel {
 		start();
 	}
 
-	private int cardMarginHeight = 45;
+	private int cardMarginHeight = 55;
 	private int initialMargin = 15;
 	private int numberOfCards = 8;
 	public void start() {

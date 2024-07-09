@@ -1,6 +1,4 @@
 package InGame.Cards;
-
-import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -20,7 +18,7 @@ public class CardInPlay extends JLabel implements MouseListener {
     // vector of card
     private double dx;
     private double dy;
-    private int speed_scale = 300;
+    private int speed_scale = 10;
 
     // whether the card is being shown
     boolean choosen = false;
@@ -42,8 +40,8 @@ public class CardInPlay extends JLabel implements MouseListener {
     }
 
     public void viewAble(int X, int Y, int scale) {
-        x = X*scale;
-        y = Y*scale;
+        x = X * scale;
+        y = Y * scale;
         initialX = x;
         initialY = y;
         this.setBounds(x, y, width, height);
@@ -52,16 +50,16 @@ public class CardInPlay extends JLabel implements MouseListener {
     }
 
     public void moveTo(int x_stop, int y_stop, int FPS) {
-        dx = (x_stop - x) * FPS / speed_scale;
+        dx = (x_stop - x) / (FPS / speed_scale);
         x += dx;
-        dy = (y_stop - y) * FPS / speed_scale;
+        dy = (y_stop - y) / (FPS / speed_scale);
         y += dy;
         this.setLocation(x, y);
     }
 
     public void update(int FPS) {
         if (choosen) {
-            this.moveTo(initialX, initialY - (3*height / 4), FPS);
+            this.moveTo(initialX, initialY - (3 * height / 4), FPS);
         } else {
             if (mouseInside) {
                 this.moveTo(initialX, initialY - (height / 4), FPS);
