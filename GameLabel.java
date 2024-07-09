@@ -2,6 +2,7 @@ import java.awt.Color;
 
 import javax.swing.JLabel;
 
+import InGame.Boss.BossLabel;
 import InGame.Cards.CardLabel;
 import InGame.Players.PlayerLabel;
 
@@ -46,7 +47,7 @@ public class GameLabel extends JLabel implements Runnable{
 
     // FPS implementation
 
-	final private int FPS = 100;
+	final private int FPS = 60;
 
 	Thread gameThread;
     public void startGameThread() {

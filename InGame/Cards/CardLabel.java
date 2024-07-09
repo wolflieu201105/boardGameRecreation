@@ -105,6 +105,7 @@ public class CardLabel extends JLabel {
 		for (int i = 0; i < numberOfCards; i++) {
 			cardsInPlay[i].cardTypes = cardTypes[i];
 			cardsInPlay[i].viewAble(initialMargin + (marginWidth + card_width_ratio) * i,cardMarginHeight,scale);
+			cardsInPlay[i].choosable = true;
 			this.add(cardsInPlay[i]);
 		} 
 	}
@@ -117,6 +118,13 @@ public class CardLabel extends JLabel {
 				cardsInPlay[num].update(FPS);
 			});
 			cardsThread[num].start();
+		}
+	}
+
+	// Overiding in order to change the choosable in every card
+	public void removeAll() {
+		for (int i = 0; i < numberOfCards; i++) {
+			cardsInPlay[i].choosable = false;
 		}
 	}
 }

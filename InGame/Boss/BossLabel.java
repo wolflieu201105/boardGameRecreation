@@ -1,3 +1,4 @@
+package InGame.Boss;
 import javax.swing.JLabel;
 
 import java.awt.Color;
