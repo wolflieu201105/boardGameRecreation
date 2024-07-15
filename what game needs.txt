@@ -15,6 +15,7 @@ when hovered => move up and show what the card can do
 //////////////////////////////////////////////////
 
 Bosses:
+!!! Bosses are needed to be hard coded, not just simple as cards that can be taken out of the deck
 Name
 Image source
 Skill (3 different skills)

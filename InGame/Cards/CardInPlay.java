@@ -85,9 +85,14 @@ public class CardInPlay extends JLabel implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (choosable) {
-            choosen = true;
-            this.getParent().removeAll();
+        if (e.getButton() == MouseEvent.BUTTON1){
+            if (choosable) {
+                choosen = true;
+                this.getParent().removeAll();
+            }
+        }
+        if (e.getButton() == MouseEvent.BUTTON3){
+            System.out.println("show function");
         }
     }
 

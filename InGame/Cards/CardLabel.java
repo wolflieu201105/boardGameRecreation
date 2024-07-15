@@ -99,7 +99,7 @@ public class CardLabel extends JLabel {
 
 	private int cardMarginHeight = 55;
 	private int initialMargin = 15;
-	private int numberOfCards = 8;
+	private int numberOfCards = 6;
 	public void start() {
 		int marginWidth = (this.width_ratio - this.card_width_ratio*numberOfCards - initialMargin*2)/(numberOfCards - 1);
 		for (int i = 0; i < numberOfCards; i++) {

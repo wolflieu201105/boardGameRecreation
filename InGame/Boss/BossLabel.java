@@ -18,11 +18,7 @@ public class BossLabel extends JLabel{
 	private int height;
     private int x_start;
     private int y_start;
-
-	// bossFile
-	private String assetFile = "Assets/BossCards.txt";
-	private String assets = "Assets/BossCards/Phase_";
-
+	
     public BossLabel(int newScale) {
         scale = newScale;
         width = width_ratio * scale;
