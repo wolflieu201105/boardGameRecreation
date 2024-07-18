@@ -33,5 +33,4 @@ public class BossLabel extends JLabel{
 		this.setBackground(new Color(255, 255, 70));
 		this.setOpaque(true);
     }
-    
 }

@@ -94,7 +94,6 @@ public class CardLabel extends JLabel {
 
 		this.setBackground(new Color(255, 70, 255));
 		this.setOpaque(true);
-		start();
 	}
 
 	private int cardMarginHeight = 55;

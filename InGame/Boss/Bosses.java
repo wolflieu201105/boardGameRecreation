@@ -13,6 +13,7 @@ public abstract class Bosses extends JLabel {
 	abstract void Skill(int Phase);
 
 	// the health bar of the boss
+	int health;
 	BossHealthBar healthBar;
 
 	// the position, width, height of the boss
@@ -20,9 +21,9 @@ public abstract class Bosses extends JLabel {
 	int x;
 	int y;
 	// width
-	int dx;
+	int width;
 	// height
-	int dy;
+	int height;
 
 	// when hovering over the boss, the info about the boss
 	// should appear along with how it attack
