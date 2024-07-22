@@ -4,7 +4,6 @@ import java.awt.Font;
 
 import javax.swing.JTextPane;
 
-@SuppressWarnings("serial")
 public class GameTitle extends JTextPane {
 	// the dimensions of the text label
 	final private int width_ratio = 206;

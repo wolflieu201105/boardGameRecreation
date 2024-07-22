@@ -42,7 +42,7 @@ public class PlayerCards extends JLabel {
 		name = playerName;
 
 		// setting the new bounds for the label
-		this.setBounds(x_ratio * newScale, y_ratio * newScale, width * newScale, height * newScale);
+		this.setBounds(x_ratio * newScale, y_ratio * newScale, width_ratio * newScale, height_ratio * newScale);
 
 		// set the player's name
 		nameTextPane = new JTextPane();

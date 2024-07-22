@@ -13,7 +13,6 @@ import MainLabel.GameTitle;
 import MainLabel.PlayButton;
 import MainLabel.PlayerNameLabel;
 
-@SuppressWarnings("serial")
 public class MainLabel extends JLabel implements ActionListener {
 	// the dimensions of the main label
 	final private int width_ratio = 320;

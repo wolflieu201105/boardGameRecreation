@@ -8,7 +8,6 @@ import java.util.Scanner;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-@SuppressWarnings("serial")
 public class MyFrame extends JFrame implements ComponentListener {
 	// the initial frame size
 	final private int width_ratio = 350;

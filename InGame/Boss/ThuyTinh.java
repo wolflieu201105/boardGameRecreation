@@ -75,7 +75,7 @@ public class ThuyTinh extends Bosses implements MouseListener{
 		cardImage = cardImage.getScaledInstance(width, width * 3 / 2, Image.SCALE_SMOOTH);
 		newIcon = new ImageIcon(cardImage);
         this.setIcon(newIcon);
-		this.setVerticalAlignment(this.TOP);
+		this.setVerticalAlignment(ThuyTinh.TOP);
 	}
 	
 	boolean shaking = false;
