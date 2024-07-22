@@ -18,6 +18,8 @@ public class CardInPlay extends JLabel implements MouseListener {
     // vector of card
     private double dx;
     private double dy;
+    private double dummyX;
+    private double dummyY;
     private int speed_scale = 10;
 
     // whether the card is being shown
@@ -48,6 +50,8 @@ public class CardInPlay extends JLabel implements MouseListener {
     public void viewAble(int X, int Y, int scale) {
         x = X * scale;
         y = Y * scale;
+        dummyX = x;
+        dummyY = y;
         initialX = x;
         initialY = y;
         this.setBounds(x, y, width, height);
@@ -56,10 +60,12 @@ public class CardInPlay extends JLabel implements MouseListener {
     }
 
     public void moveTo(int x_stop, int y_stop, int FPS) {
-        dx = (x_stop - x) / (FPS / speed_scale);
-        x += dx;
-        dy = (y_stop - y) / (FPS / speed_scale);
-        y += dy;
+        dx = (x_stop - dummyX) / (FPS / speed_scale);
+        dummyX += dx;
+        x = (int)dummyX;
+        dy = (y_stop - dummyY) / (FPS / speed_scale);
+        dummyY += dy;
+        y = (int)dummyY;
         this.setLocation(x, y);
     }
 
