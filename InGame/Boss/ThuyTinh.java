@@ -81,12 +81,13 @@ public class ThuyTinh extends Bosses implements MouseListener{
 	boolean shaking = false;
 	int bound;
 	int shake_time = 4;
-	int k = 500;
-	int friction = 250;
+	int k = 1000;
+	int friction = 500;
 	double length;
 	double velocity;
 	double accelaration;
 	private void shake(int FPS) {
+		boolean check1 = length > 0;
 		accelaration = -length * k;
 		if (velocity < 0){
 			accelaration += friction;
@@ -96,6 +97,13 @@ public class ThuyTinh extends Bosses implements MouseListener{
 		}
 		velocity += accelaration * 1/FPS;
 		length += velocity * 1/FPS;
+		if ((length < 0 && check1) || (length > 0 && !check1)){
+			shake_time--;
+			if (shake_time == 0){
+				this.setLocation(initialX, initialY);
+				shaking = false;
+			}
+		}
 		this.setLocation(initialX + (int)length, initialY);
 	}
 
@@ -104,6 +112,7 @@ public class ThuyTinh extends Bosses implements MouseListener{
 		this.setLocation(initialX + bound, initialY);
 		length = bound;
 		velocity = 0;
+		shake_time = 6;
 		shaking = true;
 	}
 

@@ -48,7 +48,7 @@ public class GameLabel extends JLabel implements Runnable {
 
 	// FPS implementation
 
-	final private int FPS = 60;
+	final private int FPS = 200;
 
 	Thread gameThread;
 
