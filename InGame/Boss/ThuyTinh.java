@@ -1,6 +1,16 @@
 package InGame.Boss;
 
-public class ThuyTinh extends Bosses{
+import javax.swing.ImageIcon;
+import javax.swing.JTextPane;
+
+import java.awt.Color;
+import java.awt.Font;
+
+import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+public class ThuyTinh extends Bosses implements MouseListener{
     // the name of the boss
 	String Name = "Thuy Tinh";
 
@@ -12,19 +22,34 @@ public class ThuyTinh extends Bosses{
 
 	// the position, width, height of the boss
 	// initial position
-	int x;
-	int y;
+    private int initialX;
+    private int initialY;
+	public int x;
+	public int y;
 	// width
-	int width;
+	private int width;
 	// height
-	int height;
+	private int height;
 
 	// the health bar of the boss
-	int health = 35;
-	BossHealthBar healthBar;
+	int maxHealth = 35;
+	int health = maxHealth;
+	int text_size = 10;
+	JTextPane healthBar;
 
-	public ThuyTinh() {
-		
+	public ThuyTinh(int Width, int Height, int scale) {
+		width = Width * scale;
+        height = Height * scale;
+		bound = width/20;
+        this.setOpaque(false);
+		healthBar = new JTextPane();
+		healthBar.setBounds(0, width * 3/2, width, height - width*3/2);
+		healthBar.setFont(new Font("Arial", Font.PLAIN, text_size*scale));
+		healthBar.setText(health + "/" + maxHealth);
+		healthBar.setEditable(false);
+		healthBar.setOpaque(false);
+		this.add(healthBar);
+		this.addMouseListener(this);
 	}
 
 	// the skill of the boss
@@ -37,4 +62,70 @@ public class ThuyTinh extends Bosses{
 	void HoverForInfo(){
 
     }
+
+	// showing boss with x, y, etc
+	void showBoss(int X, int Y, int scale){
+		x = X * scale;
+        y = Y * scale;
+        initialX = x;
+        initialY = y;
+        this.setBounds(x, y, width, height);
+		ImageIcon newIcon = new ImageIcon(ImageSource);
+        Image cardImage = newIcon.getImage();
+		cardImage = cardImage.getScaledInstance(width, width * 3 / 2, Image.SCALE_SMOOTH);
+		newIcon = new ImageIcon(cardImage);
+        this.setIcon(newIcon);
+		this.setVerticalAlignment(this.TOP);
+	}
+	
+	boolean shaking = false;
+	int bound;
+	int shake_time = 4;
+	int k = 500;
+	int friction = 250;
+	double length;
+	double velocity;
+	double accelaration;
+	private void shake(int FPS) {
+		accelaration = -length * k;
+		if (velocity < 0){
+			accelaration += friction;
+		}
+		else {
+			accelaration -= friction;
+		}
+		velocity += accelaration * 1/FPS;
+		length += velocity * 1/FPS;
+		this.setLocation(initialX + (int)length, initialY);
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		this.setLocation(initialX + bound, initialY);
+		length = bound;
+		velocity = 0;
+		shaking = true;
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
+
+	public void update(int FPS){
+		if (shaking){
+			shake(FPS);
+		}
+	}
 }

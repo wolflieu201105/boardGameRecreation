@@ -18,6 +18,8 @@ public class BossLabel extends JLabel{
 	private int height;
     private int x_start;
     private int y_start;
+
+	ThuyTinh newBoss;
 	
     public BossLabel(int newScale) {
         scale = newScale;
@@ -32,5 +34,12 @@ public class BossLabel extends JLabel{
 		// set the visibility of the color
 		this.setBackground(new Color(255, 255, 70));
 		this.setOpaque(true);
+		newBoss = new ThuyTinh(40, 75, scale);
+		this.add(newBoss);
+		newBoss.showBoss(5, 5, scale);
     }
+
+	public void update(int FPS){
+		newBoss.update(FPS);
+	}
 }

@@ -85,6 +85,7 @@ public class CardLabel extends JLabel {
 		for (int i = 0; i < cardsInPlay.length; i++) {
 			cardsInPlay[i] = new CardInPlay(card_width_ratio * scale, card_height_ratio * scale);
 			this.add(cardsInPlay[i]);
+			cardsInPlay[i].getCreator(this);
 		}
 
 		// setting the new bounds for the label
@@ -121,7 +122,7 @@ public class CardLabel extends JLabel {
 	}
 
 	// Overiding in order to change the choosable in every card
-	public void removeAll() {
+	public void cardPlayed(String name) {
 		for (int i = 0; i < numberOfCards; i++) {
 			cardsInPlay[i].choosable = false;
 		}

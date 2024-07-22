@@ -1,9 +1,6 @@
 package InGame.Cards;
 
-
 import java.awt.Image;
-
-import javax.swing.Icon;
 
 public class CardTypes{
 	// the name of the card

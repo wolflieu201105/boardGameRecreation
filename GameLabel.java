@@ -79,5 +79,6 @@ public class GameLabel extends JLabel implements Runnable {
 	public void update() {
 		playerLabel.update();
 		cardLabel.update(FPS);
+		bossLabel.update(FPS);
 	}
 }

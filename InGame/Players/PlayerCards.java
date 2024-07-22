@@ -12,7 +12,7 @@ public class PlayerCards extends JLabel {
 	private int x_ratio;
 	private int y_ratio;
 
-	// the name of the boss
+	// the name of the Player
 	private String name;
 	private JTextPane nameTextPane;
 	private int nameHeight = 13;

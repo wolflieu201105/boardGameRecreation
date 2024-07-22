@@ -1,4 +1,4 @@
-Player 1	Wolflieu
-Player 2	wolflieu
-Player 3	chigga
-Player 4	PMH
+Player 1	Player 1
+Player 2	Player 2
+Player 3	 
+Player 4	Player 4
