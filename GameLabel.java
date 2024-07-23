@@ -1,12 +1,15 @@
 import java.awt.Color;
 
 import javax.swing.JLabel;
+import javax.swing.JButton;
+
+import java.awt.Font;
 
 import InGame.Boss.BossLabel;
 import InGame.Cards.CardLabel;
 import InGame.Players.PlayerLabel;
 
-public class GameLabel extends JLabel implements Runnable {
+public class GameLabel extends JLabel implements Runnable{
 	// the dimensions of the main label
 	final private int width_ratio = 320;
 	final private int height_ratio = 200;
@@ -23,6 +26,18 @@ public class GameLabel extends JLabel implements Runnable {
 	CardLabel cardLabel;
 	BossLabel bossLabel;
 
+	// next turn button
+	String nextTurnString = "End turn";
+	JButton nextButton = new JButton(nextTurnString);
+	int button_x_start_ratio = 270;
+	int button_y_start_ratio = 10;
+	int button_width_ratio = 50;
+	int button_heigth_ratio = 10;
+	int text_size_ratio = 8;
+
+	// turn of players
+	int turn = 0;
+
 	public GameLabel(int newScale) {
 		scale = newScale;
 		width = width_ratio * scale;
@@ -36,6 +51,19 @@ public class GameLabel extends JLabel implements Runnable {
 		this.add(cardLabel);
 		this.add(bossLabel);
 
+		// setting bounds for button
+		nextButton.setBounds(button_x_start_ratio * scale, button_y_start_ratio * scale, button_width_ratio * scale, button_heigth_ratio * scale);
+		nextButton.setFont(new Font("Arial", Font.PLAIN, text_size_ratio * scale));
+		nextButton.setBackground(new Color(255,255,255));
+		this.add(nextButton);
+		nextButton.addActionListener(e -> {
+			turn++;
+			if (turn == 5){
+				turn = 0;
+			}
+			System.out.println(turn);
+		});
+
 		// setting the new bounds for the label
 		this.setBounds(0, 0, width, height);
 
@@ -44,7 +72,6 @@ public class GameLabel extends JLabel implements Runnable {
 		this.setOpaque(true);
 		startGameThread();
 	}
-
 	// FPS implementation
 
 	final private int FPS = 200;
