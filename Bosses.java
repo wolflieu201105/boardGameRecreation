@@ -1,5 +1,3 @@
-package InGame.Boss;
-
 import javax.swing.JLabel;
 
 public abstract class Bosses extends JLabel {

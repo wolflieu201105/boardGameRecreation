@@ -1,5 +1,3 @@
-package InGame.Cards;
-
 import java.awt.Image;
 
 public class CardTypes{

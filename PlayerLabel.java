@@ -1,4 +1,3 @@
-package InGame.Players;
 
 import javax.swing.JLabel;
 
@@ -30,7 +29,11 @@ public class PlayerLabel extends JLabel {
 	final private int player_height = 50;
 	private PlayerCards[] players = new PlayerCards[4];
 
-	public PlayerLabel(int newScale) {
+	// game label
+	GameLabel parent;
+
+	public PlayerLabel(int newScale, GameLabel thisParent) {
+		parent = thisParent;
 		scale = newScale;
 		width = width_ratio * scale;
 		height = height_ratio * scale;

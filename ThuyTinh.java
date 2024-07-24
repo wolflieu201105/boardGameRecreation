@@ -1,5 +1,3 @@
-package InGame.Boss;
-
 import javax.swing.ImageIcon;
 import javax.swing.JTextPane;
 

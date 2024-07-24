@@ -1,4 +1,3 @@
-package InGame.Boss;
 import javax.swing.JLabel;
 
 import java.awt.Color;
@@ -19,9 +18,13 @@ public class BossLabel extends JLabel{
     private int x_start;
     private int y_start;
 
+	// game label
+	GameLabel parent;
+
 	ThuyTinh newBoss;
 	
-    public BossLabel(int newScale) {
+    public BossLabel(int newScale, GameLabel thisParent) {
+		parent = thisParent;
         scale = newScale;
         width = width_ratio * scale;
         height = height_ratio * scale;

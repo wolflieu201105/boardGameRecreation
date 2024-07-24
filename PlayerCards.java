@@ -1,4 +1,3 @@
-package InGame.Players;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
 

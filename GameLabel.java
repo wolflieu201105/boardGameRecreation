@@ -5,10 +5,6 @@ import javax.swing.JButton;
 
 import java.awt.Font;
 
-import InGame.Boss.BossLabel;
-import InGame.Cards.CardLabel;
-import InGame.Players.PlayerLabel;
-
 public class GameLabel extends JLabel implements Runnable{
 	// the dimensions of the main label
 	final private int width_ratio = 320;
@@ -44,9 +40,9 @@ public class GameLabel extends JLabel implements Runnable{
 		height = height_ratio * scale;
 
 		// adding it's own label
-		playerLabel = new PlayerLabel(scale);
-		cardLabel = new CardLabel(scale);
-		bossLabel = new BossLabel(scale);
+		playerLabel = new PlayerLabel(scale, this);
+		cardLabel = new CardLabel(scale, this);
+		bossLabel = new BossLabel(scale, this);
 		this.add(playerLabel);
 		this.add(cardLabel);
 		this.add(bossLabel);

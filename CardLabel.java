@@ -1,5 +1,3 @@
-package InGame.Cards;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -39,7 +37,11 @@ public class CardLabel extends JLabel {
 	CardTypes[] cardTypes;
 	int[] remaining;
 
-	public CardLabel(int newScale) {
+	// game label
+	GameLabel parent;
+
+	public CardLabel(int newScale, GameLabel thisParent) {
+		parent = thisParent;
 		scale = newScale;
 		width = width_ratio * scale;
 		height = height_ratio * scale;
