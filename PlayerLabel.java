@@ -69,6 +69,10 @@ public class PlayerLabel extends JLabel {
 		this.setOpaque(false);
 	}
 
+	public int getNumCards(int player) {
+		return players[player].cardsNextTurn;
+	}
+
 	public void update() {
 		for (PlayerCards playerCards : players) {
 			playerCards.update();

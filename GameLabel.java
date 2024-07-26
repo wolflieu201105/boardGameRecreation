@@ -34,6 +34,13 @@ public class GameLabel extends JLabel implements Runnable{
 	// turn of players
 	int turn = 0;
 
+	// phase of game
+	int phase = 1;
+
+	// make a draw card deck and a deck to put cards away
+	CardDeck drawDeck;
+	CardDeck disposalDeck;
+
 	public GameLabel(int newScale) {
 		scale = newScale;
 		width = width_ratio * scale;
@@ -54,10 +61,11 @@ public class GameLabel extends JLabel implements Runnable{
 		this.add(nextButton);
 		nextButton.addActionListener(e -> {
 			turn++;
-			if (turn == 5){
+			if (turn == 4){
 				turn = 0;
+				return;
 			}
-			System.out.println(turn);
+			startTurn();
 		});
 
 		// setting the new bounds for the label
@@ -68,6 +76,23 @@ public class GameLabel extends JLabel implements Runnable{
 		this.setOpaque(true);
 		startGameThread();
 	}
+
+	private void makeNewDeck() {
+		drawDeck = new CardDeck();
+		disposalDeck = new CardDeck();
+		for (int i = 0; i < cardLabel.cardNum; i++) {
+			for (int y = 0; y < cardLabel.remaining[i]; y++) {
+				drawDeck.insertCard(cardLabel.cardTypes[i]);
+			}
+		}
+		switch(phase){
+			case 1:
+		}
+	}
+
+	private void startTurn() {
+	}
+
 	// FPS implementation
 
 	final private int FPS = 200;
@@ -77,7 +102,7 @@ public class GameLabel extends JLabel implements Runnable{
 	public void startGameThread() {
 		gameThread = new Thread(this);
 		gameThread.start();
-		cardLabel.start();
+		startTurn();
 	}
 
 	@Override
