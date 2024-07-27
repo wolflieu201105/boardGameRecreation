@@ -14,6 +14,9 @@ public class CardDeck {
     }
 
     public CardTypes drawCard() {
+        if (numberOfCards == 0){
+            return null;
+        }
         numberOfCards--;
         return cardList.remove(0);
     }

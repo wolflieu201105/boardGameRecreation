@@ -3,6 +3,9 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import java.awt.Font;
 
 public class GameLabel extends JLabel implements Runnable{
@@ -74,6 +77,7 @@ public class GameLabel extends JLabel implements Runnable{
 		// set color back ground and visibility of the color
 		this.setBackground(new Color(255, 248, 178));
 		this.setOpaque(true);
+		makeNewDeck();
 		startGameThread();
 	}
 
@@ -85,12 +89,26 @@ public class GameLabel extends JLabel implements Runnable{
 				drawDeck.insertCard(cardLabel.cardTypes[i]);
 			}
 		}
-		switch(phase){
-			case 1:
+		for (int i = 0; i < bossLabel.cardPhases.get(phase-1).size(); i++) {
+			for (int y = 0; y < bossLabel.cardNums.get(phase-1).get(i); y++){
+				drawDeck.insertCard(bossLabel.cardPhases.get(phase-1).get(i));
+			}
 		}
 	}
 
+	List<CardTypes> cardsDrawn = new ArrayList<CardTypes>();
 	private void startTurn() {
+		cardsDrawn.clear();
+		for (int i = playerLabel.getNumCards(turn); i > 0; i--) {
+			CardTypes newCard = drawDeck.drawCard();
+			if (newCard == null) {
+				drawDeck = disposalDeck;
+				disposalDeck = new CardDeck();
+				newCard = drawDeck.drawCard();
+			}
+			cardsDrawn.add(newCard);
+		}
+		cardLabel.start(cardsDrawn);
 	}
 
 	// FPS implementation

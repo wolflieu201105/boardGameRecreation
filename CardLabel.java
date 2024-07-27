@@ -1,6 +1,8 @@
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
@@ -101,12 +103,16 @@ public class CardLabel extends JLabel {
 
 	private int cardMarginHeight = 55;
 	private int initialMargin = 15;
-	public int numberOfCards;
-	public void start(int numCards) {
-		numberOfCards = numCards;
+	private int numberOfCards = 0;
+	public void start(List<CardTypes> newCards) {
+		for (int i = 0; i < numberOfCards; i++){
+			cardsInPlay[i].choosable = true;
+			cardsInPlay[i].choosen = false;
+		}
+		numberOfCards = newCards.size();
 		int marginWidth = (this.width_ratio - this.card_width_ratio*numberOfCards - initialMargin*2)/(numberOfCards - 1);
 		for (int i = 0; i < numberOfCards; i++) {
-			cardsInPlay[i].cardTypes = cardTypes[i];
+			cardsInPlay[i].cardTypes = newCards.get(i);
 			cardsInPlay[i].viewAble(initialMargin + (marginWidth + card_width_ratio) * i,cardMarginHeight,scale);
 			cardsInPlay[i].choosable = true;
 			this.add(cardsInPlay[i]);

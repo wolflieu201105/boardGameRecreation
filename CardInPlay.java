@@ -103,7 +103,7 @@ public class CardInPlay extends JLabel implements MouseListener {
             }
         }
         if (e.getButton() == MouseEvent.BUTTON3){
-            System.out.println("show function");
+            System.out.println(cardTypes.name);
         }
     }
 

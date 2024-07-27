@@ -26,8 +26,9 @@ public class BossLabel extends JLabel{
 	List<List<String>> cardNames = new ArrayList<List<String>>();
 	List<List<Integer>> cardNums = new ArrayList<List<Integer>>();
 	List<List<String>> imageSources = new ArrayList<List<String>>();
-	List<List<CardTypes>> cardPhases = new ArrayList<List<CardTypes>>();
 	List<List<String>> descriptions = new ArrayList<List<String>>();
+
+	List<List<CardTypes>> cardPhases = new ArrayList<List<CardTypes>>();
 
 	// game label
 	GameLabel parent;
@@ -70,30 +71,39 @@ public class BossLabel extends JLabel{
 		cardNames.add(cardName);
 		cardNums.add(cardNum);
 		imageSources.add(imageSource);
-		cardName.clear();
-		cardNum.clear();
-		imageSource.clear();
-		description.clear();
+		descriptions.add(description);
+		cardName = new ArrayList<String>();
+		cardNum = new ArrayList<Integer>();
+		imageSource = new ArrayList<String>();
+		description = new ArrayList<String>();
 
 		// phase 2
 		cardName.add("Coc");
 		cardNum.add(5);
 		imageSource.add("Assets/phase2/Coc.png");
 		description.add("When the tide goes low, deals 1 damage to all boats");
-		cardName.clear();
-		cardNum.clear();
-		imageSource.clear();
-		description.clear();
+		cardNames.add(cardName);
+		cardNums.add(cardNum);
+		imageSources.add(imageSource);
+		descriptions.add(description);
+		cardName = new ArrayList<String>();
+		cardNum = new ArrayList<Integer>();
+		imageSource = new ArrayList<String>();
+		description = new ArrayList<String>();
 
 		// phase 3
 		cardName.add("Vuon khong nha trong");
 		cardNum.add(5);
 		imageSource.add("Assets/phase3/Vuon_khong_nha_trong.png");
 		description.add("If you have this card, you will no longer be stolen, if all 5 cards are gathered, boss won't heal in turn 3");
-		cardName.clear();
-		cardNum.clear();
-		imageSource.clear();
-		description.clear();
+		cardNames.add(cardName);
+		cardNums.add(cardNum);
+		imageSources.add(imageSource);
+		descriptions.add(description);
+		cardName = new ArrayList<String>();
+		cardNum = new ArrayList<Integer>();
+		imageSource = new ArrayList<String>();
+		description = new ArrayList<String>();
 
 		// phase 4
 		cardName.add("Phan Dinh Giot");
@@ -111,10 +121,11 @@ public class BossLabel extends JLabel{
 		cardNames.add(cardName);
 		cardNums.add(cardNum);
 		imageSources.add(imageSource);
-		cardName.clear();
-		cardNum.clear();
-		imageSource.clear();
-		description.clear();
+		descriptions.add(description);
+		cardName = new ArrayList<String>();
+		cardNum = new ArrayList<Integer>();
+		imageSource = new ArrayList<String>();
+		description = new ArrayList<String>();
 
 		// phase 5
 		cardName.add("Du kich");
@@ -132,13 +143,15 @@ public class BossLabel extends JLabel{
 		cardNames.add(cardName);
 		cardNums.add(cardNum);
 		imageSources.add(imageSource);
-		cardName.clear();
-		cardNum.clear();
-		imageSource.clear();
-		description.clear();
+		descriptions.add(description);
+		cardName = new ArrayList<String>();
+		cardNum = new ArrayList<Integer>();
+		imageSource = new ArrayList<String>();
+		description = new ArrayList<String>();
 
 		for (int i = 0; i < cardNames.size(); i++){
 			List<CardTypes> thisPhase = new ArrayList<CardTypes>();
+			System.out.println(cardNames.get(i).size());
 			int length = cardNames.get(i).size();
 			for (int y = 0; y < length; y++){
 				ImageIcon newIcon = new ImageIcon(imageSources.get(i).get(y));
@@ -146,6 +159,7 @@ public class BossLabel extends JLabel{
 				cardImage = cardImage.getScaledInstance(CardLabel.card_width_ratio * scale, CardLabel.card_height_ratio * scale, Image.SCALE_SMOOTH);
 				thisPhase.add(new CardTypes(cardNames.get(i).get(y), cardNums.get(i).get(y), cardImage, descriptions.get(i).get(y)));
 			}
+			cardPhases.add(thisPhase);
 		}
     }
 
