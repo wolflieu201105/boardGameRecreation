@@ -13,7 +13,7 @@ public class QuanMy_1 extends Bosses implements MouseListener{
 	String Name = "Thuy Tinh";
 
 	// the source of the image to navigate
-	String ImageSource = "Assets/BossCards/Phase_2/Warship_1.png";
+	String ImageSource = "Assets/BossCards/Phase_5/Quan_My_1.png";
 
 	// whether the boss can be chosen
 	boolean choosable = true;

@@ -13,7 +13,7 @@ public class QuanNguyenMong extends Bosses implements MouseListener{
 	String Name = "Luu Hoang Thao";
 
 	// the source of the image to navigate
-	String ImageSource = "Assets/BossCards/Phase_2/Luu_Hoang_Thao.png";
+	String ImageSource = "Assets/BossCards/Phase_3/Quan_Nguyen_Mong.png";
 
 	// whether the boss can be chosen
 	boolean choosable = true;
