@@ -8,12 +8,12 @@ import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class ThuyTinh extends Bosses implements MouseListener{
+public class QuanPhap extends Bosses implements MouseListener{
     // the name of the boss
-	String Name = "Thuy Tinh";
+	String Name = "Luu Hoang Thao";
 
 	// the source of the image to navigate
-	String ImageSource = "Assets/BossCards/Phase_1/Thuy_Tinh.png";
+	String ImageSource = "Assets/BossCards/Phase_2/Luu_Hoang_Thao.png";
 
 	// whether the boss can be chosen
 	boolean choosable = true;
@@ -30,12 +30,12 @@ public class ThuyTinh extends Bosses implements MouseListener{
 	private int height;
 
 	// the health bar of the boss
-	int maxHealth = 35;
+	int maxHealth = 30;
 	int health = maxHealth;
 	int text_size = 10;
 	JTextPane healthBar;
 
-	public ThuyTinh(int Width, int Height, int scale) {
+	public QuanPhap(int Width, int Height, int scale) {
 		width = Width * scale;
         height = Height * scale;
 		bound = width/20;

@@ -2,7 +2,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.File;

@@ -151,7 +151,6 @@ public class BossLabel extends JLabel{
 
 		for (int i = 0; i < cardNames.size(); i++){
 			List<CardTypes> thisPhase = new ArrayList<CardTypes>();
-			System.out.println(cardNames.get(i).size());
 			int length = cardNames.get(i).size();
 			for (int y = 0; y < length; y++){
 				ImageIcon newIcon = new ImageIcon(imageSources.get(i).get(y));
@@ -162,6 +161,16 @@ public class BossLabel extends JLabel{
 			cardPhases.add(thisPhase);
 		}
     }
+
+	int damageDealt = 0;
+
+	public void choosable(int phase, int damage) {
+		damageDealt = damage;
+		switch (phase) {
+			case 1:
+				newBoss.choosable = true;
+		}
+	}
 
 	public void update(int FPS){
 		newBoss.update(FPS);

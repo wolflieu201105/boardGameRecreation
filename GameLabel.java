@@ -5,6 +5,7 @@ import javax.swing.JButton;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import java.awt.Font;
 
@@ -77,6 +78,11 @@ public class GameLabel extends JLabel implements Runnable{
 		// set color back ground and visibility of the color
 		this.setBackground(new Color(255, 248, 178));
 		this.setOpaque(true);
+
+		// setting deck to get ready to play
+		for (int i = 0; i < cardLabel.cardTypes.length; i++) {
+			cardToNum.put(cardLabel.cardTypes[i].name, i);
+		}
 		makeNewDeck();
 		startGameThread();
 	}
@@ -109,6 +115,21 @@ public class GameLabel extends JLabel implements Runnable{
 			cardsDrawn.add(newCard);
 		}
 		cardLabel.start(cardsDrawn);
+	}
+
+	HashMap<String, Integer> cardToNum = new HashMap<String, Integer>();
+	public void cardUsed(String name) {
+		if (cardToNum.get(name) == null) {
+
+		}
+		else {
+			int getNum = cardToNum.get(name);
+			switch (getNum) {
+				case 1:
+					
+					break;
+			}
+		}
 	}
 
 	// FPS implementation
