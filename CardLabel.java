@@ -134,5 +134,6 @@ public class CardLabel extends JLabel {
 		for (int i = 0; i < numberOfCards; i++) {
 			cardsInPlay[i].choosable = false;
 		}
+		parent.cardUsed(name);
 	}
 }

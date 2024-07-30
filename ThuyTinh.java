@@ -16,7 +16,7 @@ public class ThuyTinh extends Bosses implements MouseListener{
 	String ImageSource = "Assets/BossCards/Phase_1/Thuy_Tinh.png";
 
 	// whether the boss can be chosen
-	boolean choosable = true;
+	boolean choosable = false;
 
 	// the position, width, height of the boss
 	// initial position
@@ -35,10 +35,14 @@ public class ThuyTinh extends Bosses implements MouseListener{
 	int text_size = 10;
 	JTextPane healthBar;
 
-	public ThuyTinh(int Width, int Height, int scale) {
+	// the parent label of boss
+	BossLabel parent;
+
+	public ThuyTinh(int Width, int Height, int scale, BossLabel thisParent) {
 		width = Width * scale;
         height = Height * scale;
 		bound = width/20;
+		parent = thisParent;
         this.setOpaque(false);
 		healthBar = new JTextPane();
 		healthBar.setBounds(0, width * 3/2, width, height - width*3/2);
@@ -105,10 +109,17 @@ public class ThuyTinh extends Bosses implements MouseListener{
 		this.setLocation(initialX + (int)length, initialY);
 	}
 
+	// set choosable to true
+	public void setChoosable(){
+		choosable = true;
+	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (choosable){
-			
+			health -= parent.damageDealt;
+			choosable = false;
+			healthBar.setText(health + "/" + maxHealth);
 		}
 		else {
 			this.setLocation(initialX + bound, initialY);

@@ -22,6 +22,8 @@ public abstract class Bosses extends JLabel {
 	int width;
 	// height
 	int height;
+	// choosable
+	boolean choosable;
 
 	// when hovering over the boss, the info about the boss
 	// should appear along with how it attack
@@ -29,4 +31,10 @@ public abstract class Bosses extends JLabel {
 
 	// showing boss with x, y, etc
 	abstract void showBoss(int X, int Y, int scale);
+
+	// setting choosable
+	abstract void setChoosable();
+
+	// update the boss
+	abstract void update(int FPS);
 }

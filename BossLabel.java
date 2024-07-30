@@ -22,6 +22,10 @@ public class BossLabel extends JLabel{
     private int x_start;
     private int y_start;
 
+	// width and height of boss cards
+	private int boss_width_ratio = 40;
+	private int boss_height_ratio = 75;
+
 	// added cards for each phase
 	List<List<String>> cardNames = new ArrayList<List<String>>();
 	List<List<Integer>> cardNums = new ArrayList<List<Integer>>();
@@ -33,7 +37,7 @@ public class BossLabel extends JLabel{
 	// game label
 	GameLabel parent;
 
-	ThuyTinh newBoss;
+	List<List<Bosses>> bossInPhases = new ArrayList<List<Bosses>>();
 	
     public BossLabel(int newScale, GameLabel thisParent) {
 		parent = thisParent;
@@ -49,9 +53,8 @@ public class BossLabel extends JLabel{
 		// set the visibility of the color
 		this.setBackground(new Color(255, 255, 70));
 		this.setOpaque(true);
-		newBoss = new ThuyTinh(40, 75, scale);
-		this.add(newBoss);
-		newBoss.showBoss(5, 5, scale);
+
+		List<Bosses> bossThisPhase = new ArrayList<Bosses>();
 
 		// making cards
 		List<String> cardName = new ArrayList<String>();
@@ -77,6 +80,10 @@ public class BossLabel extends JLabel{
 		imageSource = new ArrayList<String>();
 		description = new ArrayList<String>();
 
+		bossThisPhase.add(new ThuyTinh(boss_width_ratio, boss_height_ratio, scale, this));
+		bossInPhases.add(bossThisPhase);
+		bossThisPhase = new ArrayList<Bosses>();
+
 		// phase 2
 		cardName.add("Coc");
 		cardNum.add(5);
@@ -90,6 +97,12 @@ public class BossLabel extends JLabel{
 		cardNum = new ArrayList<Integer>();
 		imageSource = new ArrayList<String>();
 		description = new ArrayList<String>();
+		
+		bossThisPhase.add(new Warship_1(boss_width_ratio, boss_height_ratio, scale, this));
+		bossThisPhase.add(new LuuHoangThao(boss_width_ratio, boss_height_ratio, scale, this));
+		bossThisPhase.add(new Warship_2(boss_width_ratio, boss_height_ratio, scale, this));
+		bossInPhases.add(bossThisPhase);
+		bossThisPhase = new ArrayList<Bosses>();
 
 		// phase 3
 		cardName.add("Vuon khong nha trong");
@@ -104,6 +117,10 @@ public class BossLabel extends JLabel{
 		cardNum = new ArrayList<Integer>();
 		imageSource = new ArrayList<String>();
 		description = new ArrayList<String>();
+
+		bossThisPhase.add(new QuanNguyenMong(boss_width_ratio, boss_height_ratio, scale, this));
+		bossInPhases.add(bossThisPhase);
+		bossThisPhase = new ArrayList<Bosses>();
 
 		// phase 4
 		cardName.add("Phan Dinh Giot");
@@ -127,6 +144,12 @@ public class BossLabel extends JLabel{
 		imageSource = new ArrayList<String>();
 		description = new ArrayList<String>();
 
+		bossThisPhase.add(new QuanPhap(boss_width_ratio, boss_height_ratio, scale, this));
+		bossThisPhase.add(new QuanPhap(boss_width_ratio, boss_height_ratio, scale, this));
+		bossThisPhase.add(new QuanPhap(boss_width_ratio, boss_height_ratio, scale, this));
+		bossInPhases.add(bossThisPhase);
+		bossThisPhase = new ArrayList<Bosses>();
+
 		// phase 5
 		cardName.add("Du kich");
 		cardNum.add(3);
@@ -149,6 +172,12 @@ public class BossLabel extends JLabel{
 		imageSource = new ArrayList<String>();
 		description = new ArrayList<String>();
 
+		bossThisPhase.add(new QuanMy_1(boss_width_ratio, boss_height_ratio, scale, this));
+		bossThisPhase.add(new B52(boss_width_ratio, boss_height_ratio, scale, this));
+		bossThisPhase.add(new QuanMy_2(boss_width_ratio, boss_height_ratio, scale, this));
+		bossInPhases.add(bossThisPhase);
+		bossThisPhase = new ArrayList<Bosses>();
+
 		for (int i = 0; i < cardNames.size(); i++){
 			List<CardTypes> thisPhase = new ArrayList<CardTypes>();
 			int length = cardNames.get(i).size();
@@ -160,19 +189,33 @@ public class BossLabel extends JLabel{
 			}
 			cardPhases.add(thisPhase);
 		}
+
+		startPhase(1);
     }
+
+	public void startPhase(int phase) {
+		int margin = 10;
+		int distance = (width_ratio - margin * 2)/(bossInPhases.get(phase - 1).size()+1);
+		for (int i = 0; i < bossInPhases.get(phase - 1).size(); i++) {
+			bossInPhases.get(phase - 1).get(i).showBoss(margin + distance*(i+1) - boss_width_ratio/2, height_ratio - boss_height_ratio, scale);
+			this.add(bossInPhases.get(phase - 1).get(i));
+		}
+	}
 
 	int damageDealt = 0;
 
-	public void choosable(int phase, int damage) {
+	public void choosable(int damage) {
 		damageDealt = damage;
-		switch (phase) {
+		switch (parent.phase) {
 			case 1:
-				newBoss.choosable = true;
+				bossInPhases.get(parent.phase - 1).get(0).setChoosable();
+				break;
 		}
 	}
 
 	public void update(int FPS){
-		newBoss.update(FPS);
+		for (int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++){
+			bossInPhases.get(parent.phase - 1).get(i).update(FPS);
+		}
 	}
 }

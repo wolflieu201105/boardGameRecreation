@@ -120,13 +120,15 @@ public class GameLabel extends JLabel implements Runnable{
 	HashMap<String, Integer> cardToNum = new HashMap<String, Integer>();
 	public void cardUsed(String name) {
 		if (cardToNum.get(name) == null) {
-
 		}
 		else {
 			int getNum = cardToNum.get(name);
 			switch (getNum) {
-				case 1:
-					
+				case 0:
+					bossLabel.choosable(2);
+					break;
+				default:
+					System.out.println("Through");
 					break;
 			}
 		}
