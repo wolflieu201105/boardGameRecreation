@@ -33,15 +33,19 @@ public class CardInPlay extends JLabel implements MouseListener {
     // card type
     public CardTypes cardTypes;
 
+    // index of the card on Field
+    int index;
+
     // parent
     private CardLabel parent;
     public void getCreator (CardLabel creator){
         parent = creator;
     }
 
-    public CardInPlay(int Width, int Height) {
+    public CardInPlay(int Width, int Height, int Index) {
         width = Width;
         height = Height;
+        index = Index;
         this.setOpaque(true);
         this.addMouseListener(this);
     }
@@ -99,7 +103,7 @@ public class CardInPlay extends JLabel implements MouseListener {
         if (e.getButton() == MouseEvent.BUTTON1){
             if (choosable) {
                 choosen = true;
-                parent.cardPlayed(cardTypes.name);
+                parent.cardPlayed(index);
             }
         }
         if (e.getButton() == MouseEvent.BUTTON3){

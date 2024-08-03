@@ -120,6 +120,7 @@ public class ThuyTinh extends Bosses implements MouseListener{
 			health -= parent.damageDealt;
 			choosable = false;
 			healthBar.setText(health + "/" + maxHealth);
+			parent.parent.continueGame();
 		}
 		else {
 			this.setLocation(initialX + bound, initialY);

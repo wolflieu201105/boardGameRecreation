@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class CardLabel extends JLabel {
 	// the dimensions of the main label
-	final private int width_ratio = 280;
+	final private int width_ratio = 270;
 	final private int height_ratio = 120;
 	final private int x_start_ratio = 50;
 	final private int y_start_ratio = 80;
@@ -86,7 +86,7 @@ public class CardLabel extends JLabel {
 		}
 
 		for (int i = 0; i < cardsInPlay.length; i++) {
-			cardsInPlay[i] = new CardInPlay(card_width_ratio * scale, card_height_ratio * scale);
+			cardsInPlay[i] = new CardInPlay(card_width_ratio * scale, card_height_ratio * scale, i);
 			this.add(cardsInPlay[i]);
 			cardsInPlay[i].getCreator(this);
 		}
@@ -102,20 +102,36 @@ public class CardLabel extends JLabel {
 
 	private int cardMarginHeight = 55;
 	private int initialMargin = 15;
+	private int maxCardsOnField = (width_ratio - initialMargin)/(card_width_ratio + initialMargin);
 	private int numberOfCards = 0;
 	public void start(List<CardTypes> newCards) {
 		for (int i = 0; i < numberOfCards; i++){
-			cardsInPlay[i].choosable = true;
-			cardsInPlay[i].choosen = false;
+			this.remove(cardsInPlay[i]);
 		}
 		numberOfCards = newCards.size();
-		int marginWidth = (this.width_ratio - this.card_width_ratio*numberOfCards - initialMargin*2)/(numberOfCards - 1);
-		for (int i = 0; i < numberOfCards; i++) {
-			cardsInPlay[i].cardTypes = newCards.get(i);
-			cardsInPlay[i].viewAble(initialMargin + (marginWidth + card_width_ratio) * i,cardMarginHeight,scale);
-			cardsInPlay[i].choosable = true;
+		for (int i = 0; i < numberOfCards; i++){
 			this.add(cardsInPlay[i]);
-		} 
+			cardsInPlay[i].choosen = false;
+			cardsInPlay[i].choosable = true;
+		}
+		if (numberOfCards > maxCardsOnField){
+			int marginWidth = (width_ratio - card_width_ratio*numberOfCards - initialMargin*2)/(numberOfCards - 1);
+			for (int i = 0; i < numberOfCards; i++) {
+				cardsInPlay[i].cardTypes = newCards.get(i);
+				cardsInPlay[i].viewAble(initialMargin + (marginWidth + card_width_ratio) * i,cardMarginHeight,scale);
+				cardsInPlay[i].choosable = true;
+				this.add(cardsInPlay[i]);
+			} 
+		}
+		else {
+			int start = (width_ratio - (card_width_ratio + initialMargin) * numberOfCards + initialMargin) / 2;
+			for (int i = 0; i < numberOfCards; i++) {
+				cardsInPlay[i].cardTypes = newCards.get(i);
+				cardsInPlay[i].viewAble(start + (initialMargin + card_width_ratio) * i,cardMarginHeight,scale);
+				cardsInPlay[i].choosable = true;
+				this.add(cardsInPlay[i]);
+			} 
+		}
 	}
 
 	public void update(int FPS) {
@@ -130,10 +146,10 @@ public class CardLabel extends JLabel {
 	}
 
 	// Overiding in order to change the choosable in every card
-	public void cardPlayed(String name) {
+	public void cardPlayed(int index) {
 		for (int i = 0; i < numberOfCards; i++) {
 			cardsInPlay[i].choosable = false;
 		}
-		parent.cardUsed(name);
+		parent.cardUsed(index);
 	}
 }

@@ -118,7 +118,10 @@ public class GameLabel extends JLabel implements Runnable{
 	}
 
 	HashMap<String, Integer> cardToNum = new HashMap<String, Integer>();
-	public void cardUsed(String name) {
+	public void cardUsed(int index) {
+		System.out.println(index);
+		String name = cardsDrawn.get(index).name;
+		cardsDrawn.remove(index);
 		if (cardToNum.get(name) == null) {
 		}
 		else {
@@ -132,6 +135,10 @@ public class GameLabel extends JLabel implements Runnable{
 					break;
 			}
 		}
+	}
+
+	public void continueGame() {
+		cardLabel.start(cardsDrawn);
 	}
 
 	// FPS implementation
