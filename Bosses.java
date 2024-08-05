@@ -35,6 +35,9 @@ public abstract class Bosses extends JLabel {
 	// setting choosable
 	abstract void setChoosable();
 
+	// losing hp
+	abstract void loseHP(int hp);
+
 	// update the boss
 	abstract void update(int FPS);
 }

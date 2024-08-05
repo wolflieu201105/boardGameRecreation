@@ -114,6 +114,14 @@ public class B52 extends Bosses implements MouseListener{
 		choosable = true;
 	}
 
+	// losing hp
+	public void loseHP(int hp) {
+		health -= hp;
+		choosable = false;
+		healthBar.setText(health + "/" + maxHealth);
+		parent.parent.continueGame();
+	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (choosable){

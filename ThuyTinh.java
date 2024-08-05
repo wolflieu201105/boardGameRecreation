@@ -3,8 +3,8 @@ import javax.swing.JTextPane;
 
 import java.awt.Color;
 import java.awt.Font;
-
 import java.awt.Image;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -114,13 +114,18 @@ public class ThuyTinh extends Bosses implements MouseListener{
 		choosable = true;
 	}
 
+	// losing hp
+	public void loseHP(int hp) {
+		health -= hp;
+		choosable = false;
+		healthBar.setText(health + "/" + maxHealth);
+		parent.parent.continueGame();
+	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (choosable){
-			health -= parent.damageDealt;
-			choosable = false;
-			healthBar.setText(health + "/" + maxHealth);
-			parent.parent.continueGame();
+			loseHP(parent.damageDealt);
 		}
 		else {
 			this.setLocation(initialX + bound, initialY);

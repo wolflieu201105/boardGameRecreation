@@ -4,7 +4,7 @@ import javax.swing.JTextPane;
 import java.awt.Color;
 import java.awt.Font;
 
-public class PlayerCards extends JLabel {
+public class PlayerCards extends JLabel{
 	// the dimensions of the main label
 	private int width_ratio;
 	private int height_ratio;
@@ -65,14 +65,21 @@ public class PlayerCards extends JLabel {
 		// set the visibility of the color
 		this.setOpaque(false);
 	}
+
+	public void loseHP(int hp) {
+		health -= hp;
+		if (health > maxHealth) {
+			health = 25;
+		}
+		healthBar.setText(health + "/" + maxHealth);
+		nameTextPane.setBackground(new Color(250 - health*10, health*10, 0, 150));
+	}
 	
 	public void update() {
 		if (health < 0) {
 			health = 0;
 		}
 		if (health != Integer.parseInt(healthBar.getText().split("/")[0])) {
-			healthBar.setText(health + "/" + maxHealth);
-			nameTextPane.setBackground(new Color(250 - health*10, health*10, 0, 150));
 		}
 	}
 

@@ -5,8 +5,10 @@ import java.util.ArrayList;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class BossLabel extends JLabel{
+public class BossLabel extends JLabel implements MouseListener{
 	// the dimensions of the main label
 	final private int width_ratio = 220;
 	final private int height_ratio = 80;
@@ -53,6 +55,7 @@ public class BossLabel extends JLabel{
 		// set the visibility of the color
 		this.setBackground(new Color(255, 255, 70));
 		this.setOpaque(true);
+		this.addMouseListener(this);
 
 		List<Bosses> bossThisPhase = new ArrayList<Bosses>();
 
@@ -204,13 +207,49 @@ public class BossLabel extends JLabel{
 
 	int damageDealt = 0;
 
-	public void choosable(int damage) {
+	public void normalAttack(int damage) {
 		damageDealt = damage;
 		switch (parent.phase) {
 			case 1:
 				bossInPhases.get(parent.phase - 1).get(0).setChoosable();
 				break;
 		}
+	}
+
+	public void muaTen() {
+		switch (parent.phase) {
+			case 1:
+				bossInPhases.get(parent.phase - 1).get(0).loseHP(damageDealt);
+				break;
+		}
+		parent.continueGame();
+	}
+
+	// whether the label can be chosen
+	boolean choosable = false;
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (choosable){
+			muaTen();
+			choosable = false;
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
 	}
 
 	public void update(int FPS){

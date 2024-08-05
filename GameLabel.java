@@ -128,7 +128,11 @@ public class GameLabel extends JLabel implements Runnable{
 			int getNum = cardToNum.get(name);
 			switch (getNum) {
 				case 0:
-					bossLabel.choosable(2);
+					bossLabel.normalAttack(2);
+					break;
+				case 1:
+					bossLabel.damageDealt = 1;
+					bossLabel.choosable = true;
 					break;
 				default:
 					System.out.println("Through");
