@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import java.awt.Font;
 
 public class GameLabel extends JLabel implements Runnable{
@@ -125,19 +129,29 @@ public class GameLabel extends JLabel implements Runnable{
 		if (cardToNum.get(name) == null) {
 		}
 		else {
-			int getNum = cardToNum.get(name);
-			switch (getNum) {
-				case 0:
-					bossLabel.normalAttack(2);
-					break;
-				case 1:
-					bossLabel.damageDealt = 1;
-					bossLabel.choosable = true;
-					break;
-				default:
-					System.out.println("Through");
-					break;
-			}
+			NormalCardFunction(cardToNum.get(name));
+		}
+	}
+
+	public void NormalCardFunction(int card){
+		switch (card) {
+			case 0:
+				bossLabel.normalAttack(2);
+				break;
+			case 1:
+				int waitTime = 500;
+				Timer timer = new Timer(waitTime, new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent arg0) {            
+						bossLabel.muaTen(1);
+					}
+				});
+				timer.setRepeats(false);
+				timer.start();
+				break;
+			default:
+				System.out.println("Through");
+				break;
 		}
 	}
 
@@ -147,7 +161,7 @@ public class GameLabel extends JLabel implements Runnable{
 
 	// FPS implementation
 
-	final private int FPS = 200;
+	final private int FPS = 60;
 
 	Thread gameThread;
 
