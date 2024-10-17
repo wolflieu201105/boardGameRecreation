@@ -91,11 +91,10 @@ public class PlayerCards extends JLabel implements MouseListener{
 	// when left clicked on the player: 
 	// check on what the buff is => change accordingly
     public void mouseClicked(MouseEvent e) {
-		System.out.println(parent.parent.turn);
 		if(parent.clickable) {
 			if(parent.notClickablePlayer != id){
 				switch(parent.cardName) {
-					case "DuongThuong":
+					case 2:
 						this.loseHP(-2);
 						parent.afterCardFuntion();
 						break;

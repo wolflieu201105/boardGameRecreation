@@ -68,10 +68,12 @@ public class GameLabel extends JLabel implements Runnable{
 		nextButton.setBackground(new Color(255,255,255));
 		this.add(nextButton);
 		nextButton.addActionListener(e -> {
+			for (int i = 0; i < cardsDrawn.size(); i++) {
+				disposalDeck.insertCard(cardsDrawn.get(i));
+			}
 			turn++;
 			if (turn == 4){
 				turn = 0;
-				return;
 			}
 			startTurn();
 		});
@@ -91,6 +93,7 @@ public class GameLabel extends JLabel implements Runnable{
 		startGameThread();
 	}
 
+	// creates a deck that has every card in it and a disposal deck in order to mimick the real world
 	private void makeNewDeck() {
 		drawDeck = new CardDeck();
 		disposalDeck = new CardDeck();
@@ -112,6 +115,7 @@ public class GameLabel extends JLabel implements Runnable{
 		for (int i = playerLabel.getNumCards(turn); i > 0; i--) {
 			CardTypes newCard = drawDeck.drawCard();
 			if (newCard == null) {
+				System.out.println("noDeck");
 				drawDeck = disposalDeck;
 				disposalDeck = new CardDeck();
 				newCard = drawDeck.drawCard();
@@ -123,11 +127,17 @@ public class GameLabel extends JLabel implements Runnable{
 
 	HashMap<String, Integer> cardToNum = new HashMap<String, Integer>();
 	public void cardUsed(int index) {
-		String name = cardsDrawn.get(index).name;
+		CardTypes cardDrawn = cardsDrawn.get(index);
+		String name = cardDrawn.name;
 		cardsDrawn.remove(index);
+
+		// if this is null, it is a card that is exclusive for that phase
 		if (cardToNum.get(name) == null) {
 		}
 		else {
+			if(cardToNum.get(name) < 6) {
+				disposalDeck.insertCard(cardDrawn);
+			}
 			NormalCardFunction(cardToNum.get(name));
 		}
 	}
@@ -149,7 +159,10 @@ public class GameLabel extends JLabel implements Runnable{
 				timer.start();
 				break;
 			case 2:
-				playerLabel.changePlayersState("DuongThuong", turn);
+				playerLabel.changePlayersState(card, turn);
+				break;
+			case 3:
+				playerLabel.changePlayersState(card, turn);
 				break;
 			default:
 				System.out.println("Through");

@@ -33,10 +33,10 @@ public class PlayerLabel extends JLabel {
 	GameLabel parent;
 
 	// card name that can alter a player's state
-	public String cardName = "";
+	public int cardName;
 	public int notClickablePlayer = -1;
 	public boolean clickable = false;
-	public void changePlayersState(String CardName, int NotClickablePlayer){
+	public void changePlayersState(int CardName, int NotClickablePlayer){
 		cardName = CardName;
 		notClickablePlayer = NotClickablePlayer;
 		clickable = true;
