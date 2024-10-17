@@ -4,7 +4,10 @@ import javax.swing.JTextPane;
 import java.awt.Color;
 import java.awt.Font;
 
-public class PlayerCards extends JLabel{
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+public class PlayerCards extends JLabel implements MouseListener{
 	// the dimensions of the main label
 	private int width_ratio;
 	private int height_ratio;
@@ -12,6 +15,7 @@ public class PlayerCards extends JLabel{
 	private int y_ratio;
 
 	// the name of the Player
+	private int id;
 	private String name;
 	private JTextPane nameTextPane;
 	private int nameHeight = 13;
@@ -33,12 +37,17 @@ public class PlayerCards extends JLabel{
 	// the number of buffs (can be different) that the player have currently
 	int[] buffs;
 
-	public PlayerCards(int x_start, int y_start, int width, int height, int newScale, String playerName) {
+	// get access to player label
+	PlayerLabel parent;
+
+	public PlayerCards(int x_start, int y_start, int width, int height, int newScale, String playerName, int ID, PlayerLabel Parent) {
 		x_ratio = x_start;
 		y_ratio = y_start;
 		width_ratio = width;
 		height_ratio = height;
 		name = playerName;
+		id = ID;
+		parent = Parent;
 
 		// setting the new bounds for the label
 		this.setBounds(x_ratio * newScale, y_ratio * newScale, width_ratio * newScale, height_ratio * newScale);
@@ -64,6 +73,7 @@ public class PlayerCards extends JLabel{
 
 		// set the visibility of the color
 		this.setOpaque(false);
+		this.addMouseListener(this);
 	}
 
 	public void loseHP(int hp) {
@@ -76,13 +86,38 @@ public class PlayerCards extends JLabel{
 	}
 	
 	public void update() {
-		if (health < 0) {
-			health = 0;
-		}
-		if (health != Integer.parseInt(healthBar.getText().split("/")[0])) {
-		}
 	}
 
-	// when hovering over the player, it should show the player name, status and 
-	// buffs
+	// when left clicked on the player: 
+	// check on what the buff is => change accordingly
+    public void mouseClicked(MouseEvent e) {
+		System.out.println(parent.parent.turn);
+		if(parent.clickable) {
+			if(parent.notClickablePlayer != id){
+				switch(parent.cardName) {
+					case "DuongThuong":
+						this.loseHP(-2);
+						parent.afterCardFuntion();
+						break;
+					default:
+				}
+			}
+		}
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
 }

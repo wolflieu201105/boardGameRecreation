@@ -32,6 +32,21 @@ public class PlayerLabel extends JLabel {
 	// game label
 	GameLabel parent;
 
+	// card name that can alter a player's state
+	public String cardName = "";
+	public int notClickablePlayer = -1;
+	public boolean clickable = false;
+	public void changePlayersState(String CardName, int NotClickablePlayer){
+		cardName = CardName;
+		notClickablePlayer = NotClickablePlayer;
+		clickable = true;
+	}
+	public void afterCardFuntion(){
+		notClickablePlayer = -1;
+		clickable = false;
+		parent.continueGame();
+	}
+
 	public PlayerLabel(int newScale, GameLabel thisParent) {
 		parent = thisParent;
 		scale = newScale;
@@ -48,8 +63,7 @@ public class PlayerLabel extends JLabel {
 
 			for (int i = 0; i < players.length; i++) {
 				String data = myReader.nextLine();
-				players[i] = new PlayerCards(0, i * player_height, player_width, player_height, newScale,
-						data.split("\t")[1]);
+				players[i] = new PlayerCards(0, i * player_height, player_width, player_height, newScale, data.split("\t")[1], i, this);
 				this.add(players[i]);
 			}
 

@@ -123,7 +123,6 @@ public class GameLabel extends JLabel implements Runnable{
 
 	HashMap<String, Integer> cardToNum = new HashMap<String, Integer>();
 	public void cardUsed(int index) {
-		System.out.println(index);
 		String name = cardsDrawn.get(index).name;
 		cardsDrawn.remove(index);
 		if (cardToNum.get(name) == null) {
@@ -148,6 +147,9 @@ public class GameLabel extends JLabel implements Runnable{
 				});
 				timer.setRepeats(false);
 				timer.start();
+				break;
+			case 2:
+				playerLabel.changePlayersState("DuongThuong", turn);
 				break;
 			default:
 				System.out.println("Through");
