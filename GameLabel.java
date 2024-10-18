@@ -67,16 +67,7 @@ public class GameLabel extends JLabel implements Runnable{
 		nextButton.setFont(new Font("Arial", Font.PLAIN, text_size_ratio * scale));
 		nextButton.setBackground(new Color(255,255,255));
 		this.add(nextButton);
-		nextButton.addActionListener(e -> {
-			for (int i = 0; i < cardsDrawn.size(); i++) {
-				disposalDeck.insertCard(cardsDrawn.get(i));
-			}
-			turn++;
-			if (turn == 4){
-				turn = 0;
-			}
-			startTurn();
-		});
+		nextButton.addActionListener(e -> {endTurn();});
 
 		// setting the new bounds for the label
 		this.setBounds(0, 0, width, height);
@@ -113,16 +104,20 @@ public class GameLabel extends JLabel implements Runnable{
 	private void startTurn() {
 		cardsDrawn.clear();
 		for (int i = playerLabel.getNumCards(turn); i > 0; i--) {
-			CardTypes newCard = drawDeck.drawCard();
-			if (newCard == null) {
-				System.out.println("noDeck");
-				drawDeck = disposalDeck;
-				disposalDeck = new CardDeck();
-				newCard = drawDeck.drawCard();
-			}
-			cardsDrawn.add(newCard);
+			cardsDrawn.add(drawACard());
 		}
 		cardLabel.start(cardsDrawn);
+	}
+
+	private CardTypes drawACard() {
+		CardTypes newCard = drawDeck.drawCard();
+		if (newCard == null) {
+			System.out.println("noDeck");
+			drawDeck = disposalDeck;
+			disposalDeck = new CardDeck();
+			newCard = drawDeck.drawCard();
+		}
+		return newCard;
 	}
 
 	HashMap<String, Integer> cardToNum = new HashMap<String, Integer>();
@@ -148,26 +143,51 @@ public class GameLabel extends JLabel implements Runnable{
 				bossLabel.normalAttack(2);
 				break;
 			case 1:
-				int waitTime = 500;
-				Timer timer = new Timer(waitTime, new ActionListener() {
+				int muaTenWaitTime = 500;
+				Timer muaTenTimer = new Timer(muaTenWaitTime, new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent arg0) {            
 						bossLabel.muaTen(1);
 					}
 				});
-				timer.setRepeats(false);
-				timer.start();
+				muaTenTimer.setRepeats(false);
+				muaTenTimer.start();
 				break;
 			case 2:
 				playerLabel.changePlayersState(card, turn);
 				break;
 			case 3:
-				playerLabel.changePlayersState(card, turn);
+				bossLabel.normalAttack(4);
+				playerLabel.players[turn].loseHP(2);
+				break;
+			case 4:
+				cardsDrawn.add(drawACard());
+				cardsDrawn.add(drawACard());
+				int dieuBinhKhienTuongWaitTime = 500;
+				Timer dieuBinhKhienTuongTimer = new Timer(dieuBinhKhienTuongWaitTime, new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent arg0) {            
+						bossLabel.muaTen(1);
+					}
+				});
+				dieuBinhKhienTuongTimer.setRepeats(false);
+				dieuBinhKhienTuongTimer.start();
 				break;
 			default:
 				System.out.println("Through");
 				break;
 		}
+	}
+
+	public void endTurn() {
+		for (int i = 0; i < cardsDrawn.size(); i++) {
+			disposalDeck.insertCard(cardsDrawn.get(i));
+		}
+		turn++;
+		if (turn == 4){
+			turn = 0;
+		}
+		startTurn();
 	}
 
 	public void continueGame() {

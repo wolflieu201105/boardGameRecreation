@@ -27,7 +27,7 @@ public class PlayerLabel extends JLabel {
 	// players
 	final private int player_width = 50;
 	final private int player_height = 50;
-	private PlayerCards[] players = new PlayerCards[4];
+	public PlayerCards[] players = new PlayerCards[4];
 
 	// game label
 	GameLabel parent;

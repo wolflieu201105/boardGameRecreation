@@ -27,6 +27,7 @@ public class PlayerCards extends JLabel implements MouseListener{
 	// health
 	public int health = 25;
 	public int maxHealth = 25;
+	public boolean isDead = false;
 
 	// the maximum stamina of the player
 	public int maxStamina = 3;
@@ -80,6 +81,10 @@ public class PlayerCards extends JLabel implements MouseListener{
 		health -= hp;
 		if (health > maxHealth) {
 			health = 25;
+		}
+		if (health < 0) {
+			this.isDead = true;
+			health = 0;
 		}
 		healthBar.setText(health + "/" + maxHealth);
 		nameTextPane.setBackground(new Color(250 - health*10, health*10, 0, 150));
