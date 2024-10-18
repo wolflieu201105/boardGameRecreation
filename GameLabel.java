@@ -173,6 +173,9 @@ public class GameLabel extends JLabel implements Runnable{
 				dieuBinhKhienTuongTimer.setRepeats(false);
 				dieuBinhKhienTuongTimer.start();
 				break;
+			case 5:
+				playerLabel.changePlayersState(card, turn);
+				break;
 			default:
 				System.out.println("Through");
 				break;
@@ -187,6 +190,7 @@ public class GameLabel extends JLabel implements Runnable{
 		if (turn == 4){
 			turn = 0;
 		}
+		System.out.println(turn);
 		startTurn();
 	}
 

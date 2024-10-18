@@ -9,13 +9,13 @@ import java.awt.event.MouseListener;
 
 public class PlayerCards extends JLabel implements MouseListener{
 	// the dimensions of the main label
-	private int width_ratio;
-	private int height_ratio;
-	private int x_ratio;
-	private int y_ratio;
+	public int width_ratio;
+	public int height_ratio;
+	public int x_ratio;
+	public int y_ratio;
 
 	// the name of the Player
-	private int id;
+	public int id;
 	private String name;
 	private JTextPane nameTextPane;
 	private int nameHeight = 13;
@@ -96,15 +96,20 @@ public class PlayerCards extends JLabel implements MouseListener{
 	// when left clicked on the player: 
 	// check on what the buff is => change accordingly
     public void mouseClicked(MouseEvent e) {
-		if(parent.clickable) {
-			if(parent.notClickablePlayer != id){
-				switch(parent.cardName) {
-					case 2:
-						this.loseHP(-2);
-						parent.afterCardFuntion();
-						break;
-					default:
-				}
+		if(parent.clickable || isDead) {
+			return;
+		}
+		if(parent.notClickablePlayer != id){
+			switch(parent.cardName) {
+				case 2:
+					this.loseHP(-2);
+					parent.afterCardFuntion();
+					break;
+				case 5:
+					parent.swapPlayers(id, parent.notClickablePlayer);
+					parent.afterCardFuntion();
+					break;
+				default:
 			}
 		}
     }

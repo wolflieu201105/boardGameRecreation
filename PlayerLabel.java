@@ -1,6 +1,9 @@
 
 import javax.swing.JLabel;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -28,6 +31,7 @@ public class PlayerLabel extends JLabel {
 	final private int player_width = 50;
 	final private int player_height = 50;
 	public PlayerCards[] players = new PlayerCards[4];
+	private List<PlayerBuffs> buffs = new ArrayList<PlayerBuffs>();
 
 	// game label
 	GameLabel parent;
@@ -81,6 +85,22 @@ public class PlayerLabel extends JLabel {
 
 		// set the visibility of the color
 		this.setOpaque(false);
+	}
+
+	public void swapPlayers(int p1, int p2) {
+		PlayerCards playerDummy = players[p1];
+		players[p1] = players[p2];
+		players[p2] = playerDummy;
+		players[p1].id = p2;
+		players[p2].id = p1;
+		int swap = players[p1].x_ratio;
+		players[p1].x_ratio = players[p2].x_ratio;
+		players[p2].x_ratio = swap;
+		swap = players[p1].y_ratio;
+		players[p1].y_ratio = players[p2].y_ratio;
+		players[p2].y_ratio = swap;
+		players[p1].setBounds(players[p1].x_ratio * scale, players[p1].y_ratio * scale, players[p1].width_ratio * scale, players[p1].height_ratio * scale);
+		players[p2].setBounds(players[p2].x_ratio * scale, players[p2].y_ratio * scale, players[p2].width_ratio * scale, players[p2].height_ratio * scale);
 	}
 
 	public int getNumCards(int player) {
