@@ -4,6 +4,9 @@ import javax.swing.JTextPane;
 import java.awt.Color;
 import java.awt.Font;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -36,7 +39,7 @@ public class PlayerCards extends JLabel implements MouseListener{
 	public int cardsNextTurn = 3;
 
 	// the number of buffs (can be different) that the player have currently
-	int[] buffs;
+	private List<PlayerBuffs> buffs = new ArrayList<PlayerBuffs>();
 
 	// get access to player label
 	PlayerLabel parent;
@@ -90,13 +93,15 @@ public class PlayerCards extends JLabel implements MouseListener{
 		nameTextPane.setBackground(new Color(250 - health*10, health*10, 0, 150));
 	}
 	
+
+
 	public void update() {
 	}
 
 	// when left clicked on the player: 
 	// check on what the buff is => change accordingly
     public void mouseClicked(MouseEvent e) {
-		if(parent.clickable || isDead) {
+		if(!parent.clickable || isDead) {
 			return;
 		}
 		if(parent.notClickablePlayer != id){

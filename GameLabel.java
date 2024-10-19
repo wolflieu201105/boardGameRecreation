@@ -133,11 +133,12 @@ public class GameLabel extends JLabel implements Runnable{
 			if(cardToNum.get(name) < 6) {
 				disposalDeck.insertCard(cardDrawn);
 			}
-			NormalCardFunction(cardToNum.get(name));
+			NormalCardFunction(cardDrawn);
 		}
 	}
 
-	public void NormalCardFunction(int card){
+	public void NormalCardFunction(CardTypes cardDrawn){
+		int card = cardToNum.get(cardDrawn.name);
 		switch (card) {
 			case 0:
 				bossLabel.normalAttack(2);
@@ -174,6 +175,10 @@ public class GameLabel extends JLabel implements Runnable{
 				dieuBinhKhienTuongTimer.start();
 				break;
 			case 5:
+				playerLabel.changePlayersState(card, turn);
+				break;
+			case 6:
+				playerLabel.buffUsed = cardDrawn;
 				playerLabel.changePlayersState(card, turn);
 				break;
 			default:

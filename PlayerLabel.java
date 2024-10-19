@@ -1,9 +1,6 @@
 
 import javax.swing.JLabel;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -31,7 +28,6 @@ public class PlayerLabel extends JLabel {
 	final private int player_width = 50;
 	final private int player_height = 50;
 	public PlayerCards[] players = new PlayerCards[4];
-	private List<PlayerBuffs> buffs = new ArrayList<PlayerBuffs>();
 
 	// game label
 	GameLabel parent;
@@ -40,6 +36,7 @@ public class PlayerLabel extends JLabel {
 	public int cardName;
 	public int notClickablePlayer = -1;
 	public boolean clickable = false;
+	public CardTypes buffUsed = null;
 	public void changePlayersState(int CardName, int NotClickablePlayer){
 		cardName = CardName;
 		notClickablePlayer = NotClickablePlayer;
@@ -91,8 +88,8 @@ public class PlayerLabel extends JLabel {
 		PlayerCards playerDummy = players[p1];
 		players[p1] = players[p2];
 		players[p2] = playerDummy;
-		players[p1].id = p2;
-		players[p2].id = p1;
+		players[p1].id = p1;
+		players[p2].id = p2;
 		int swap = players[p1].x_ratio;
 		players[p1].x_ratio = players[p2].x_ratio;
 		players[p2].x_ratio = swap;
