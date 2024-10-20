@@ -16,6 +16,7 @@ public class PlayerCards extends JLabel implements MouseListener{
 	public int height_ratio;
 	public int x_ratio;
 	public int y_ratio;
+	private int scale;
 
 	// the name of the Player
 	public int id;
@@ -39,7 +40,7 @@ public class PlayerCards extends JLabel implements MouseListener{
 	public int cardsNextTurn = 3;
 
 	// the number of buffs (can be different) that the player have currently
-	private List<PlayerBuffs> buffs = new ArrayList<PlayerBuffs>();
+	public List<PlayerBuffs> buffs = new ArrayList<PlayerBuffs>();
 
 	// get access to player label
 	PlayerLabel parent;
@@ -49,6 +50,7 @@ public class PlayerCards extends JLabel implements MouseListener{
 		y_ratio = y_start;
 		width_ratio = width;
 		height_ratio = height;
+		scale = newScale;
 		name = playerName;
 		id = ID;
 		parent = Parent;
@@ -93,7 +95,19 @@ public class PlayerCards extends JLabel implements MouseListener{
 		nameTextPane.setBackground(new Color(250 - health*10, health*10, 0, 150));
 	}
 	
-
+	public void drawBuffs(){
+		int numBuffs = buffs.size();
+		for (int i = 0; i < numBuffs - 1; i++) {
+			this.remove(buffs.get(i));
+		}
+		int marginWidth = PlayerBuffs.width_ratio/2;
+		int marginHeight = (width_ratio - nameHeight*2 - PlayerBuffs.height_ratio)/2 + nameHeight*2;
+		int displacement = (width_ratio - PlayerBuffs.width_ratio * numBuffs - marginWidth*2)/(numBuffs + 1);
+		for (int i = 0; i < numBuffs; i++) {
+			buffs.get(i).setPositions(displacement + marginWidth + i*(PlayerBuffs.width_ratio + displacement), marginHeight);
+			this.add(buffs.get(i));
+		}
+	}
 
 	public void update() {
 	}

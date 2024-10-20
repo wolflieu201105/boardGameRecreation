@@ -178,8 +178,17 @@ public class GameLabel extends JLabel implements Runnable{
 				playerLabel.changePlayersState(card, turn);
 				break;
 			case 6:
-				playerLabel.buffUsed = cardDrawn;
-				playerLabel.changePlayersState(card, turn);
+				int phongThuWaitTime = 500;
+				Timer phongThuTimer = new Timer(phongThuWaitTime, new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						playerLabel.players[turn].buffs.add(new PlayerBuffs(scale, cardDrawn));
+						playerLabel.players[turn].drawBuffs();
+						playerLabel.afterCardFuntion();
+					}
+				});
+				phongThuTimer.setRepeats(false);
+				phongThuTimer.start();
 				break;
 			default:
 				System.out.println("Through");
