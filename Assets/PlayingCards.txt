@@ -6,4 +6,4 @@ TienThoaiLuongNan	2	TienThoaiLuongNan.png	5	Consumes 2 hp and deal 4 damage to o
 DieuBinhKhienTuong	1	DieuBinhKhienTuong.png	5	Draws 2 cards
 DanXepDoiHinh	1	DanXepDoiHinh.png	5	Change your position with the player you pick
 PhongThu	1	PhongThu.png	10	Block 1 damage that comes from the next attack from enemy
-BaoHoDongMinh	1	BaoHoDongMinh.png	5	Takes all the damage for the player you picked in the next turn
+BaoHoDongMinh	1	BaoHoDongMinh.png	5	Takes 2 damages for the player you picked in the next turn

@@ -168,7 +168,7 @@ public class GameLabel extends JLabel implements Runnable{
 				Timer dieuBinhKhienTuongTimer = new Timer(dieuBinhKhienTuongWaitTime, new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent arg0) {            
-						bossLabel.muaTen(1);
+						continueGame();
 					}
 				});
 				dieuBinhKhienTuongTimer.setRepeats(false);
@@ -178,17 +178,21 @@ public class GameLabel extends JLabel implements Runnable{
 				playerLabel.changePlayersState(card, turn);
 				break;
 			case 6:
+				playerLabel.players[turn].buffs.add(new PlayerBuffs(scale, cardDrawn, 2));
+				playerLabel.players[turn].drawBuffs();
 				int phongThuWaitTime = 500;
 				Timer phongThuTimer = new Timer(phongThuWaitTime, new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
-						playerLabel.players[turn].buffs.add(new PlayerBuffs(scale, cardDrawn));
-						playerLabel.players[turn].drawBuffs();
 						playerLabel.afterCardFuntion();
 					}
 				});
 				phongThuTimer.setRepeats(false);
 				phongThuTimer.start();
+				break;
+			case 7:
+				playerLabel.buffUsed = cardDrawn;
+				playerLabel.changePlayersState(card, turn);
 				break;
 			default:
 				System.out.println("Through");

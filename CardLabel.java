@@ -27,7 +27,7 @@ public class CardLabel extends JLabel {
 	// card label to display cards
 	static int card_width_ratio = 40;
 	static int card_height_ratio = 60;
-	private CardInPlay[] cardsInPlay = new CardInPlay[8];
+	private CardInPlay[] cardsInPlay = new CardInPlay[100];
 
 	// playing cards file
 	private String assetFile = "Assets/PlayingCards.txt";
