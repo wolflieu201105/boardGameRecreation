@@ -16,6 +16,7 @@ public class PlayerBuffs extends JLabel{
     public PlayerBuffs(int scale, CardTypes cardDrawn, int BuffEffect){
         newScale = scale;
         buffEffect = BuffEffect;
+        cardTypes = cardDrawn;
         Image cardImage = cardDrawn.image;
         cardImage = cardImage.getScaledInstance(width_ratio * scale, height_ratio * scale, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(cardImage);

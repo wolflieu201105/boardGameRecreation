@@ -27,6 +27,7 @@ public class PlayerLabel extends JLabel {
 	// players
 	final private int player_width = 50;
 	final private int player_height = 50;
+	public int[] newFormation = {1,2,3,4};
 	public PlayerCards[] players = new PlayerCards[4];
 
 	// game label
@@ -37,11 +38,32 @@ public class PlayerLabel extends JLabel {
 	public int notClickablePlayer = -1;
 	public boolean clickable = false;
 	public CardTypes buffUsed = null;
+
+
 	public void changePlayersState(int CardName, int NotClickablePlayer){
 		cardName = CardName;
 		notClickablePlayer = NotClickablePlayer;
 		clickable = true;
 	}
+
+
+	public void phasePlayerState(int CardName, int NotClickablePlayer){
+		switch(parent.phase){
+			case 1:
+				if (CardName == -1) {
+					cardName = CardName;
+					notClickablePlayer = NotClickablePlayer;
+					clickable = true;
+				}
+				break;
+			case 2:
+				break;
+			default:
+				return;
+		}
+	}
+
+
 	public void afterCardFuntion(){
 		notClickablePlayer = -1;
 		clickable = false;

@@ -177,7 +177,8 @@ public class BossLabel extends JLabel{
 		bossThisPhase.add(new QuanMy_2(boss_width_ratio, boss_height_ratio, scale, this));
 		bossInPhases.add(bossThisPhase);
 		bossThisPhase = new ArrayList<Bosses>();
-
+		
+		//generate cardTypes and bosses
 		for (int i = 0; i < cardNames.size(); i++){
 			List<CardTypes> thisPhase = new ArrayList<CardTypes>();
 			int length = cardNames.get(i).size();
@@ -193,7 +194,11 @@ public class BossLabel extends JLabel{
 		startPhase(1);
     }
 
+	// ading the bosses into the screen
+	private int bossTurn = 0;
+
 	public void startPhase(int phase) {
+		bossTurn = 0;
 		int margin = 10;
 		int distance = (width_ratio - margin * 2)/(bossInPhases.get(phase - 1).size()+1);
 		for (int i = 0; i < bossInPhases.get(phase - 1).size(); i++) {
@@ -202,7 +207,25 @@ public class BossLabel extends JLabel{
 		}
 	}
 
-	int damageDealt = 0;
+	public void bossAttack() {
+		switch(parent.phase) {
+			case 1:
+				switch(bossTurn) {
+					case 0:
+					case 1:
+						
+					case 2:
+					default:
+						break;
+				}
+			default:
+				System.out.println("No boss function yet");
+				break;
+		}
+	}
+
+	// normal card functions
+	public int damageDealt = 0;
 
 	public void normalAttack(int damage) {
 		damageDealt = damage;

@@ -95,6 +95,10 @@ public class PlayerCards extends JLabel implements MouseListener{
 		nameTextPane.setBackground(new Color(250 - health*10, health*10, 0, 150));
 	}
 	
+	public void damaged(int damage){
+		
+	}
+
 	public void drawBuffs(){
 		int numBuffs = buffs.size();
 		for (int i = 0; i < numBuffs - 1; i++) {
@@ -119,24 +123,53 @@ public class PlayerCards extends JLabel implements MouseListener{
 			return;
 		}
 		if(parent.notClickablePlayer != id){
+			PlayerBuffs newBuff;
 			switch(parent.cardName) {
 				case 2:
 					this.loseHP(-2);
 					parent.afterCardFuntion();
 					break;
 				case 5:
-					parent.swapPlayers(id, parent.notClickablePlayer);
+					int position1 = 0;
+					int position2 = 0;
+					for(int i = 0; i < parent.newFormation.length; i++) {
+						if (parent.newFormation[i] == id){
+							position1 = i;
+						}
+						if (parent.newFormation[i] == parent.notClickablePlayer){
+							position2 = i;
+						}
+					}
+					int swap = parent.newFormation[position1];
+					parent.newFormation[position1] = parent.newFormation[position2];
+					parent.newFormation[position2] = swap;
 					parent.afterCardFuntion();
 					break;
 				case 7:
-					PlayerBuffs newBuff = new PlayerBuffs(scale, parent.buffUsed, 2);
+					newBuff = new PlayerBuffs(scale, parent.buffUsed, 2);
 					buffs.add(newBuff);
 					drawBuffs();
 					newBuff = new PlayerBuffs(scale, parent.buffUsed, -2);
 					parent.players[parent.notClickablePlayer].buffs.add(newBuff);
 					parent.players[parent.notClickablePlayer].drawBuffs();
 					parent.afterCardFuntion();
+					break;
+				case -1:
+					switch(parent.parent.phase){
+						case 1:
+							for(int i = 0; i < buffs.size(); i++) {
+								if (buffs.get(i).cardTypes.name.equals("Dap de")){
+									return;
+								}
+							}
+							newBuff = new PlayerBuffs(scale, parent.buffUsed, 1);
+							buffs.add(newBuff);
+							drawBuffs();
+							parent.afterCardFuntion();
+							break;
+					}
 				default:
+					break;
 			}
 		}
     }

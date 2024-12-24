@@ -128,6 +128,7 @@ public class GameLabel extends JLabel implements Runnable{
 
 		// if this is null, it is a card that is exclusive for that phase
 		if (cardToNum.get(name) == null) {
+			PhaseCardFunction(cardDrawn);
 		}
 		else {
 			if(cardToNum.get(name) < 6) {
@@ -178,12 +179,12 @@ public class GameLabel extends JLabel implements Runnable{
 				playerLabel.changePlayersState(card, turn);
 				break;
 			case 6:
-				playerLabel.players[turn].buffs.add(new PlayerBuffs(scale, cardDrawn, 2));
-				playerLabel.players[turn].drawBuffs();
+				playerLabel.players[turn].buffs.add(new PlayerBuffs(scale, cardDrawn, 1));
 				int phongThuWaitTime = 500;
 				Timer phongThuTimer = new Timer(phongThuWaitTime, new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
+						playerLabel.players[turn].drawBuffs();
 						playerLabel.afterCardFuntion();
 					}
 				});
@@ -196,6 +197,31 @@ public class GameLabel extends JLabel implements Runnable{
 				break;
 			default:
 				System.out.println("Through");
+				continueGame();
+				break;
+		}
+	}
+
+	public void PhaseCardFunction(CardTypes cardDrawn){
+		switch (phase){
+			case 1:
+				if (cardDrawn.name.equals("Dap de")){
+					playerLabel.buffUsed = cardDrawn;
+					playerLabel.phasePlayerState(-1,-1);
+				}
+				else if (cardDrawn.name.equals("Vo de")){
+					for(int i = 0; i < playerLabel.players[turn].buffs.size(); i++){
+						if (playerLabel.players[turn].buffs.get(i).cardTypes.name.equals("Dap de")){
+							disposalDeck.insertCard(playerLabel.players[turn].buffs.get(i).cardTypes);
+							playerLabel.players[turn].remove(playerLabel.players[turn].buffs.get(i));
+							playerLabel.players[turn].buffs.remove(i);
+							playerLabel.players[turn].drawBuffs();
+							break;
+						}
+					}
+					disposalDeck.insertCard(cardDrawn);
+					playerLabel.afterCardFuntion();
+				}
 				break;
 		}
 	}
