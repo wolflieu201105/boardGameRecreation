@@ -252,6 +252,8 @@ public class GameLabel extends JLabel implements Runnable{
 		}
 		turn++;
 		if (turn == 4){
+			playerLabel.changePosition();
+			bossLabel.bossAttack();
 			turn = 0;
 		}
 		System.out.println(turn);

@@ -27,7 +27,7 @@ public class PlayerLabel extends JLabel {
 	// players
 	final private int player_width = 50;
 	final private int player_height = 50;
-	public int[] newFormation = {1,2,3,4};
+	public int[] newFormation = {0,1,2,3};
 	public PlayerCards[] players = new PlayerCards[4];
 
 	// game label
@@ -104,6 +104,21 @@ public class PlayerLabel extends JLabel {
 
 		// set the visibility of the color
 		this.setOpaque(false);
+	}
+
+	public void changePosition(){
+		for(int i = 0; i < newFormation.length; i++){
+			if(newFormation[i] != i){
+				swapPlayers(newFormation[i], i);
+				for (int y = i+1; y < newFormation.length; y++){
+					if (newFormation[y] == i){
+						newFormation[y] = newFormation[i];
+					}
+				}
+				newFormation[i] = i;
+				continue;
+			}
+		}
 	}
 
 	public void swapPlayers(int p1, int p2) {
