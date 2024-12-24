@@ -107,6 +107,18 @@ public class GameLabel extends JLabel implements Runnable{
 			cardsDrawn.add(drawACard());
 		}
 		cardLabel.start(cardsDrawn);
+		switch(phase){
+			case 1:
+				for (int i = 0; i < cardLabel.numberOfCards; i++) {
+					if (cardLabel.cardsInPlay[i].cardTypes.name.equals("Vo de")){
+						cardLabel.cardsInPlay[i].choosen = true;
+						cardLabel.cardPlayed(i);
+					}
+				}
+				break;
+			default:
+				break;
+		}
 	}
 
 	private CardTypes drawACard() {
@@ -210,17 +222,25 @@ public class GameLabel extends JLabel implements Runnable{
 					playerLabel.phasePlayerState(-1,-1);
 				}
 				else if (cardDrawn.name.equals("Vo de")){
-					for(int i = 0; i < playerLabel.players[turn].buffs.size(); i++){
-						if (playerLabel.players[turn].buffs.get(i).cardTypes.name.equals("Dap de")){
-							disposalDeck.insertCard(playerLabel.players[turn].buffs.get(i).cardTypes);
-							playerLabel.players[turn].remove(playerLabel.players[turn].buffs.get(i));
-							playerLabel.players[turn].buffs.remove(i);
-							playerLabel.players[turn].drawBuffs();
-							break;
+					int voDeWaitTime = 500;
+					Timer voDeTimer = new Timer(voDeWaitTime, new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						for(int i = 0; i < playerLabel.players[turn].buffs.size(); i++){
+							if (playerLabel.players[turn].buffs.get(i).cardTypes.name.equals("Dap de")){
+								disposalDeck.insertCard(playerLabel.players[turn].buffs.get(i).cardTypes);
+								playerLabel.players[turn].remove(playerLabel.players[turn].buffs.get(i));
+								playerLabel.players[turn].buffs.remove(i);
+								playerLabel.players[turn].drawBuffs();
+								break;
+							}
 						}
+						disposalDeck.insertCard(cardDrawn);
+						playerLabel.afterCardFuntion();
 					}
-					disposalDeck.insertCard(cardDrawn);
-					playerLabel.afterCardFuntion();
+					});
+					voDeTimer.setRepeats(false);
+					voDeTimer.start();
 				}
 				break;
 		}

@@ -27,7 +27,7 @@ public class CardLabel extends JLabel {
 	// card label to display cards
 	static int card_width_ratio = 40;
 	static int card_height_ratio = 60;
-	private CardInPlay[] cardsInPlay = new CardInPlay[100];
+	public CardInPlay[] cardsInPlay = new CardInPlay[100];
 
 	// playing cards file
 	private String assetFile = "Assets/PlayingCards.txt";
@@ -103,7 +103,7 @@ public class CardLabel extends JLabel {
 	private int cardMarginHeight = 55;
 	private int initialMargin = 15;
 	private int maxCardsOnField = (width_ratio - initialMargin)/(card_width_ratio + initialMargin);
-	private int numberOfCards = 0;
+	public int numberOfCards = 0;
 	public void start(List<CardTypes> newCards) {
 		for (int i = 0; i < numberOfCards; i++){
 			this.remove(cardsInPlay[i]);
