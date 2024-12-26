@@ -68,7 +68,7 @@ public class BossLabel extends JLabel{
 		imageSource.add("Assets/phase1/Dap_de.png");
 		description.add("If you have this card, you won't be affected by Thuy Tinh's flood effect");
 		cardName.add("Vo de");
-		cardNum.add(3);
+		cardNum.add(4);
 		imageSource.add("Assets/phase1/Vo_de.png");
 		description.add("If you have this card, the card will be used immidiately and lose Vo de card");
 		cardNames.add(cardName);
@@ -195,7 +195,7 @@ public class BossLabel extends JLabel{
     }
 
 	// ading the bosses into the screen
-	private int bossTurn = 0;
+	public int bossTurn = 0;
 
 	public void startPhase(int phase) {
 		bossTurn = 0;
@@ -207,21 +207,81 @@ public class BossLabel extends JLabel{
 		}
 	}
 
-	public void bossAttack() {
+	public void bossTurn() {
 		switch(parent.phase) {
 			case 1:
+				System.out.println(bossTurn);
 				switch(bossTurn) {
 					case 0:
+						for(int turn = 0; turn < parent.playerLabel.players.length; turn++){
+							boolean check = true;
+							for(int i = 0; i < parent.playerLabel.players[turn].buffs.size(); i++){
+								if (parent.playerLabel.players[turn].buffs.get(i).cardTypes.name.equals("Dap de")){
+									check = false;
+									break;
+								}
+							}
+							if (check){
+								parent.playerLabel.players[turn].loseHP(2);
+							}
+						}
+						break;
 					case 1:
-						
+						bossAttack(new int[]{2,0,2,0});
+						break;
 					case 2:
+						bossAttack(new int[]{0,2,0,2});
+						break;
 					default:
 						break;
 				}
+				break;
 			default:
 				System.out.println("No boss function yet");
 				break;
 		}
+	}
+
+	public void bossAttack(int[] damage){
+		damage = defendPlayer(damage);
+		for (int i = 0; i < damage.length; i++){
+			parent.playerLabel.players[i].loseHP(damage[i]);
+		}
+	}
+
+	private int[] defendPlayer(int[] damage){
+		for (int i = 0; i < damage.length; i++){
+			if (damage[i] != 0){
+				for(int y = 0; y < parent.playerLabel.players[i].buffs.size(); y++){
+					if (parent.playerLabel.players[i].buffs.get(y).cardTypes.name.equals("PhongThu")){
+						parent.playerLabel.players[i].remove(parent.playerLabel.players[i].buffs.get(y));
+						parent.playerLabel.players[i].buffs.remove(y);
+						y--;
+						damage[i] -= 1;
+						if (damage[i] == 0){
+							break;
+						}
+					}
+				}
+			}
+		}
+		return playerDefend(damage);
+	}
+
+	private int[] playerDefend(int[] damage){
+		if (parent.playerLabel.cardQueue.size() == 0){
+			return damage;
+		}
+		if (damage[parent.playerLabel.cardQueue.get(0)[0]] == 1){
+			damage[parent.playerLabel.cardQueue.get(0)[0]] -= 1;
+			damage[parent.playerLabel.cardQueue.get(0)[1]] += 1;
+		}
+		else if (damage[parent.playerLabel.cardQueue.get(0)[0]] >= 2){
+			damage[parent.playerLabel.cardQueue.get(0)[0]] -= 2;
+			damage[parent.playerLabel.cardQueue.get(0)[1]] += 2;
+		}
+		parent.playerLabel.cardQueue.remove(0);
+		return defendPlayer(damage);
 	}
 
 	// normal card functions

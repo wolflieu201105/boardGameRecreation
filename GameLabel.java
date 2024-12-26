@@ -109,15 +109,20 @@ public class GameLabel extends JLabel implements Runnable{
 		cardLabel.start(cardsDrawn);
 		switch(phase){
 			case 1:
-				for (int i = 0; i < cardLabel.numberOfCards; i++) {
-					if (cardLabel.cardsInPlay[i].cardTypes.name.equals("Vo de")){
-						cardLabel.cardsInPlay[i].choosen = true;
-						cardLabel.cardPlayed(i);
-					}
-				}
+				checkForVoDe();
 				break;
 			default:
 				break;
+		}
+	}
+
+	private void checkForVoDe(){
+		for (int i = 0; i < cardLabel.numberOfCards; i++) {
+			if (cardLabel.cardsInPlay[i].cardTypes.name.equals("Vo de")){
+				cardLabel.cardsInPlay[i].choosen = true;
+				cardLabel.cardPlayed(i);
+				break;
+			}
 		}
 	}
 
@@ -182,6 +187,7 @@ public class GameLabel extends JLabel implements Runnable{
 					@Override
 					public void actionPerformed(ActionEvent arg0) {            
 						continueGame();
+						checkForVoDe();
 					}
 				});
 				dieuBinhKhienTuongTimer.setRepeats(false);
@@ -237,6 +243,7 @@ public class GameLabel extends JLabel implements Runnable{
 						}
 						disposalDeck.insertCard(cardDrawn);
 						playerLabel.afterCardFuntion();
+						checkForVoDe();
 					}
 					});
 					voDeTimer.setRepeats(false);
@@ -253,12 +260,46 @@ public class GameLabel extends JLabel implements Runnable{
 		turn++;
 		if (turn == 4){
 			playerLabel.changePosition();
-			bossLabel.bossAttack();
+			bossLabel.bossTurn();
+			bossLabel.bossTurn++;
+			if(bossLabel.bossTurn == 3){
+				bossLabel.bossTurn = 0;
+			}
+			for (int i = 0; i < playerLabel.players.length; i++){
+				for(int y = 0; y < playerLabel.players[i].buffs.size(); y++){
+					if (playerLabel.players[i].buffs.get(y).cardTypes.name.equals("PhongThu") || playerLabel.players[i].buffs.get(y).cardTypes.name.equals("BaoHoDongMinh")){
+						playerLabel.players[i].remove(playerLabel.players[i].buffs.get(y));
+						playerLabel.players[i].buffs.remove(y);
+						y--;
+					}
+				}
+				playerLabel.players[i].drawBuffs();
+			}
 			turn = 0;
 		}
+		
 		System.out.println(turn);
 		startTurn();
 	}
+
+
+	public void endGamePhase(){
+		for (int i = 0; i < bossLabel.bossInPhases.get(phase - 1).size(); i++) {
+			bossLabel.remove(bossLabel.bossInPhases.get(phase - 1).get(i));
+		}
+		for (int i = 0; i < cardLabel.numberOfCards; i++) {
+			cardLabel.remove(cardLabel.cardsInPlay[i]);
+		}
+		for (int i = 0; i < playerLabel.players.length; i++) {
+			for (int y = playerLabel.players[i].buffs.size() - 1; y >=0 ; y--) {
+				playerLabel.players[i].remove(playerLabel.players[i].buffs.get(y));
+			}
+		}
+		phase++;
+		turn = 0;
+		
+	}
+
 
 	public void continueGame() {
 		cardLabel.start(cardsDrawn);

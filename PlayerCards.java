@@ -146,12 +146,10 @@ public class PlayerCards extends JLabel implements MouseListener{
 					parent.afterCardFuntion();
 					break;
 				case 7:
-					newBuff = new PlayerBuffs(scale, parent.buffUsed, 2);
+					newBuff = new PlayerBuffs(scale, parent.buffUsed, parent.notClickablePlayer);
 					buffs.add(newBuff);
 					drawBuffs();
-					newBuff = new PlayerBuffs(scale, parent.buffUsed, -2);
-					parent.players[parent.notClickablePlayer].buffs.add(newBuff);
-					parent.players[parent.notClickablePlayer].drawBuffs();
+					parent.cardQueue.add(new int[]{id, parent.notClickablePlayer});
 					parent.afterCardFuntion();
 					break;
 				case -1:

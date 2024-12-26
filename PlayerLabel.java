@@ -1,6 +1,9 @@
 
 import javax.swing.JLabel;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -39,6 +42,9 @@ public class PlayerLabel extends JLabel {
 	public boolean clickable = false;
 	public CardTypes buffUsed = null;
 
+	// Baohodongminh card queue
+	public List<int[]> cardQueue = new ArrayList<int[]>();
+	
 
 	public void changePlayersState(int CardName, int NotClickablePlayer){
 		cardName = CardName;
