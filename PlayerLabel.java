@@ -44,7 +44,7 @@ public class PlayerLabel extends JLabel {
 
 	// Baohodongminh card queue
 	public List<int[]> cardQueue = new ArrayList<int[]>();
-	
+
 
 	public void changePlayersState(int CardName, int NotClickablePlayer){
 		cardName = CardName;

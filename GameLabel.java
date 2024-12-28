@@ -176,7 +176,7 @@ public class GameLabel extends JLabel implements Runnable{
 				playerLabel.changePlayersState(card, turn);
 				break;
 			case 3:
-				bossLabel.normalAttack(4);
+				bossLabel.normalAttack(30);
 				playerLabel.players[turn].loseHP(2);
 				break;
 			case 4:
@@ -253,10 +253,21 @@ public class GameLabel extends JLabel implements Runnable{
 		}
 	}
 
-	public void endTurn() {
-		for (int i = 0; i < cardsDrawn.size(); i++) {
-			disposalDeck.insertCard(cardsDrawn.get(i));
+
+	public void resetLabelState(){
+		playerLabel.notClickablePlayer = -1;
+		playerLabel.clickable = false;
+		for (int i = 0; i < bossLabel.bossInPhases.get(phase - 1).size(); i++) {
+			bossLabel.bossInPhases.get(phase - 1).get(i).choosable = false;
 		}
+		for (int i = 0; i < cardLabel.numberOfCards; i++) {
+			cardLabel.cardsInPlay[i].choosen = false;
+		}
+	}
+
+
+	public void endTurn() {
+		resetLabelState();
 		turn++;
 		if (turn == 4){
 			playerLabel.changePosition();
@@ -284,6 +295,7 @@ public class GameLabel extends JLabel implements Runnable{
 
 
 	public void endGamePhase(){
+		resetLabelState();
 		for (int i = 0; i < bossLabel.bossInPhases.get(phase - 1).size(); i++) {
 			bossLabel.remove(bossLabel.bossInPhases.get(phase - 1).get(i));
 		}
@@ -291,13 +303,16 @@ public class GameLabel extends JLabel implements Runnable{
 			cardLabel.remove(cardLabel.cardsInPlay[i]);
 		}
 		for (int i = 0; i < playerLabel.players.length; i++) {
-			for (int y = playerLabel.players[i].buffs.size() - 1; y >=0 ; y--) {
+			for (int y = playerLabel.players[i].buffs.size() - 1; y >= 0 ; y--) {
 				playerLabel.players[i].remove(playerLabel.players[i].buffs.get(y));
 			}
 		}
 		phase++;
 		turn = 0;
-		
+		makeNewDeck();
+		bossLabel.bossTurn = 0;
+		bossLabel.startPhase(phase);
+		startTurn();
 	}
 
 

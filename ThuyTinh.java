@@ -117,9 +117,9 @@ public class ThuyTinh extends Bosses implements MouseListener{
 	public void loseHP(int hp) {
 		health -= hp;
 		choosable = false;
-		if(health < 0){
+		if(health <= 0){
 			health = 0;
-			
+			parent.parent.endGamePhase();
 		}
 		healthBar.setText(health + "/" + maxHealth);
 		parent.parent.continueGame();

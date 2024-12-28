@@ -107,7 +107,17 @@ public class CardInPlay extends JLabel implements MouseListener {
             }
         }
         if (e.getButton() == MouseEvent.BUTTON3){
-            System.out.println(cardTypes.name);
+            if (choosen) {
+                if (cardTypes.name.equals("PhongThu") || cardTypes.name.equals("MuaTen")) {
+                    return;
+                }
+                parent.parent.resetLabelState();
+                choosen = false;
+                parent.parent.cardsDrawn.add(index, cardTypes);
+                for (int i = 0; i < parent.numberOfCards; i++) {
+                    parent.cardsInPlay[i].choosable = true;
+                }
+            }
         }
     }
 
