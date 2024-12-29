@@ -159,7 +159,7 @@ public class GameLabel extends JLabel implements Runnable{
 		int card = cardToNum.get(cardDrawn.name);
 		switch (card) {
 			case 0:
-				bossLabel.normalAttack(2);
+				bossLabel.normalAttack(15);
 				break;
 			case 1:
 				int muaTenWaitTime = 500;
@@ -248,6 +248,16 @@ public class GameLabel extends JLabel implements Runnable{
 					});
 					voDeTimer.setRepeats(false);
 					voDeTimer.start();
+				}
+				break;
+			case 2:
+				playerLabel.buffUsed = cardDrawn;
+				if (cardDrawn.name.equals("Coc")){
+					for (int i = 0; i < bossLabel.bossInPhases.get(phase - 1).size(); i++) {
+						if (bossLabel.bossInPhases.get(phase - 1).get(i).getName().equals("Warship")){
+							bossLabel.bossInPhases.get(phase - 1).get(i).setChoosable(true);
+						}
+					}
 				}
 				break;
 		}

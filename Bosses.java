@@ -2,7 +2,9 @@ import javax.swing.JLabel;
 
 public abstract class Bosses extends JLabel {
 	// the name of the boss
-	String Name;
+	public String Name;
+
+	public abstract String getName();
 
 	// the source of the image to navigate
 	String ImageSource;
@@ -25,6 +27,8 @@ public abstract class Bosses extends JLabel {
 	// choosable
 	boolean choosable;
 
+	public abstract boolean getChoosable();
+
 	// when hovering over the boss, the info about the boss
 	// should appear along with how it attack
 	abstract void HoverForInfo();
@@ -33,7 +37,7 @@ public abstract class Bosses extends JLabel {
 	abstract void showBoss(int X, int Y, int scale);
 
 	// setting choosable
-	abstract void setChoosable();
+	abstract void setChoosable(boolean state);
 
 	// losing hp
 	abstract void loseHP(int hp);

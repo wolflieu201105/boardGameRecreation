@@ -86,7 +86,7 @@ public class BossLabel extends JLabel{
 
 		// phase 2
 		cardName.add("Coc");
-		cardNum.add(5);
+		cardNum.add(6);
 		imageSource.add("Assets/phase2/Coc.png");
 		description.add("When the tide goes low, deals 1 damage to all boats");
 		cardNames.add(cardName);
@@ -210,7 +210,6 @@ public class BossLabel extends JLabel{
 	public void bossTurn() {
 		switch(parent.phase) {
 			case 1:
-				System.out.println(bossTurn);
 				switch(bossTurn) {
 					case 0:
 						for(int turn = 0; turn < parent.playerLabel.players.length; turn++){
@@ -236,6 +235,18 @@ public class BossLabel extends JLabel{
 						break;
 				}
 				break;
+
+			case 2:
+				for (int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++) {
+					if (bossInPhases.get(parent.phase - 1).get(i).getName().equals("Warship")){
+						bossInPhases.get(parent.phase - 1).get(i).loseHP(-1);
+					}
+				}
+				switch(bossTurn) {
+					case 0:
+					default:
+						break;
+				}
 			default:
 				System.out.println("No boss function yet");
 				break;
@@ -291,7 +302,16 @@ public class BossLabel extends JLabel{
 		damageDealt = damage;
 		switch (parent.phase) {
 			case 1:
-				bossInPhases.get(parent.phase - 1).get(0).setChoosable();
+				bossInPhases.get(parent.phase - 1).get(0).setChoosable(true);
+				break;
+			case 2:
+				for(int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++){
+					System.out.println(bossInPhases.get(parent.phase - 1).get(i));
+					if (bossInPhases.get(parent.phase - 1).get(i).getName().equals("Luu Hoang Thao")){
+						bossInPhases.get(parent.phase - 1).get(i).setChoosable(true);
+						break;
+					}
+				}
 				break;
 		}
 	}
@@ -300,6 +320,11 @@ public class BossLabel extends JLabel{
 		switch (parent.phase) {
 			case 1:
 				bossInPhases.get(parent.phase - 1).get(0).loseHP(damage);
+				break;
+			case 2:
+				for(int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++){
+					bossInPhases.get(parent.phase - 1).get(i).loseHP(damage);
+				}
 				break;
 		}
 	}

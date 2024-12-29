@@ -9,13 +9,21 @@ import java.awt.event.MouseListener;
 
 public class Warship_1 extends Bosses implements MouseListener{
     // the name of the boss
-	String Name = "Thuy Tinh";
+	String Name = "Warship";
+
+	public String getName() {
+		return Name;
+	}
 
 	// the source of the image to navigate
 	String ImageSource = "Assets/BossCards/Phase_2/Warship_1.png";
 
 	// whether the boss can be chosen
 	boolean choosable = false;
+
+	public boolean getChoosable(){
+		return choosable;
+	}
 
 	// the position, width, height of the boss
 	// initial position
@@ -28,8 +36,9 @@ public class Warship_1 extends Bosses implements MouseListener{
 	// height
 	private int height;
 
+	public int coc = 0;
 	// the health bar of the boss
-	int maxHealth = 35;
+	int maxHealth = 25;
 	int health = maxHealth;
 	int text_size = 10;
 	JTextPane healthBar;
@@ -109,12 +118,15 @@ public class Warship_1 extends Bosses implements MouseListener{
 	}
 
 	// set choosable to true
-	public void setChoosable(){
-		choosable = true;
+	public void setChoosable(boolean state){
+		choosable = state;
 	}
 
 	// losing hp
 	public void loseHP(int hp) {
+		if (hp == -1){
+			health -= coc;
+		}
 		health -= hp;
 		choosable = false;
 		healthBar.setText(health + "/" + maxHealth);
@@ -124,10 +136,12 @@ public class Warship_1 extends Bosses implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (choosable){
-			health -= parent.damageDealt;
-			choosable = false;
-			healthBar.setText(health + "/" + maxHealth);
-			
+			coc++;
+			for(int i = 0; i < parent.bossInPhases.get(parent.parent.phase - 1).size(); i++){
+				System.out.println(parent.bossInPhases.get(parent.parent.phase - 1).get(i).getName());
+				parent.bossInPhases.get(parent.parent.phase - 1).get(i).setChoosable(false);
+			}
+			parent.parent.playerLabel.phasePlayerState(-1, parent.parent.turn);
 		}
 		else {
 			this.setLocation(initialX + bound, initialY);

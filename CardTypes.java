@@ -3,7 +3,7 @@ import java.awt.Image;
 public class CardTypes{
 	// the name of the card
 	String name;
-
+	
 	// the source of the image to navigate
 	Image image;
 

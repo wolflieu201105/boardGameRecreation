@@ -11,11 +11,19 @@ public class LuuHoangThao extends Bosses implements MouseListener{
     // the name of the boss
 	String Name = "Luu Hoang Thao";
 
+	public String getName() {
+		return Name;
+	}
+
 	// the source of the image to navigate
 	String ImageSource = "Assets/BossCards/Phase_2/Luu_Hoang_Thao.png";
 
 	// whether the boss can be chosen
 	boolean choosable = false;
+
+	public boolean getChoosable(){
+		return choosable;
+	}
 
 	// the position, width, height of the boss
 	// initial position
@@ -109,8 +117,8 @@ public class LuuHoangThao extends Bosses implements MouseListener{
 	}
 
 	// set choosable to true
-	public void setChoosable(){
-		choosable = true;
+	public void setChoosable(boolean state){
+		choosable = state;
 	}
 
 	// losing hp
@@ -124,10 +132,7 @@ public class LuuHoangThao extends Bosses implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (choosable){
-			health -= parent.damageDealt;
-			choosable = false;
-			healthBar.setText(health + "/" + maxHealth);
-			
+			loseHP(parent.damageDealt);
 		}
 		else {
 			this.setLocation(initialX + bound, initialY);

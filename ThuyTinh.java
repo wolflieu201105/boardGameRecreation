@@ -11,11 +11,19 @@ public class ThuyTinh extends Bosses implements MouseListener{
     // the name of the boss
 	String Name = "Thuy Tinh";
 
+	public String getName() {
+		return Name;
+	}
+
 	// the source of the image to navigate
 	String ImageSource = "Assets/BossCards/Phase_1/Thuy_Tinh.png";
 
 	// whether the boss can be chosen
 	boolean choosable = false;
+
+	public boolean getChoosable(){
+		return choosable;
+	}
 
 	// the position, width, height of the boss
 	// initial position
@@ -109,8 +117,8 @@ public class ThuyTinh extends Bosses implements MouseListener{
 	}
 
 	// set choosable to true
-	public void setChoosable(){
-		choosable = true;
+	public void setChoosable(boolean state){
+		choosable = state;
 	}
 
 	// losing hp
