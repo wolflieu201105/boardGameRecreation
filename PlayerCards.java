@@ -126,8 +126,18 @@ public class PlayerCards extends JLabel implements MouseListener{
 			PlayerBuffs newBuff;
 			switch(parent.cardName) {
 				case 2:
-					this.loseHP(-2);
-					parent.afterCardFuntion();
+					switch(parent.parent.phase){
+						case 2:
+							if (parent.parent.turn == 0 || parent.parent.turn == 1){
+								this.loseHP(-3);
+								parent.afterCardFuntion();
+								break;
+							}
+						default:
+							this.loseHP(-2);
+							parent.afterCardFuntion();
+							break;
+					}
 					break;
 				case 5:
 					int position1 = 0;

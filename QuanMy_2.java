@@ -42,6 +42,10 @@ public class QuanMy_2 extends Bosses implements MouseListener{
 	int text_size = 10;
 	JTextPane healthBar;
 
+	public int getHealth(){
+		return health;
+	}
+
 	// the parent label of boss
 	BossLabel parent;
 

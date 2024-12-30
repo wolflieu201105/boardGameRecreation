@@ -239,14 +239,26 @@ public class BossLabel extends JLabel{
 			case 2:
 				for (int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++) {
 					if (bossInPhases.get(parent.phase - 1).get(i).getName().equals("Warship")){
-						bossInPhases.get(parent.phase - 1).get(i).loseHP(-1);
+						bossInPhases.get(parent.phase - 1).get(i).loseHP(0);
 					}
 				}
 				switch(bossTurn) {
 					case 0:
+						bossAttack(new int[]{3,3,2,2});
+						break;
+					case 1:
+						break;
+					case 2:
+						for(int i = 0; i < parent.playerLabel.players.length; i++){
+							parent.playerLabel.players[i].loseHP(2);
+						}
+						for(int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++){
+							bossInPhases.get(parent.phase - 1).get(i).loseHP(-2);
+						}
 					default:
 						break;
 				}
+				break;
 			default:
 				System.out.println("No boss function yet");
 				break;
@@ -261,22 +273,61 @@ public class BossLabel extends JLabel{
 	}
 
 	private int[] defendPlayer(int[] damage){
-		for (int i = 0; i < damage.length; i++){
-			if (damage[i] != 0){
-				for(int y = 0; y < parent.playerLabel.players[i].buffs.size(); y++){
-					if (parent.playerLabel.players[i].buffs.get(y).cardTypes.name.equals("PhongThu")){
-						parent.playerLabel.players[i].remove(parent.playerLabel.players[i].buffs.get(y));
-						parent.playerLabel.players[i].buffs.remove(y);
-						y--;
-						damage[i] -= 1;
-						if (damage[i] == 0){
-							break;
+		switch(parent.phase){
+			case 2:
+				if (bossTurn == 1){
+					for (int i = 0; i < 2; i++){
+						if (damage[i] != 0){
+							for(int y = 0; y < parent.playerLabel.players[i].buffs.size(); y++){
+								if (parent.playerLabel.players[i].buffs.get(y).cardTypes.name.equals("PhongThu")){
+									parent.playerLabel.players[i].remove(parent.playerLabel.players[i].buffs.get(y));
+									parent.playerLabel.players[i].buffs.remove(y);
+									y--;
+									damage[i] -= 2;
+									if (damage[i] <= 0){
+										damage[i] = 0;
+										break;
+									}
+								}
+							}
+						}
+					}
+
+					for (int i = 2; i < 4; i++){
+						if (damage[i] != 0){
+							for(int y = 0; y < parent.playerLabel.players[i].buffs.size(); y++){
+								if (parent.playerLabel.players[i].buffs.get(y).cardTypes.name.equals("PhongThu")){
+									parent.playerLabel.players[i].remove(parent.playerLabel.players[i].buffs.get(y));
+									parent.playerLabel.players[i].buffs.remove(y);
+									y--;
+									damage[i] -= 1;
+									if (damage[i] == 0){
+										break;
+									}
+								}
+							}
+						}
+					}
+					return playerDefend(damage);
+				}
+			default:
+				for (int i = 0; i < damage.length; i++){
+					if (damage[i] != 0){
+						for(int y = 0; y < parent.playerLabel.players[i].buffs.size(); y++){
+							if (parent.playerLabel.players[i].buffs.get(y).cardTypes.name.equals("PhongThu")){
+								parent.playerLabel.players[i].remove(parent.playerLabel.players[i].buffs.get(y));
+								parent.playerLabel.players[i].buffs.remove(y);
+								y--;
+								damage[i] -= 1;
+								if (damage[i] == 0){
+									break;
+								}
+							}
 						}
 					}
 				}
-			}
+				return playerDefend(damage);
 		}
-		return playerDefend(damage);
 	}
 
 	private int[] playerDefend(int[] damage){
@@ -306,7 +357,6 @@ public class BossLabel extends JLabel{
 				break;
 			case 2:
 				for(int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++){
-					System.out.println(bossInPhases.get(parent.phase - 1).get(i));
 					if (bossInPhases.get(parent.phase - 1).get(i).getName().equals("Luu Hoang Thao")){
 						bossInPhases.get(parent.phase - 1).get(i).setChoosable(true);
 						break;
@@ -324,6 +374,27 @@ public class BossLabel extends JLabel{
 			case 2:
 				for(int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++){
 					bossInPhases.get(parent.phase - 1).get(i).loseHP(damage);
+				}
+				break;
+		}
+	}
+
+	public void BossDie(){
+		switch(parent.phase){
+			case 1:
+				parent.endGamePhase();
+				break;
+			case 2:
+				for(int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++){
+					if(bossInPhases.get(parent.phase - 1).get(i).getHealth() == 0){
+						if(bossInPhases.get(parent.phase - 1).get(i).getName().equals("Warship")){
+							this.remove(bossInPhases.get(parent.phase - 1).get(i));
+							bossInPhases.get(parent.phase - 1).remove(i);
+						}
+						else if(bossInPhases.get(parent.phase - 1).get(i).getName().equals("Luu Hoang Thao")){
+							parent.endGamePhase();
+						}
+					}
 				}
 				break;
 		}

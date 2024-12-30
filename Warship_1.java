@@ -43,6 +43,10 @@ public class Warship_1 extends Bosses implements MouseListener{
 	int text_size = 10;
 	JTextPane healthBar;
 
+	public int getHealth(){
+		return health;
+	}
+
 	// the parent label of boss
 	BossLabel parent;
 
@@ -124,10 +128,17 @@ public class Warship_1 extends Bosses implements MouseListener{
 
 	// losing hp
 	public void loseHP(int hp) {
-		if (hp == -1){
+		if (hp == 0){
 			health -= coc;
 		}
 		health -= hp;
+		if (health <= 0){
+			health = 0;
+			parent.BossDie();
+		}
+		if (health > maxHealth){
+			health = maxHealth;
+		}
 		choosable = false;
 		healthBar.setText(health + "/" + maxHealth);
 		parent.parent.continueGame();
@@ -138,7 +149,6 @@ public class Warship_1 extends Bosses implements MouseListener{
 		if (choosable){
 			coc++;
 			for(int i = 0; i < parent.bossInPhases.get(parent.parent.phase - 1).size(); i++){
-				System.out.println(parent.bossInPhases.get(parent.parent.phase - 1).get(i).getName());
 				parent.bossInPhases.get(parent.parent.phase - 1).get(i).setChoosable(false);
 			}
 			parent.parent.playerLabel.phasePlayerState(-1, parent.parent.turn);

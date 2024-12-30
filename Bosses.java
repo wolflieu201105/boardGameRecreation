@@ -16,6 +16,8 @@ public abstract class Bosses extends JLabel {
 	int maxHealth;
 	int health;
 
+	public abstract int getHealth();
+
 	// the position, width, height of the boss
 	// initial position
 	int x;

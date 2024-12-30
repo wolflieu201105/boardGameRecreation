@@ -159,25 +159,49 @@ public class GameLabel extends JLabel implements Runnable{
 		int card = cardToNum.get(cardDrawn.name);
 		switch (card) {
 			case 0:
-				bossLabel.normalAttack(15);
+				switch(phase){
+				case 2:
+					if (turn == 0 || turn == 1){
+						break;
+					}
+				default:
+					bossLabel.normalAttack(15);
+					break;
+				}
 				break;
 			case 1:
-				int muaTenWaitTime = 500;
-				Timer muaTenTimer = new Timer(muaTenWaitTime, new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent arg0) {            
-						bossLabel.muaTen(1);
-					}
-				});
-				muaTenTimer.setRepeats(false);
-				muaTenTimer.start();
+				switch(phase){
+					case 2:
+						if (turn == 0 || turn == 1){
+							break;
+						}
+					default:
+						int muaTenWaitTime = 500;
+						Timer muaTenTimer = new Timer(muaTenWaitTime, new ActionListener() {
+							@Override
+							public void actionPerformed(ActionEvent arg0) {            
+								bossLabel.muaTen(1);
+							}
+						});
+						muaTenTimer.setRepeats(false);
+						muaTenTimer.start();
+						break;
+				}
 				break;
 			case 2:
 				playerLabel.changePlayersState(card, turn);
 				break;
 			case 3:
-				bossLabel.normalAttack(30);
-				playerLabel.players[turn].loseHP(2);
+				switch(phase){
+				case 2:
+					if (turn == 0 || turn == 1){
+						break;
+					}
+				default:
+					bossLabel.normalAttack(30);
+					playerLabel.players[turn].loseHP(2);
+					break;
+				}
 				break;
 			case 4:
 				cardsDrawn.add(drawACard());
@@ -187,7 +211,13 @@ public class GameLabel extends JLabel implements Runnable{
 					@Override
 					public void actionPerformed(ActionEvent arg0) {            
 						continueGame();
-						checkForVoDe();
+						switch(phase){
+							case 1:
+								checkForVoDe();
+							default:
+								playerLabel.players[turn].loseHP(2);
+								break;
+						}
 					}
 				});
 				dieuBinhKhienTuongTimer.setRepeats(false);
@@ -297,9 +327,13 @@ public class GameLabel extends JLabel implements Runnable{
 				playerLabel.players[i].drawBuffs();
 			}
 			turn = 0;
+			startTurn();
+			return;
 		}
-		
-		System.out.println(turn);
+		for (int i = 0; i < cardsDrawn.size(); i++) {
+			disposalDeck.insertCard(cardsDrawn.get(i));
+		}
+		cardsDrawn.clear();
 		startTurn();
 	}
 
