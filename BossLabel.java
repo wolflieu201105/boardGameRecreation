@@ -238,6 +238,18 @@ public class BossLabel extends JLabel{
 
 			case 2:
 				for (int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++) {
+					if (bossInPhases.get(parent.phase - 1).get(i).getName().equals("Luu Hoang Thao")){
+						if(bossInPhases.get(parent.phase - 1).get(i).getHealth() < 21){
+							for (int y = 0; y < bossInPhases.get(parent.phase - 1).size(); y++) {
+								if (bossInPhases.get(parent.phase - 1).get(y).getName().equals("Warship")){
+									bossInPhases.get(parent.phase - 1).get(y).loseHP(-1);
+								}
+							}
+						}
+					}
+					break;
+				}
+				for (int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++) {
 					if (bossInPhases.get(parent.phase - 1).get(i).getName().equals("Warship")){
 						bossInPhases.get(parent.phase - 1).get(i).loseHP(0);
 					}
@@ -255,8 +267,22 @@ public class BossLabel extends JLabel{
 						for(int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++){
 							bossInPhases.get(parent.phase - 1).get(i).loseHP(-2);
 						}
+						for (int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++) {
+							if (bossInPhases.get(parent.phase - 1).get(i).getName().equals("Luu Hoang Thao")){
+								if(bossInPhases.get(parent.phase - 1).get(i).getHealth() > 19){
+									bossAttack(new int[]{3,3,3,3});
+								}
+							}
+							break;
+						}
+						break;
 					default:
 						break;
+				}
+				break;
+			case 3:
+				switch(bossTurn) {
+					case 0:
 				}
 				break;
 			default:

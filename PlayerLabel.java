@@ -119,6 +119,19 @@ public class PlayerLabel extends JLabel {
 	public void changePosition(){
 		for(int i = 0; i < newFormation.length; i++){
 			if(newFormation[i] != i){
+				for(int y = i+1; y < cardQueue.size(); y++){
+					if(cardQueue.get(y)[0] == i){
+						cardQueue.get(y)[0] = newFormation[i];
+					}
+					if(cardQueue.get(y)[1] == i){
+						cardQueue.get(y)[1] = newFormation[i];
+					}
+				}
+			}
+		}
+		
+		for(int i = 0; i < newFormation.length; i++){
+			if(newFormation[i] != i){
 				swapPlayers(newFormation[i], i);
 				for (int y = i+1; y < newFormation.length; y++){
 					if (newFormation[y] == i){
