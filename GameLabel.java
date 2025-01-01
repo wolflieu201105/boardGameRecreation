@@ -122,6 +122,11 @@ public class GameLabel extends JLabel implements Runnable{
 		startGameThread();
 	}
 
+	// rewrites the stamina
+	public void setStaminaText() {
+		staminaTextPane.setText(staminaString + currentStamina + "/" + playerLabel.players[turn].maxStamina);
+	}
+
 	// creates a deck that has every card in it and a disposal deck in order to mimick the real world
 	private void makeNewDeck() {
 		drawDeck = new CardDeck();
@@ -142,7 +147,7 @@ public class GameLabel extends JLabel implements Runnable{
 	private void startTurn() {
 		playerTurnTextPane.setText(playerTurnString + playerLabel.players[turn].name);
 		currentStamina = playerLabel.players[turn].maxStamina;
-		staminaTextPane.setText(staminaString + currentStamina + "/" + playerLabel.players[turn].maxStamina);
+		setStaminaText();
 		cardsDrawn.clear();
 		for (int i = playerLabel.getNumCards(turn); i > 0; i--) {
 			cardsDrawn.add(drawACard());
@@ -181,11 +186,12 @@ public class GameLabel extends JLabel implements Runnable{
 	HashMap<String, Integer> cardToNum = new HashMap<String, Integer>();
 	public void cardUsed(int index) {
 		CardTypes cardDrawn = cardsDrawn.get(index);
-		System.out.println("yes");
 		if (currentStamina < cardDrawn.staminaCost){
-			System.out.println("yes");
+			cardLabel.cardsInPlay[index].choosen = false;
 			return;
 		}
+		currentStamina -= cardDrawn.staminaCost;
+		setStaminaText();
 		String name = cardDrawn.name;
 		cardsDrawn.remove(index);
 
@@ -204,7 +210,7 @@ public class GameLabel extends JLabel implements Runnable{
 			case 0:
 				switch(phase){
 				case 2:
-					if (turn == 0 || turn == 1){
+					if (bossLabel.bossTurn == 1 && (turn == 0 || turn == 1)){
 						break;
 					}
 				default:
@@ -214,10 +220,6 @@ public class GameLabel extends JLabel implements Runnable{
 				break;
 			case 1:
 				switch(phase){
-					case 2:
-						if (turn == 0 || turn == 1){
-							break;
-						}
 					default:
 						int muaTenWaitTime = 500;
 						Timer muaTenTimer = new Timer(muaTenWaitTime, new ActionListener() {
@@ -237,7 +239,7 @@ public class GameLabel extends JLabel implements Runnable{
 			case 3:
 				switch(phase){
 				case 2:
-					if (turn == 0 || turn == 1){
+					if (bossLabel.bossTurn == 1 && (turn == 0 || turn == 1)){
 						break;
 					}
 				default:
@@ -247,6 +249,15 @@ public class GameLabel extends JLabel implements Runnable{
 				}
 				break;
 			case 4:
+				switch(phase){
+					case 3:
+						if (bossLabel.bossTurn == 1){
+							cardsDrawn.add(drawACard());
+						}
+						break;
+					default:
+						break;
+				}
 				cardsDrawn.add(drawACard());
 				cardsDrawn.add(drawACard());
 				int dieuBinhKhienTuongWaitTime = 500;
@@ -391,6 +402,9 @@ public class GameLabel extends JLabel implements Runnable{
 			for (int y = playerLabel.players[i].buffs.size() - 1; y >= 0 ; y--) {
 				playerLabel.players[i].remove(playerLabel.players[i].buffs.get(y));
 			}
+			playerLabel.players[i].buffs = new ArrayList<PlayerBuffs>();
+			playerLabel.players[i].maxStamina = 3;
+			playerLabel.players[i].cardsNextTurn = 3;
 		}
 		phase++;
 		turn = 0;

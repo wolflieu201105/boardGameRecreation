@@ -9,7 +9,7 @@ import java.awt.event.MouseListener;
 
 public class QuanNguyenMong extends Bosses implements MouseListener{
     // the name of the boss
-	String Name = "Luu Hoang Thao";
+	String Name = "Quan Nguyen Mong";
 
 	public String getName() {
 		return Name;
@@ -129,6 +129,10 @@ public class QuanNguyenMong extends Bosses implements MouseListener{
 	public void loseHP(int hp) {
 		health -= hp;
 		choosable = false;
+		if(health <= 0){
+			health = 0;
+			parent.BossDie();
+		}
 		healthBar.setText(health + "/" + maxHealth);
 		parent.parent.continueGame();
 	}
@@ -136,10 +140,7 @@ public class QuanNguyenMong extends Bosses implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (choosable){
-			health -= parent.damageDealt;
-			choosable = false;
-			healthBar.setText(health + "/" + maxHealth);
-			
+			loseHP(parent.damageDealt);
 		}
 		else {
 			this.setLocation(initialX + bound, initialY);

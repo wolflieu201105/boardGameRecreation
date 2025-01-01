@@ -8,7 +8,7 @@ public class PlayerBuffs extends JLabel{
     static public int height_ratio = 21;
     
     // buff number of effectiveness
-    int buffEffect;
+    public int buffEffect;
 
     // card type
     public CardTypes cardTypes;

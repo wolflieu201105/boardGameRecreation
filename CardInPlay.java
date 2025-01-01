@@ -113,6 +113,8 @@ public class CardInPlay extends JLabel implements MouseListener {
                 }
                 parent.parent.resetLabelState();
                 choosen = false;
+                parent.parent.currentStamina += cardTypes.staminaCost;
+                parent.parent.setStaminaText();
                 parent.parent.cardsDrawn.add(index, cardTypes);
                 for (int i = 0; i < parent.numberOfCards; i++) {
                     parent.cardsInPlay[i].choosable = true;

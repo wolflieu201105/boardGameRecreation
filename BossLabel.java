@@ -298,8 +298,50 @@ public class BossLabel extends JLabel{
 				}
 				break;
 			case 3:
+				int index;
+				int[] damage;
 				switch(bossTurn) {
 					case 0:
+						index = 0;
+						for(int i = 1; i < parent.playerLabel.players.length; i++){
+							if (parent.playerLabel.players[i].health < parent.playerLabel.players[index].health){
+								index = i;
+							}
+						}
+						damage = new int[]{0,0,0,0};
+						damage[index] = 3;
+						bossAttack(damage);
+						break;
+					case 1:
+						for(int turn = 0; turn < parent.playerLabel.players.length; turn++){
+							boolean check = false;
+							for(int i = 0; i < parent.playerLabel.players[turn].buffs.size(); i++){
+								if (parent.playerLabel.players[turn].buffs.get(i).cardTypes.name.equals("Vuon khong nha trong")){
+									check = true;
+									break;
+								}
+							}
+							if (check){
+								parent.playerLabel.players[turn].cardsNextTurn = 2;
+							}
+						}
+					case 2:
+						for(int turn = 0; turn < parent.playerLabel.players.length; turn++){
+							parent.playerLabel.players[turn].cardsNextTurn = 3;
+						}
+						bossInPhases.get(parent.phase - 1).get(0).loseHP(-3);
+						index = 0;
+						for(int i = 1; i < parent.playerLabel.players.length; i++){
+							if (parent.playerLabel.players[i].health > parent.playerLabel.players[index].health){
+								index = i;
+							}
+						}
+						damage = new int[]{0,0,0,0};
+						damage[index] = 4;
+						bossAttack(damage);
+						break;
+					default:
+						break;
 				}
 				break;
 			default:
@@ -415,9 +457,20 @@ public class BossLabel extends JLabel{
 				bossInPhases.get(parent.phase - 1).get(0).loseHP(damage);
 				break;
 			case 2:
-				for(int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++){
-					bossInPhases.get(parent.phase - 1).get(i).loseHP(damage);
+				for (int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++) {
+					if (bossInPhases.get(parent.phase - 1).get(i).getName().equals("Warship")){
+						bossInPhases.get(parent.phase - 1).get(i).loseHP(damage);
+					}
 				}
+				for (int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++) {
+					if (bossInPhases.get(parent.phase - 1).get(i).getName().equals("Luu Hoang Thao")){
+						bossInPhases.get(parent.phase - 1).get(i).loseHP(damage);
+						break;
+					}
+				}
+				break;
+			case 3:
+				bossInPhases.get(parent.phase - 1).get(0).loseHP(damage);
 				break;
 		}
 	}
@@ -435,10 +488,19 @@ public class BossLabel extends JLabel{
 							bossInPhases.get(parent.phase - 1).remove(i);
 						}
 						else if(bossInPhases.get(parent.phase - 1).get(i).getName().equals("Luu Hoang Thao")){
+							for (int y = 0; y < bossInPhases.get(parent.phase - 1).size(); y++) {
+								if (bossInPhases.get(parent.phase - 1).get(y).getHealth() > 0){
+									bossInPhases.get(parent.phase - 1).get(i).loseHP(-1);
+									return;
+								}
+							}
 							parent.endGamePhase();
 						}
 					}
 				}
+				break;
+			case 3:
+				parent.endGamePhase();
 				break;
 		}
 	}

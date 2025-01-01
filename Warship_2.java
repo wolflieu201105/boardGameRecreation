@@ -133,6 +133,16 @@ public class Warship_2 extends Bosses implements MouseListener{
 		health -= hp;
 		if (health <= 0){
 			health = 0;
+			for (int i = 0; i < coc; i++){
+				parent.parent.disposalDeck.insertCard(parent.cardPhases.get(parent.parent.phase - 1).get(0));
+			}
+			for (int i = 0; i < parent.parent.playerLabel.players.length; i++){
+				for (int y = 0; y < parent.parent.playerLabel.players[i].buffs.size(); y++){
+					if (parent.parent.playerLabel.players[i].buffs.get(y).cardTypes.name.equals("Coc") && parent.parent.playerLabel.players[i].buffs.get(y).buffEffect == 1){
+						parent.parent.playerLabel.players[i].buffs.remove(y);
+					}
+				}
+			}
 			parent.BossDie();
 		}
 		if (health > maxHealth){
@@ -150,7 +160,7 @@ public class Warship_2 extends Bosses implements MouseListener{
 			for(int i = 0; i < parent.bossInPhases.get(parent.parent.phase - 1).size(); i++){
 				parent.bossInPhases.get(parent.parent.phase - 1).get(i).setChoosable(false);
 			}
-			parent.parent.playerLabel.phasePlayerState(-1, parent.parent.turn);
+			parent.parent.playerLabel.phasePlayerState(parent.parent.turn, 2);
 		}
 		else {
 			this.setLocation(initialX + bound, initialY);

@@ -64,8 +64,8 @@ public class PlayerLabel extends JLabel {
 				break;
 			case 2:
 				PlayerBuffs newBuff = new PlayerBuffs(scale, buffUsed, NotClickablePlayer);
-				players[NotClickablePlayer].buffs.add(newBuff);
-				players[NotClickablePlayer].drawBuffs();
+				players[CardName].buffs.add(newBuff);
+				players[CardName].drawBuffs();
 				afterCardFuntion();
 				break;
 			default:
