@@ -18,6 +18,8 @@ public class CardDeck {
             return null;
         }
         numberOfCards--;
-        return cardList.remove(0);
+        CardTypes card = cardList.get(0);
+        cardList.remove(0);
+        return card;
     }
 }

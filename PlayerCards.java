@@ -20,7 +20,7 @@ public class PlayerCards extends JLabel implements MouseListener{
 
 	// the name of the Player
 	public int id;
-	private String name;
+	public String name;
 	private JTextPane nameTextPane;
 	private int nameHeight = 13;
 	private int text_size = 10;

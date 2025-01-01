@@ -28,9 +28,10 @@ public class BossLabel extends JLabel{
 
 	// added cards for each phase
 	List<List<String>> cardNames = new ArrayList<List<String>>();
-	List<List<Integer>> cardNums = new ArrayList<List<Integer>>();
+	List<List<Integer>> cardStaminas = new ArrayList<List<Integer>>();
 	List<List<String>> imageSources = new ArrayList<List<String>>();
 	List<List<String>> descriptions = new ArrayList<List<String>>();
+	List<List<Integer>> cardNums = new ArrayList<List<Integer>>();
 
 	List<List<CardTypes>> cardPhases = new ArrayList<List<CardTypes>>();
 
@@ -58,24 +59,29 @@ public class BossLabel extends JLabel{
 
 		// making cards
 		List<String> cardName = new ArrayList<String>();
-		List<Integer> cardNum = new ArrayList<Integer>();
+		List<Integer> cardStamina = new ArrayList<Integer>();
 		List<String> imageSource = new ArrayList<String>();
 		List<String> description = new ArrayList<String>();
+		List<Integer> cardNum = new ArrayList<Integer>();
 		
 		// phase 1
 		cardName.add("Dap de");
+		cardStamina.add(1);
 		cardNum.add(4);
 		imageSource.add("Assets/phase1/Dap_de.png");
 		description.add("If you have this card, you won't be affected by Thuy Tinh's flood effect");
 		cardName.add("Vo de");
+		cardStamina.add(0);
 		cardNum.add(4);
 		imageSource.add("Assets/phase1/Vo_de.png");
 		description.add("If you have this card, the card will be used immidiately and lose Vo de card");
 		cardNames.add(cardName);
+		cardStaminas.add(cardStamina);
 		cardNums.add(cardNum);
 		imageSources.add(imageSource);
 		descriptions.add(description);
 		cardName = new ArrayList<String>();
+		cardStamina = new ArrayList<Integer>();
 		cardNum = new ArrayList<Integer>();
 		imageSource = new ArrayList<String>();
 		description = new ArrayList<String>();
@@ -86,14 +92,17 @@ public class BossLabel extends JLabel{
 
 		// phase 2
 		cardName.add("Coc");
+		cardStamina.add(1);
 		cardNum.add(6);
 		imageSource.add("Assets/phase2/Coc.png");
 		description.add("When the tide goes low, deals 1 damage to all boats");
 		cardNames.add(cardName);
+		cardStaminas.add(cardStamina);
 		cardNums.add(cardNum);
 		imageSources.add(imageSource);
 		descriptions.add(description);
 		cardName = new ArrayList<String>();
+		cardStamina = new ArrayList<Integer>();
 		cardNum = new ArrayList<Integer>();
 		imageSource = new ArrayList<String>();
 		description = new ArrayList<String>();
@@ -106,14 +115,17 @@ public class BossLabel extends JLabel{
 
 		// phase 3
 		cardName.add("Vuon khong nha trong");
+		cardStamina.add(0);
 		cardNum.add(5);
 		imageSource.add("Assets/phase3/Vuon_khong_nha_trong.png");
 		description.add("If you have this card, you will no longer be stolen, if all 5 cards are gathered, boss won't heal in turn 3");
 		cardNames.add(cardName);
+		cardStaminas.add(cardStamina);
 		cardNums.add(cardNum);
 		imageSources.add(imageSource);
 		descriptions.add(description);
 		cardName = new ArrayList<String>();
+		cardStamina = new ArrayList<Integer>();
 		cardNum = new ArrayList<Integer>();
 		imageSource = new ArrayList<String>();
 		description = new ArrayList<String>();
@@ -124,22 +136,27 @@ public class BossLabel extends JLabel{
 
 		// phase 4
 		cardName.add("Phan Dinh Giot");
+		cardStamina.add(2);
 		cardNum.add(1);
 		imageSource.add("Assets/phase1/Phan_Dinh_Giot.png");
 		description.add("stop the boss from performing in one turn");
 		cardName.add("Be Van Dan");
+		cardStamina.add(2);
 		cardNum.add(2);
 		imageSource.add("Assets/phase1/Be_Van_Dan.png");
 		description.add("Add 2 damages to all type of attacks in the next turn");
 		cardName.add("Xe dap tho");
+		cardStamina.add(2);
 		cardNum.add(3);
 		imageSource.add("Assets/phase1/Xe_dap_tho.png");
 		description.add("Next turn draw 4 cards instead of 3, your stamina is also increased to 4");
 		cardNames.add(cardName);
+		cardStaminas.add(cardStamina);
 		cardNums.add(cardNum);
 		imageSources.add(imageSource);
 		descriptions.add(description);
 		cardName = new ArrayList<String>();
+		cardStamina = new ArrayList<Integer>();
 		cardNum = new ArrayList<Integer>();
 		imageSource = new ArrayList<String>();
 		description = new ArrayList<String>();
@@ -152,25 +169,25 @@ public class BossLabel extends JLabel{
 
 		// phase 5
 		cardName.add("Du kich");
+		cardStamina.add(1);
 		cardNum.add(3);
 		imageSource.add("Assets/phase1/Du_Kich.png");
 		description.add("Deals 5 damage without getting counter");
 		cardName.add("Sung phong khong");
+		cardStamina.add(1);
 		cardNum.add(3);
 		imageSource.add("Assets/phase1/Sung_Phong_Khong.png");
 		description.add("Collect 3 cards and then you can use mua ten to deal 5 damages to B52");
 		cardName.add("Chat doc mau da cam");
+		cardStamina.add(0);
 		cardNum.add(3);
 		imageSource.add("Assets/phase1/Chat_Doc_Mau_Da_Cam.png");
 		description.add("Deals damage to every players 1 damage/turn");
 		cardNames.add(cardName);
+		cardStaminas.add(cardStamina);
 		cardNums.add(cardNum);
 		imageSources.add(imageSource);
 		descriptions.add(description);
-		cardName = new ArrayList<String>();
-		cardNum = new ArrayList<Integer>();
-		imageSource = new ArrayList<String>();
-		description = new ArrayList<String>();
 
 		bossThisPhase.add(new QuanMy_1(boss_width_ratio, boss_height_ratio, scale, this));
 		bossThisPhase.add(new B52(boss_width_ratio, boss_height_ratio, scale, this));
@@ -186,7 +203,7 @@ public class BossLabel extends JLabel{
 				ImageIcon newIcon = new ImageIcon(imageSources.get(i).get(y));
 				Image cardImage = newIcon.getImage();
 				cardImage = cardImage.getScaledInstance(CardLabel.card_width_ratio * scale, CardLabel.card_height_ratio * scale, Image.SCALE_SMOOTH);
-				thisPhase.add(new CardTypes(cardNames.get(i).get(y), cardNums.get(i).get(y), cardImage, descriptions.get(i).get(y)));
+				thisPhase.add(new CardTypes(cardNames.get(i).get(y), cardStaminas.get(i).get(y), cardImage, descriptions.get(i).get(y)));
 			}
 			cardPhases.add(thisPhase);
 		}
@@ -246,8 +263,8 @@ public class BossLabel extends JLabel{
 								}
 							}
 						}
+						break;
 					}
-					break;
 				}
 				for (int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++) {
 					if (bossInPhases.get(parent.phase - 1).get(i).getName().equals("Warship")){
@@ -272,8 +289,8 @@ public class BossLabel extends JLabel{
 								if(bossInPhases.get(parent.phase - 1).get(i).getHealth() > 19){
 									bossAttack(new int[]{3,3,3,3});
 								}
+								break;
 							}
-							break;
 						}
 						break;
 					default:

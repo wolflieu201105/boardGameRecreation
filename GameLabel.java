@@ -2,6 +2,7 @@ import java.awt.Color;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JTextPane;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -30,14 +31,33 @@ public class GameLabel extends JLabel implements Runnable{
 	CardLabel cardLabel;
 	BossLabel bossLabel;
 
+	// player turn text
+	private String playerTurnString = "Player's turn: \n";
+	private JTextPane playerTurnTextPane;
+	private int playerTurn_x_start_ratio = 270;
+	private int playerTurn_y_start_ratio = 0;
+	private int playerTurn_width_ratio = 50;
+	private int playerTurn_height_ratio = 20;
+	private int playerTurnSize = 7;
+
 	// next turn button
 	String nextTurnString = "End turn";
 	JButton nextButton = new JButton(nextTurnString);
 	int button_x_start_ratio = 270;
-	int button_y_start_ratio = 10;
+	int button_y_start_ratio = 20;
 	int button_width_ratio = 50;
-	int button_heigth_ratio = 10;
+	int button_height_ratio = 10;
 	int text_size_ratio = 8;
+
+	// stamina of players text
+	private String staminaString = "Stamina: ";
+	private JTextPane staminaTextPane;
+	private int stamina_x_start_ratio = 270;
+	private int stamina_y_start_ratio = 40;
+	private int stamina_width_ratio = 50;
+	private int stamina_height_ratio = 20;
+	private int staminaSize = 7;
+	public int currentStamina;
 
 	// turn of players
 	int turn = 0;
@@ -62,12 +82,30 @@ public class GameLabel extends JLabel implements Runnable{
 		this.add(cardLabel);
 		this.add(bossLabel);
 
+		// setting the player turn text
+		playerTurnTextPane = new JTextPane();
+		playerTurnTextPane.setBounds(playerTurn_x_start_ratio * scale, playerTurn_y_start_ratio * scale, playerTurn_width_ratio * scale, playerTurn_height_ratio * scale);
+		playerTurnTextPane.setFont(new Font("Arial", Font.PLAIN, playerTurnSize * scale));
+		playerTurnTextPane.setEditable(false);
+		playerTurnTextPane.setBackground(new Color(255, 248, 178));
+		playerTurnTextPane.setOpaque(true);
+		this.add(playerTurnTextPane);
+
 		// setting bounds for button
-		nextButton.setBounds(button_x_start_ratio * scale, button_y_start_ratio * scale, button_width_ratio * scale, button_heigth_ratio * scale);
+		nextButton.setBounds(button_x_start_ratio * scale, button_y_start_ratio * scale, button_width_ratio * scale, button_height_ratio * scale);
 		nextButton.setFont(new Font("Arial", Font.PLAIN, text_size_ratio * scale));
 		nextButton.setBackground(new Color(255,255,255));
 		this.add(nextButton);
 		nextButton.addActionListener(e -> {endTurn();});
+
+		// setting stamina text
+		staminaTextPane = new JTextPane();
+		staminaTextPane.setBounds(stamina_x_start_ratio * scale, stamina_y_start_ratio * scale, stamina_width_ratio * scale, stamina_height_ratio * scale);
+		staminaTextPane.setFont(new Font("Arial", Font.PLAIN, staminaSize * scale));
+		staminaTextPane.setEditable(false);
+		staminaTextPane.setBackground(new Color(255, 248, 178));
+		staminaTextPane.setOpaque(true);
+		this.add(staminaTextPane);
 
 		// setting the new bounds for the label
 		this.setBounds(0, 0, width, height);
@@ -102,6 +140,9 @@ public class GameLabel extends JLabel implements Runnable{
 
 	List<CardTypes> cardsDrawn = new ArrayList<CardTypes>();
 	private void startTurn() {
+		playerTurnTextPane.setText(playerTurnString + playerLabel.players[turn].name);
+		currentStamina = playerLabel.players[turn].maxStamina;
+		staminaTextPane.setText(staminaString + currentStamina + "/" + playerLabel.players[turn].maxStamina);
 		cardsDrawn.clear();
 		for (int i = playerLabel.getNumCards(turn); i > 0; i--) {
 			cardsDrawn.add(drawACard());
@@ -140,6 +181,11 @@ public class GameLabel extends JLabel implements Runnable{
 	HashMap<String, Integer> cardToNum = new HashMap<String, Integer>();
 	public void cardUsed(int index) {
 		CardTypes cardDrawn = cardsDrawn.get(index);
+		System.out.println("yes");
+		if (currentStamina < cardDrawn.staminaCost){
+			System.out.println("yes");
+			return;
+		}
 		String name = cardDrawn.name;
 		cardsDrawn.remove(index);
 
@@ -148,9 +194,6 @@ public class GameLabel extends JLabel implements Runnable{
 			PhaseCardFunction(cardDrawn);
 		}
 		else {
-			if(cardToNum.get(name) < 6) {
-				disposalDeck.insertCard(cardDrawn);
-			}
 			NormalCardFunction(cardDrawn);
 		}
 	}
@@ -257,7 +300,7 @@ public class GameLabel extends JLabel implements Runnable{
 					playerLabel.buffUsed = cardDrawn;
 					playerLabel.phasePlayerState(-1,-1);
 				}
-				else if (cardDrawn.name.equals("Vo de")){
+				else{
 					int voDeWaitTime = 500;
 					Timer voDeTimer = new Timer(voDeWaitTime, new ActionListener() {
 					@Override
@@ -327,8 +370,6 @@ public class GameLabel extends JLabel implements Runnable{
 				playerLabel.players[i].drawBuffs();
 			}
 			turn = 0;
-			startTurn();
-			return;
 		}
 		for (int i = 0; i < cardsDrawn.size(); i++) {
 			disposalDeck.insertCard(cardsDrawn.get(i));
