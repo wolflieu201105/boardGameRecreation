@@ -54,6 +54,7 @@ public class PlayerLabel extends JLabel {
 
 
 	public void phasePlayerState(int CardName, int NotClickablePlayer){
+		PlayerBuffs newBuff;
 		switch(parent.phase){
 			case 1:
 				if (CardName == -1) {
@@ -63,10 +64,15 @@ public class PlayerLabel extends JLabel {
 				}
 				break;
 			case 2:
-				PlayerBuffs newBuff = new PlayerBuffs(scale, buffUsed, NotClickablePlayer);
+				newBuff = new PlayerBuffs(scale, buffUsed, NotClickablePlayer);
 				players[CardName].buffs.add(newBuff);
 				players[CardName].drawBuffs();
 				afterCardFuntion();
+				break;
+			case 3:
+				cardName = CardName;
+				notClickablePlayer = NotClickablePlayer;
+				clickable = true;
 				break;
 			default:
 				return;

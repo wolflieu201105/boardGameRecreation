@@ -63,7 +63,7 @@ public class GameLabel extends JLabel implements Runnable{
 	int turn = 0;
 
 	// phase of game
-	int phase = 1;
+	int phase = 4;
 
 	// make a draw card deck and a deck to put cards away
 	CardDeck drawDeck;
@@ -129,16 +129,19 @@ public class GameLabel extends JLabel implements Runnable{
 
 	// creates a deck that has every card in it and a disposal deck in order to mimick the real world
 	private void makeNewDeck() {
+		System.out.println("yes");
 		drawDeck = new CardDeck();
 		disposalDeck = new CardDeck();
 		for (int i = 0; i < cardLabel.cardNum; i++) {
 			for (int y = 0; y < cardLabel.remaining[i]; y++) {
 				drawDeck.insertCard(cardLabel.cardTypes[i]);
+				drawDeck.putInDeck();
 			}
 		}
 		for (int i = 0; i < bossLabel.cardPhases.get(phase-1).size(); i++) {
 			for (int y = 0; y < bossLabel.cardNums.get(phase-1).get(i); y++){
 				drawDeck.insertCard(bossLabel.cardPhases.get(phase-1).get(i));
+				drawDeck.putInDeck();
 			}
 		}
 	}
@@ -194,7 +197,6 @@ public class GameLabel extends JLabel implements Runnable{
 		setStaminaText();
 		String name = cardDrawn.name;
 		cardsDrawn.remove(index);
-
 		// if this is null, it is a card that is exclusive for that phase
 		if (cardToNum.get(name) == null) {
 			PhaseCardFunction(cardDrawn);
@@ -206,6 +208,9 @@ public class GameLabel extends JLabel implements Runnable{
 
 	public void NormalCardFunction(CardTypes cardDrawn){
 		int card = cardToNum.get(cardDrawn.name);
+		if (card < 6){
+			disposalDeck.insertCard(cardDrawn);
+		}
 		switch (card) {
 			case 0:
 				switch(phase){
@@ -214,7 +219,7 @@ public class GameLabel extends JLabel implements Runnable{
 						break;
 					}
 				default:
-					bossLabel.normalAttack(15);
+					bossLabel.normalAttack(2);
 					break;
 				}
 				break;
@@ -243,7 +248,7 @@ public class GameLabel extends JLabel implements Runnable{
 						break;
 					}
 				default:
-					bossLabel.normalAttack(30);
+					bossLabel.normalAttack(4);
 					playerLabel.players[turn].loseHP(2);
 					break;
 				}
@@ -319,6 +324,7 @@ public class GameLabel extends JLabel implements Runnable{
 						for(int i = 0; i < playerLabel.players[turn].buffs.size(); i++){
 							if (playerLabel.players[turn].buffs.get(i).cardTypes.name.equals("Dap de")){
 								disposalDeck.insertCard(playerLabel.players[turn].buffs.get(i).cardTypes);
+								disposalDeck.putInDeck();
 								playerLabel.players[turn].remove(playerLabel.players[turn].buffs.get(i));
 								playerLabel.players[turn].buffs.remove(i);
 								playerLabel.players[turn].drawBuffs();
@@ -326,6 +332,7 @@ public class GameLabel extends JLabel implements Runnable{
 							}
 						}
 						disposalDeck.insertCard(cardDrawn);
+						disposalDeck.putInDeck();
 						playerLabel.afterCardFuntion();
 						checkForVoDe();
 					}
@@ -344,6 +351,9 @@ public class GameLabel extends JLabel implements Runnable{
 					}
 				}
 				break;
+			case 3:
+				playerLabel.buffUsed = cardDrawn;
+				playerLabel.phasePlayerState(-1,-1);
 		}
 	}
 
@@ -384,6 +394,7 @@ public class GameLabel extends JLabel implements Runnable{
 		}
 		for (int i = 0; i < cardsDrawn.size(); i++) {
 			disposalDeck.insertCard(cardsDrawn.get(i));
+			disposalDeck.putInDeck();
 		}
 		cardsDrawn.clear();
 		startTurn();
@@ -416,6 +427,7 @@ public class GameLabel extends JLabel implements Runnable{
 
 
 	public void continueGame() {
+		disposalDeck.putInDeck();
 		cardLabel.start(cardsDrawn);
 	}
 

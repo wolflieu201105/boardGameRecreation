@@ -175,6 +175,12 @@ public class PlayerCards extends JLabel implements MouseListener{
 							drawBuffs();
 							parent.afterCardFuntion();
 							break;
+						case 3:
+							newBuff = new PlayerBuffs(scale, parent.buffUsed, 1);
+							buffs.add(newBuff);
+							drawBuffs();
+							parent.afterCardFuntion();
+							break;
 					}
 				default:
 					break;

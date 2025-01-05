@@ -208,7 +208,7 @@ public class BossLabel extends JLabel{
 			cardPhases.add(thisPhase);
 		}
 
-		startPhase(1);
+		startPhase(parent.phase);
     }
 
 	// ading the bosses into the screen
@@ -216,6 +216,11 @@ public class BossLabel extends JLabel{
 
 	public void startPhase(int phase) {
 		bossTurn = 0;
+		redrawBosses();
+	}
+
+	public void redrawBosses() {
+		int phase = parent.phase;
 		int margin = 10;
 		int distance = (width_ratio - margin * 2)/(bossInPhases.get(phase - 1).size()+1);
 		for (int i = 0; i < bossInPhases.get(phase - 1).size(); i++) {
@@ -325,6 +330,7 @@ public class BossLabel extends JLabel{
 								parent.playerLabel.players[turn].cardsNextTurn = 2;
 							}
 						}
+						break;
 					case 2:
 						for(int turn = 0; turn < parent.playerLabel.players.length; turn++){
 							parent.playerLabel.players[turn].cardsNextTurn = 3;
@@ -340,6 +346,29 @@ public class BossLabel extends JLabel{
 						damage[index] = 4;
 						bossAttack(damage);
 						break;
+					default:
+						break;
+				}
+				break;
+			case 4:
+				switch(bossTurn) {
+					case 0:
+						bossAttack(new int[]{4,3,2,2});
+						break;
+					case 1:
+						int num = bossInPhases.get(parent.phase - 1).size();
+						bossAttack(new int[]{num,num,num,num});
+						break;
+					case 2:
+						for (int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++) {
+							bossInPhases.get(parent.phase - 1).get(i).loseHP(-2);
+						}
+						if (bossInPhases.get(parent.phase - 1).size() < 5){
+							QuanPhap newBoss = new QuanPhap(boss_width_ratio, boss_height_ratio, scale, this);
+							bossInPhases.get(parent.phase - 1).add(newBoss);
+							this.add(newBoss);
+							redrawBosses();
+						}
 					default:
 						break;
 				}
@@ -448,6 +477,14 @@ public class BossLabel extends JLabel{
 					}
 				}
 				break;
+			case 3:
+				bossInPhases.get(parent.phase - 1).get(0).setChoosable(true);
+				break;
+			case 4:
+				for (int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++) {
+					bossInPhases.get(parent.phase - 1).get(i).setChoosable(true);
+				}
+				break;
 		}
 	}
 
@@ -472,6 +509,11 @@ public class BossLabel extends JLabel{
 			case 3:
 				bossInPhases.get(parent.phase - 1).get(0).loseHP(damage);
 				break;
+			case 4:
+				for (int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++) {
+					bossInPhases.get(parent.phase - 1).get(i).loseHP(damage);
+				}
+				break;
 		}
 	}
 
@@ -486,6 +528,7 @@ public class BossLabel extends JLabel{
 						if(bossInPhases.get(parent.phase - 1).get(i).getName().equals("Warship")){
 							this.remove(bossInPhases.get(parent.phase - 1).get(i));
 							bossInPhases.get(parent.phase - 1).remove(i);
+							redrawBosses();
 						}
 						else if(bossInPhases.get(parent.phase - 1).get(i).getName().equals("Luu Hoang Thao")){
 							for (int y = 0; y < bossInPhases.get(parent.phase - 1).size(); y++) {
@@ -501,6 +544,18 @@ public class BossLabel extends JLabel{
 				break;
 			case 3:
 				parent.endGamePhase();
+				break;
+			case 4:
+				for(int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++){
+					if(bossInPhases.get(parent.phase - 1).get(i).getHealth() == 0){
+						this.remove(bossInPhases.get(parent.phase - 1).get(i));
+						bossInPhases.get(parent.phase - 1).remove(i);
+						redrawBosses();
+					}
+				}
+				if (bossInPhases.get(parent.phase - 1).size() == 0){
+					parent.endGamePhase();
+				}
 				break;
 		}
 	}

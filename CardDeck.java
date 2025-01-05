@@ -6,11 +6,22 @@ public class CardDeck {
     int numberOfCards = 0;
     Random randomNumbers = new Random();
     List<CardTypes> cardList = new ArrayList<CardTypes>();
+    CardTypes cardQueue = null;
     public CardDeck() {}
     
     public void insertCard(CardTypes cardName) {
-        numberOfCards ++;
-        cardList.add(randomNumbers.nextInt(numberOfCards), cardName);
+        cardQueue = cardName;
+    }
+
+    public void removeCardQueue() {
+        cardQueue = null;
+    }
+
+    public void putInDeck() {
+        if (cardQueue != null) {
+            numberOfCards++;
+            cardList.add(randomNumbers.nextInt(numberOfCards), cardQueue);
+        }
     }
 
     public CardTypes drawCard() {

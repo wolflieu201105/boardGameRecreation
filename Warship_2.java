@@ -135,6 +135,7 @@ public class Warship_2 extends Bosses implements MouseListener{
 			health = 0;
 			for (int i = 0; i < coc; i++){
 				parent.parent.disposalDeck.insertCard(parent.cardPhases.get(parent.parent.phase - 1).get(0));
+				parent.parent.disposalDeck.putInDeck();
 			}
 			for (int i = 0; i < parent.parent.playerLabel.players.length; i++){
 				for (int y = 0; y < parent.parent.playerLabel.players[i].buffs.size(); y++){
@@ -148,7 +149,6 @@ public class Warship_2 extends Bosses implements MouseListener{
 		if (health > maxHealth){
 			health = maxHealth;
 		}
-		choosable = false;
 		healthBar.setText(health + "/" + maxHealth);
 		parent.parent.continueGame();
 	}

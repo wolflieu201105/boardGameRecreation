@@ -128,6 +128,13 @@ public class QuanPhap extends Bosses implements MouseListener{
 	// losing hp
 	public void loseHP(int hp) {
 		health -= hp;
+		if (health <= 0){
+			health = 0;
+			parent.BossDie();
+		}
+		if (health > maxHealth){
+			health = maxHealth;
+		}
 		choosable = false;
 		healthBar.setText(health + "/" + maxHealth);
 		parent.parent.continueGame();
@@ -136,10 +143,10 @@ public class QuanPhap extends Bosses implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (choosable){
-			health -= parent.damageDealt;
-			choosable = false;
-			healthBar.setText(health + "/" + maxHealth);
-			
+			loseHP(parent.damageDealt);
+			for(int i = 0; i < parent.bossInPhases.get(parent.parent.phase - 1).size(); i++){
+				parent.bossInPhases.get(parent.parent.phase - 1).get(i).setChoosable(false);
+			}
 		}
 		else {
 			this.setLocation(initialX + bound, initialY);
