@@ -138,17 +138,17 @@ public class BossLabel extends JLabel{
 		cardName.add("Phan Dinh Giot");
 		cardStamina.add(2);
 		cardNum.add(1);
-		imageSource.add("Assets/phase1/Phan_Dinh_Giot.png");
+		imageSource.add("Assets/phase4/Phan_Dinh_Giot.png");
 		description.add("stop the boss from performing in one turn");
 		cardName.add("Be Van Dan");
 		cardStamina.add(2);
 		cardNum.add(2);
-		imageSource.add("Assets/phase1/Be_Van_Dan.png");
+		imageSource.add("Assets/phase4/Be_Van_Dan.png");
 		description.add("Add 2 damages to all type of attacks in the next turn");
 		cardName.add("Xe dap tho");
 		cardStamina.add(2);
 		cardNum.add(3);
-		imageSource.add("Assets/phase1/Xe_dap_tho.png");
+		imageSource.add("Assets/phase4/Xe_dap_tho.png");
 		description.add("Next turn draw 4 cards instead of 3, your stamina is also increased to 4");
 		cardNames.add(cardName);
 		cardStaminas.add(cardStamina);
@@ -171,17 +171,17 @@ public class BossLabel extends JLabel{
 		cardName.add("Du kich");
 		cardStamina.add(1);
 		cardNum.add(3);
-		imageSource.add("Assets/phase1/Du_Kich.png");
+		imageSource.add("Assets/phase5/Du_Kich.png");
 		description.add("Deals 5 damage without getting counter");
 		cardName.add("Sung phong khong");
 		cardStamina.add(1);
 		cardNum.add(3);
-		imageSource.add("Assets/phase1/Sung_Phong_Khong.png");
+		imageSource.add("Assets/phase5/Sung_Phong_Khong.png");
 		description.add("Collect 3 cards and then you can use mua ten to deal 5 damages to B52");
 		cardName.add("Chat doc mau da cam");
 		cardStamina.add(0);
 		cardNum.add(3);
-		imageSource.add("Assets/phase1/Chat_Doc_Mau_Da_Cam.png");
+		imageSource.add("Assets/phase5/Chat_Doc_Mau_Da_Cam.png");
 		description.add("Deals damage to every players 1 damage/turn");
 		cardNames.add(cardName);
 		cardStaminas.add(cardStamina);
@@ -351,6 +351,15 @@ public class BossLabel extends JLabel{
 				}
 				break;
 			case 4:
+				for (int i = 0; i < parent.playerLabel.players.length; i++) {
+					for (int y = 0; y < parent.playerLabel.players[i].buffs.size(); y++) {
+						if (parent.playerLabel.players[i].buffs.get(y).cardTypes.name.equals("Phan Dinh Giot")){
+							parent.playerLabel.players[i].remove(parent.playerLabel.players[i].buffs.get(y));
+							parent.playerLabel.players[i].buffs.remove(y);
+							return;
+						}
+					}
+				}
 				switch(bossTurn) {
 					case 0:
 						bossAttack(new int[]{4,3,2,2});

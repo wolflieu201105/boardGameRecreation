@@ -191,6 +191,9 @@ public class GameLabel extends JLabel implements Runnable{
 		CardTypes cardDrawn = cardsDrawn.get(index);
 		if (currentStamina < cardDrawn.staminaCost){
 			cardLabel.cardsInPlay[index].choosen = false;
+			for (int i = 0; i < cardLabel.numberOfCards; i++) {
+				cardLabel.cardsInPlay[i].choosable = true;
+			}
 			return;
 		}
 		currentStamina -= cardDrawn.staminaCost;
@@ -206,6 +209,9 @@ public class GameLabel extends JLabel implements Runnable{
 		}
 	}
 
+	// this is exclusive for phase 4
+	boolean bevandan = false;
+
 	public void NormalCardFunction(CardTypes cardDrawn){
 		int card = cardToNum.get(cardDrawn.name);
 		if (card < 6){
@@ -218,6 +224,16 @@ public class GameLabel extends JLabel implements Runnable{
 					if (bossLabel.bossTurn == 1 && (turn == 0 || turn == 1)){
 						break;
 					}
+					bossLabel.normalAttack(2);
+					break;
+				case 4:
+					if (bevandan){
+						bossLabel.normalAttack(4);
+					}
+					else {
+						bossLabel.normalAttack(2);
+					}
+					break;
 				default:
 					bossLabel.normalAttack(2);
 					break;
@@ -225,6 +241,29 @@ public class GameLabel extends JLabel implements Runnable{
 				break;
 			case 1:
 				switch(phase){
+					case 4:
+						if (bevandan){
+							int muaTenWaitTime = 500;
+							Timer muaTenTimer = new Timer(muaTenWaitTime, new ActionListener() {
+								@Override
+								public void actionPerformed(ActionEvent arg0) {            
+									bossLabel.muaTen(3);
+								}
+							});
+							muaTenTimer.setRepeats(false);
+							muaTenTimer.start();
+						}
+						else {
+							int muaTenWaitTime = 500;
+							Timer muaTenTimer = new Timer(muaTenWaitTime, new ActionListener() {
+								@Override
+								public void actionPerformed(ActionEvent arg0) {            
+									bossLabel.muaTen(1);
+								}
+							});
+							muaTenTimer.setRepeats(false);
+							muaTenTimer.start();
+						}
 					default:
 						int muaTenWaitTime = 500;
 						Timer muaTenTimer = new Timer(muaTenWaitTime, new ActionListener() {
@@ -247,6 +286,19 @@ public class GameLabel extends JLabel implements Runnable{
 					if (bossLabel.bossTurn == 1 && (turn == 0 || turn == 1)){
 						break;
 					}
+					bossLabel.normalAttack(4);
+					playerLabel.players[turn].loseHP(2);
+					break;
+				case 4:
+					if (bevandan){
+						bossLabel.normalAttack(6);
+						playerLabel.players[turn].loseHP(2);
+					}
+					else {
+						bossLabel.normalAttack(4);
+						playerLabel.players[turn].loseHP(1);
+					}
+					break;
 				default:
 					bossLabel.normalAttack(4);
 					playerLabel.players[turn].loseHP(2);
@@ -354,6 +406,21 @@ public class GameLabel extends JLabel implements Runnable{
 			case 3:
 				playerLabel.buffUsed = cardDrawn;
 				playerLabel.phasePlayerState(-1,-1);
+				break;
+			
+			case 4:
+				playerLabel.players[turn].buffs.add(new PlayerBuffs(scale, cardDrawn, 1));
+				int waitTime = 500;
+				Timer timer = new Timer(waitTime, new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						playerLabel.players[turn].drawBuffs();
+						playerLabel.afterCardFuntion();
+					}
+				});
+				timer.setRepeats(false);
+				timer.start();
+				break;
 		}
 	}
 
@@ -389,6 +456,51 @@ public class GameLabel extends JLabel implements Runnable{
 					}
 				}
 				playerLabel.players[i].drawBuffs();
+			}
+			switch(phase){
+				case 4:
+					for (int i = 0; i < playerLabel.players.length; i++){
+						for(int y = 0; y < playerLabel.players[i].buffs.size(); y++){
+							boolean xdtCheck = false;
+							if (playerLabel.players[i].buffs.get(y).cardTypes.name.equals("Xe dap tho")){
+								xdtCheck = true;
+								disposalDeck.insertCard(playerLabel.players[i].buffs.get(y).cardTypes);
+								disposalDeck.putInDeck();
+								playerLabel.players[i].remove(playerLabel.players[i].buffs.get(y));
+								playerLabel.players[i].buffs.remove(y);
+								y--;
+							}
+							if (xdtCheck){
+								playerLabel.players[i].maxStamina = 4;
+								playerLabel.players[i].cardsNextTurn = 4;
+								continue;
+							}
+							else {
+								playerLabel.players[i].maxStamina = 3;
+								playerLabel.players[i].cardsNextTurn = 3;
+							}
+
+							boolean bvdCheck = false;
+							if (playerLabel.players[i].buffs.get(y).cardTypes.name.equals("Be van dan")){
+								bvdCheck = true;
+								disposalDeck.insertCard(playerLabel.players[i].buffs.get(y).cardTypes);
+								disposalDeck.putInDeck();
+								playerLabel.players[i].remove(playerLabel.players[i].buffs.get(y));
+								playerLabel.players[i].buffs.remove(y);
+								y--;
+							}
+
+							if (bvdCheck){
+								bevandan = true;
+								continue;
+							}
+							else {
+								bevandan = false;
+							}
+						}
+						playerLabel.players[i].drawBuffs();
+					}
+					break;
 			}
 			turn = 0;
 		}
