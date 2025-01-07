@@ -382,6 +382,37 @@ public class BossLabel extends JLabel{
 						break;
 				}
 				break;
+			case 5:
+				for (int i = 0; i < parent.playerLabel.players.length; i++) {
+					for (int y = 0; y < parent.playerLabel.players[i].buffs.size(); y++) {
+						if (parent.playerLabel.players[i].buffs.get(y).cardTypes.name.equals("Chat doc mau da cam")){
+							parent.playerLabel.players[i].loseHP(1);
+						}
+					}
+				}
+				switch(bossTurn) {
+					case 0:
+						boolean B52Check = false;
+						for (int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++) {
+							if (bossInPhases.get(parent.phase - 1).get(i).getName().equals("B52")){
+								B52Check = true;
+								break;
+							}
+						}
+						System.out.println(B52Check);
+						if (B52Check){
+							for(int i = 0; i < parent.playerLabel.players.length; i++){
+								parent.playerLabel.players[i].loseHP(4);
+							}
+						}
+					case 1:
+						break;
+					case 2:
+						parent.disposalDeck.insertCard(cardPhases.get(parent.phase-1).get(2));
+						parent.disposalDeck.putInDeck();
+						break;
+				}
+				break;
 			default:
 				System.out.println("No boss function yet");
 				break;
@@ -494,6 +525,13 @@ public class BossLabel extends JLabel{
 					bossInPhases.get(parent.phase - 1).get(i).setChoosable(true);
 				}
 				break;
+			case 5:
+				for(int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++){
+					if (bossInPhases.get(parent.phase - 1).get(i).getName().equals("Quan My")){
+						bossInPhases.get(parent.phase - 1).get(i).setChoosable(true);
+					}
+				}
+				break;
 		}
 	}
 
@@ -521,6 +559,24 @@ public class BossLabel extends JLabel{
 			case 4:
 				for (int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++) {
 					bossInPhases.get(parent.phase - 1).get(i).loseHP(damage);
+				}
+				break;
+			case 5:
+				boolean quanMyCheck = false;
+				for (int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++) {
+					if (bossInPhases.get(parent.phase - 1).get(i).getName().equals("Quan My")){
+						bossInPhases.get(parent.phase - 1).get(i).loseHP(damage);
+						quanMyCheck = true;
+					}
+				}
+				System.out.println(parent.sungPhongKhongNum);
+				if ((!quanMyCheck || bossTurn != 1) && parent.sungPhongKhongNum >= 3){
+					for (int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++) {
+						if (bossInPhases.get(parent.phase - 1).get(i).getName().equals("B52")){
+							bossInPhases.get(parent.phase - 1).get(i).loseHP(5);
+							break;
+						}
+					}
 				}
 				break;
 		}

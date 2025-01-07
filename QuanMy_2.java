@@ -9,7 +9,7 @@ import java.awt.event.MouseListener;
 
 public class QuanMy_2 extends Bosses implements MouseListener{
     // the name of the boss
-	String Name = "Thuy Tinh";
+	String Name = "Quan My";
 
 	public String getName() {
 		return Name;
@@ -128,6 +128,13 @@ public class QuanMy_2 extends Bosses implements MouseListener{
 	// losing hp
 	public void loseHP(int hp) {
 		health -= hp;
+		if (health <= 0){
+			health = 0;
+			parent.BossDie();
+		}
+		if (health > maxHealth){
+			health = maxHealth;
+		}
 		choosable = false;
 		healthBar.setText(health + "/" + maxHealth);
 		parent.parent.continueGame();
@@ -136,10 +143,27 @@ public class QuanMy_2 extends Bosses implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (choosable){
-			health -= parent.damageDealt;
-			choosable = false;
-			healthBar.setText(health + "/" + maxHealth);
-			
+			if (parent.damageDealt != 0){
+				loseHP(parent.damageDealt);
+				boolean checkForPhongThu = true;
+				for(int i = 0; i < parent.parent.playerLabel.players[parent.parent.turn].buffs.size(); i++){
+					if (parent.parent.playerLabel.players[parent.parent.turn].buffs.get(i).cardTypes.name.equals("PhongThu")){
+						parent.parent.playerLabel.players[parent.parent.turn].buffs.remove(i);
+						parent.parent.playerLabel.players[parent.parent.turn].drawBuffs();
+						checkForPhongThu = false;
+						break;
+					}
+				}
+				if (checkForPhongThu){
+					parent.parent.playerLabel.players[parent.parent.turn].loseHP(1);
+				}
+			}
+			else {
+				loseHP(5);
+			}
+			for(int i = 0; i < parent.bossInPhases.get(parent.parent.phase - 1).size(); i++){
+				parent.bossInPhases.get(parent.parent.phase - 1).get(i).setChoosable(false);
+			}
 		}
 		else {
 			this.setLocation(initialX + bound, initialY);

@@ -133,6 +133,12 @@ public class PlayerCards extends JLabel implements MouseListener{
 								parent.afterCardFuntion();
 								break;
 							}
+						case 5:
+							if (parent.parent.bossLabel.bossTurn == 1){
+								this.loseHP(-3);
+								parent.afterCardFuntion();
+								break;
+							}
 						default:
 							this.loseHP(-2);
 							parent.afterCardFuntion();

@@ -63,7 +63,7 @@ public class GameLabel extends JLabel implements Runnable{
 	int turn = 0;
 
 	// phase of game
-	int phase = 4;
+	int phase = 5;
 
 	// make a draw card deck and a deck to put cards away
 	CardDeck drawDeck;
@@ -158,16 +158,19 @@ public class GameLabel extends JLabel implements Runnable{
 		cardLabel.start(cardsDrawn);
 		switch(phase){
 			case 1:
-				checkForVoDe();
+				checkForCardOnField("Vo de");
+				break;
+			case 5:
+				checkForCardOnField("Chat doc mau da cam");
 				break;
 			default:
 				break;
 		}
 	}
 
-	private void checkForVoDe(){
+	private void checkForCardOnField(String name){
 		for (int i = 0; i < cardLabel.numberOfCards; i++) {
-			if (cardLabel.cardsInPlay[i].cardTypes.name.equals("Vo de")){
+			if (cardLabel.cardsInPlay[i].cardTypes.name.equals(name)){
 				cardLabel.cardsInPlay[i].choosen = true;
 				cardLabel.cardPlayed(i);
 				break;
@@ -211,6 +214,9 @@ public class GameLabel extends JLabel implements Runnable{
 
 	// this is exclusive for phase 4
 	boolean bevandan = false;
+
+	// this is exclusive for phase 5
+	int sungPhongKhongNum = 0;
 
 	public void NormalCardFunction(CardTypes cardDrawn){
 		int card = cardToNum.get(cardDrawn.name);
@@ -324,9 +330,12 @@ public class GameLabel extends JLabel implements Runnable{
 						continueGame();
 						switch(phase){
 							case 1:
-								checkForVoDe();
+								checkForCardOnField("Vo de");
+								break;
+							case 5:
+								checkForCardOnField("Chat doc mau da cam");
+								break;
 							default:
-								playerLabel.players[turn].loseHP(2);
 								break;
 						}
 					}
@@ -386,7 +395,7 @@ public class GameLabel extends JLabel implements Runnable{
 						disposalDeck.insertCard(cardDrawn);
 						disposalDeck.putInDeck();
 						playerLabel.afterCardFuntion();
-						checkForVoDe();
+						checkForCardOnField("Vo de");
 					}
 					});
 					voDeTimer.setRepeats(false);
@@ -421,6 +430,38 @@ public class GameLabel extends JLabel implements Runnable{
 				timer.setRepeats(false);
 				timer.start();
 				break;
+			case 5:
+				if (cardDrawn.name.equals("Chat doc mau da cam")){
+					playerLabel.players[turn].buffs.add(new PlayerBuffs(scale, cardDrawn, 1));
+					int cdmdcWaitTime = 500;
+					Timer cdmdcTimer = new Timer(cdmdcWaitTime, new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						playerLabel.players[turn].drawBuffs();
+						playerLabel.afterCardFuntion();
+					}
+					});
+					cdmdcTimer.setRepeats(false);
+					cdmdcTimer.start();
+				}
+				else if (cardDrawn.name.equals("Du kich")){
+					bossLabel.normalAttack(0);
+				}
+				else{
+					playerLabel.players[turn].buffs.add(new PlayerBuffs(scale, cardDrawn, 1));
+					int spkWaitTime = 500;
+					Timer spkTimer = new Timer(spkWaitTime, new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						sungPhongKhongNum++;
+						playerLabel.players[turn].drawBuffs();
+						playerLabel.afterCardFuntion();
+					}
+					});
+					spkTimer.setRepeats(false);
+					spkTimer.start();
+				}
+				break;
 		}
 	}
 
@@ -449,7 +490,7 @@ public class GameLabel extends JLabel implements Runnable{
 			}
 			for (int i = 0; i < playerLabel.players.length; i++){
 				for(int y = 0; y < playerLabel.players[i].buffs.size(); y++){
-					if (playerLabel.players[i].buffs.get(y).cardTypes.name.equals("PhongThu") || playerLabel.players[i].buffs.get(y).cardTypes.name.equals("BaoHoDongMinh")){
+					if (playerLabel.players[i].buffs.get(y).cardTypes.name.equals("BaoHoDongMinh")){
 						playerLabel.players[i].remove(playerLabel.players[i].buffs.get(y));
 						playerLabel.players[i].buffs.remove(y);
 						y--;

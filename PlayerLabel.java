@@ -74,8 +74,6 @@ public class PlayerLabel extends JLabel {
 				notClickablePlayer = NotClickablePlayer;
 				clickable = true;
 				break;
-			case 4:
-				break;
 			default:
 				return;
 		}

@@ -9,7 +9,7 @@ import java.awt.event.MouseListener;
 
 public class B52 extends Bosses implements MouseListener{
     // the name of the boss
-	String Name = "Thuy Tinh";
+	String Name = "B52";
 
 	public String getName() {
 		return Name;
