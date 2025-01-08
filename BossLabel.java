@@ -399,7 +399,6 @@ public class BossLabel extends JLabel{
 								break;
 							}
 						}
-						System.out.println(B52Check);
 						if (B52Check){
 							for(int i = 0; i < parent.playerLabel.players.length; i++){
 								parent.playerLabel.players[i].loseHP(4);
@@ -569,7 +568,6 @@ public class BossLabel extends JLabel{
 						quanMyCheck = true;
 					}
 				}
-				System.out.println(parent.sungPhongKhongNum);
 				if ((!quanMyCheck || bossTurn != 1) && parent.sungPhongKhongNum >= 3){
 					for (int i = 0; i < bossInPhases.get(parent.phase - 1).size(); i++) {
 						if (bossInPhases.get(parent.phase - 1).get(i).getName().equals("B52")){

@@ -125,9 +125,19 @@ public class MainLabel extends JLabel implements ActionListener {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
 		}
-		gameLabel = new GameLabel(scale);
+		gameLabel = new GameLabel(scale, this);
 		this.removeAll();
 		this.add(gameLabel);
+		repaint();
+	}
+
+	public void gameOver(){
+		System.out.println("Game Over");
+		this.removeAll();
+		this.add(gameTitle);
+		this.add(playButton);
+		this.add(playerNameLabel);
+		gameTitle.setText("Game Over, Restart?");
 		repaint();
 	}
 }

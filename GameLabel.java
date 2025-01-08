@@ -69,7 +69,11 @@ public class GameLabel extends JLabel implements Runnable{
 	CardDeck drawDeck;
 	CardDeck disposalDeck;
 
-	public GameLabel(int newScale) {
+	// accessing mainlabel
+	MainLabel parent;
+
+	public GameLabel(int newScale, MainLabel parent) {
+		this.parent = parent;
 		scale = newScale;
 		width = width_ratio * scale;
 		height = height_ratio * scale;
@@ -129,7 +133,6 @@ public class GameLabel extends JLabel implements Runnable{
 
 	// creates a deck that has every card in it and a disposal deck in order to mimick the real world
 	private void makeNewDeck() {
-		System.out.println("yes");
 		drawDeck = new CardDeck();
 		disposalDeck = new CardDeck();
 		for (int i = 0; i < cardLabel.cardNum; i++) {
@@ -181,7 +184,6 @@ public class GameLabel extends JLabel implements Runnable{
 	private CardTypes drawACard() {
 		CardTypes newCard = drawDeck.drawCard();
 		if (newCard == null) {
-			System.out.println("noDeck");
 			drawDeck = disposalDeck;
 			disposalDeck = new CardDeck();
 			newCard = drawDeck.drawCard();
@@ -481,6 +483,9 @@ public class GameLabel extends JLabel implements Runnable{
 	public void endTurn() {
 		resetLabelState();
 		turn++;
+		while(turn < 4 && playerLabel.players[turn].isDead){
+			turn++;
+		}
 		if (turn == 4){
 			playerLabel.changePosition();
 			bossLabel.bossTurn();
@@ -582,6 +587,10 @@ public class GameLabel extends JLabel implements Runnable{
 	public void continueGame() {
 		disposalDeck.putInDeck();
 		cardLabel.start(cardsDrawn);
+	}
+
+	public void gameOver(){
+		parent.gameOver();
 	}
 
 	// FPS implementation

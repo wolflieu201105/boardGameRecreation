@@ -83,16 +83,32 @@ public class PlayerCards extends JLabel implements MouseListener{
 	}
 
 	public void loseHP(int hp) {
+		if (isDead) {
+			return;
+		}
 		health -= hp;
 		if (health > maxHealth) {
 			health = 25;
 		}
-		if (health < 0) {
+		if (health <= 0) {
 			this.isDead = true;
+			int count = 0;
+			for (int i = 0; i < parent.players.length; i++) {
+				if (parent.players[i].isDead) {
+					count++;
+				}
+			}
+			if (count == parent.players.length) {
+				parent.parent.gameOver();
+				return;
+			}
+			nameTextPane.setBackground(new Color(200, 200, 200, 150));
 			health = 0;
+			healthBar.setText(health + "/" + maxHealth);
+			return;
 		}
-		healthBar.setText(health + "/" + maxHealth);
 		nameTextPane.setBackground(new Color(250 - health*10, health*10, 0, 150));
+		healthBar.setText(health + "/" + maxHealth);
 	}
 	
 	public void damaged(int damage){
