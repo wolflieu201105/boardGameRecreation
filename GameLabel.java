@@ -63,7 +63,7 @@ public class GameLabel extends JLabel implements Runnable{
 	int turn = 0;
 
 	// phase of game
-	int phase = 5;
+	int phase = 0;
 
 	// make a draw card deck and a deck to put cards away
 	CardDeck drawDeck;
